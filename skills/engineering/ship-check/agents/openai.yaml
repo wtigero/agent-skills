@@ -1,7 +1,0 @@
-interface:
-  display_name: "Ship Check"
-  short_description: "Final readiness check before shipping"
-  default_prompt: "Use $ship-check to verify whether this work is ready to ship."
-
-policy:
-  allow_implicit_invocation: true

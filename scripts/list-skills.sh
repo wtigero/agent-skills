@@ -4,4 +4,10 @@ set -euo pipefail
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 
 cd "$REPO"
-find . -name SKILL.md -not -path '*/node_modules/*' | sed 's|^\./||' | sort
+find ./skills -name SKILL.md \
+  -not -path '*/node_modules/*' \
+  -not -path '*/deprecated/*' \
+  -not -path '*/in-progress/*' \
+  -not -path '*/personal/*' |
+  sed 's|^\./||' |
+  sort

@@ -1,52 +1,47 @@
 # agent-skills
 
-Practical skills for coding agents, review agents, and engineering workflows.
+Practical skills for coding agents.
 
-## Layout
+This repo is starting small on purpose. It currently publishes one skill:
 
-Skills live under `skills/`, grouped by use case:
+- **[hold-your-horses](./skills/engineering/hold-your-horses/SKILL.md)** - slow down vague or risky development requests before touching code.
 
-- `engineering/` - daily coding, review, debugging, and release work
-- `productivity/` - communication and workflow helpers
-- `misc/` - useful but rarely used skills
-- `personal/` - local-only skills, not included in the public index
-- `in-progress/` - drafts not ready to publish
-- `deprecated/` - retired skills kept for reference
+## Hold Your Horses
 
-Each skill is its own directory containing a `SKILL.md` with YAML frontmatter and optional bundled resources.
+Use this when an agent is about to jump into code before the request, current flow, data path, or impact is clear.
+
+The ritual is:
+
+1. **Question it** - clarify the real outcome and success criteria.
+2. **Trace it** - inspect the current code, data, contracts, and tests.
+3. **Shape it** - write the current flow, target flow, boundary, and verification plan.
+4. **Cut it small** - make the narrowest change that solves the real problem.
+5. **Review the diff** - remove scope creep before claiming completion.
+
+The point is simple: no code from a guess.
 
 ## Install
 
-For Claude Code, symlink every shippable skill into `~/.claude/skills/`:
+For Claude Code:
 
 ```bash
 ./scripts/link-claude-skills.sh
 ```
 
-For Codex, symlink every shippable skill into `${CODEX_HOME:-~/.codex}/skills/`:
+For Codex:
 
 ```bash
 ./scripts/link-codex-skills.sh
 ```
 
-List every `SKILL.md` in the repo:
+List published skills:
 
 ```bash
 ./scripts/list-skills.sh
 ```
 
-## Skills
+## Layout
 
-### Engineering
+Published skills live under `skills/`. Each skill has a `SKILL.md` and optional `agents/openai.yaml` metadata for Codex.
 
-- **[migration-safety](./skills/engineering/migration-safety/SKILL.md)** - Review and execute schema, data, and production migrations with rollback, compatibility, and validation discipline.
-- **[ship-check](./skills/engineering/ship-check/SKILL.md)** - Final readiness check before claiming work is done, released, merged, or safe to ship.
-- **[smallest-safe-change](./skills/engineering/smallest-safe-change/SKILL.md)** - Keep implementation work surgical: inspect the real path, minimize blast radius, and avoid unrelated churn.
-
-### Productivity
-
-_(none yet)_
-
-### Misc
-
-_(none yet)_
+Only skills listed in `.claude-plugin/plugin.json` are part of the public bundle.

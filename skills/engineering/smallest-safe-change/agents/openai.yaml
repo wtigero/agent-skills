@@ -1,7 +1,0 @@
-interface:
-  display_name: "Smallest Safe Change"
-  short_description: "Keep code edits surgical and low-risk"
-  default_prompt: "Use $smallest-safe-change to implement this with the smallest safe code change."
-
-policy:
-  allow_implicit_invocation: true

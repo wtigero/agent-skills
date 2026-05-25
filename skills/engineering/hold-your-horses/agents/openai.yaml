@@ -1,0 +1,7 @@
+interface:
+  display_name: "Hold Your Horses"
+  short_description: "Clarify flow before changing code"
+  default_prompt: "Use $hold-your-horses to clarify the flow before implementing this change."
+
+policy:
+  allow_implicit_invocation: true
