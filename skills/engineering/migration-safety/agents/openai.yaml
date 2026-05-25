@@ -1,0 +1,7 @@
+interface:
+  display_name: "Migration Safety"
+  short_description: "Safer production and data migrations"
+  default_prompt: "Use $migration-safety to review this migration plan before execution."
+
+policy:
+  allow_implicit_invocation: true

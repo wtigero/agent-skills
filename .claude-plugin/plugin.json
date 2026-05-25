@@ -1,0 +1,8 @@
+{
+  "name": "agent-skills",
+  "skills": [
+    "./skills/engineering/migration-safety",
+    "./skills/engineering/ship-check",
+    "./skills/engineering/smallest-safe-change"
+  ]
+}
