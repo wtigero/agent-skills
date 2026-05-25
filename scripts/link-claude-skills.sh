@@ -23,7 +23,9 @@ mkdir -p "$DEST"
 find "$REPO/skills" -name SKILL.md \
   -not -path '*/node_modules/*' \
   -not -path '*/deprecated/*' \
+  -not -path '*/drafts/*' \
   -not -path '*/in-progress/*' \
+  -not -path '*/local/*' \
   -not -path '*/personal/*' \
   -print0 |
 while IFS= read -r -d '' skill_md; do

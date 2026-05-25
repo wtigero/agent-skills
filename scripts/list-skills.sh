@@ -7,7 +7,9 @@ cd "$REPO"
 find ./skills -name SKILL.md \
   -not -path '*/node_modules/*' \
   -not -path '*/deprecated/*' \
+  -not -path '*/drafts/*' \
   -not -path '*/in-progress/*' \
+  -not -path '*/local/*' \
   -not -path '*/personal/*' |
   sed 's|^\./||' |
   sort

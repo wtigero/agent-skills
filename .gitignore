@@ -1,1 +1,7 @@
+# Local skill drafts and experiments. Move a skill out of these paths only
+# when it is ready to be part of the public bundle.
 skills/in-progress/
+skills/local/
+skills/personal/
+skills/drafts/
+skills/deprecated/
