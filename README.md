@@ -17,8 +17,10 @@ The ritual is:
 2. **Question it** - ask only what remains unclear after reading.
 3. **Trace it** - follow the current code, data, contracts, and tests.
 4. **Shape it** - write the current flow, target flow, boundary, and verification plan.
-5. **Cut it small** - make the narrowest change that solves the real problem.
-6. **Review the diff** - remove scope creep before claiming completion.
+5. **Plan it** - list the concrete tasks needed to reach the target flow.
+6. **Cut it small** - trim the plan to the necessary tasks only.
+7. **Change it** - make the smallest implementation that follows the trimmed plan.
+8. **Review the diff** - remove scope creep before claiming completion.
 
 The point is simple: no code from a guess.
 

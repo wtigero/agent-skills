@@ -15,8 +15,10 @@ Slow down and run this sequence before implementing:
 2. **Question it.**
 3. **Trace it.**
 4. **Shape it.**
-5. **Cut it small.**
-6. **Review the diff.**
+5. **Plan it.**
+6. **Cut it small.**
+7. **Change it.**
+8. **Review the diff.**
 
 Compress the ritual for tiny mechanical edits, but do not skip it when behavior, data, contracts, or production risk are involved. The point is not ceremony; the point is to avoid coding from a guess.
 
@@ -64,9 +66,8 @@ Before editing, write the working model in a compact block:
 ```text
 Current flow:
 Target flow:
-Change boundary:
 Affected data/contracts:
-Verification:
+Risk:
 Open question:
 ```
 
@@ -74,9 +75,41 @@ Use `Open question: none` only when the flow is actually clear.
 
 If tracing reveals that the original request is risky, wrong-layer, or larger than expected, stop and ask a follow-up before coding.
 
-## 5. Cut it small
+## 5. Plan it
 
-Implement the narrowest change that makes the target flow true.
+Turn the target flow into concrete tasks before editing.
+
+Write the task list with enough detail to expose risk:
+
+- Code paths, files, modules, or handlers likely to change.
+- Data, schema, query, fixture, seed, or migration work if relevant.
+- Tests, reproductions, smoke checks, or manual verification needed.
+- Contract, config, permission, deploy-order, or compatibility checks if affected.
+- Cleanup or refactor ideas that are tempting but not required.
+
+Use this compact format:
+
+```text
+To do:
+Verification:
+Nice-to-have:
+```
+
+The task list is a thinking tool, not permission to do everything on it.
+
+## 6. Cut it small
+
+Analyze the task list again before implementation. Keep only what is necessary to make the target flow true without adding avoidable bugs or side effects.
+
+Split the plan:
+
+```text
+Do now:
+Defer:
+Ask first:
+```
+
+Keep `Do now` narrow:
 
 - Prefer existing patterns, helpers, names, tests, and error handling.
 - Keep public interfaces compatible unless the user explicitly approved a breaking change.
@@ -86,7 +119,16 @@ Implement the narrowest change that makes the target flow true.
 
 If the smallest correct change is larger than the agreed boundary, report why before expanding scope.
 
-## 6. Review the diff
+## 7. Change it
+
+Implement only the `Do now` tasks.
+
+- Work in the order that gives the fastest useful feedback.
+- Stop if the code contradicts the shaped flow or exposes a new blocking question.
+- Keep any additional discovery separate from unrelated cleanup.
+- Do not silently pull deferred tasks back into scope.
+
+## 8. Review the diff
 
 Self-review before claiming completion.
 
@@ -102,7 +144,16 @@ Fix only what is necessary. Do not start a broad cleanup pass during review.
 
 ## Output
 
-Before implementation, show the compact flow block when the work is non-trivial.
+Before implementation, show the compact flow and trimmed plan when the work is non-trivial:
+
+```text
+Current flow:
+Target flow:
+Do now:
+Defer:
+Verification:
+Open question:
+```
 
 After implementation, report:
 
