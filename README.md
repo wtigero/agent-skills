@@ -12,11 +12,12 @@ Use this when an agent is about to jump into code before the request, current fl
 
 The ritual is:
 
-1. **Question it** - clarify the real outcome and success criteria.
-2. **Trace it** - inspect the current code, data, contracts, and tests.
-3. **Shape it** - write the current flow, target flow, boundary, and verification plan.
-4. **Cut it small** - make the narrowest change that solves the real problem.
-5. **Review the diff** - remove scope creep before claiming completion.
+1. **Read it** - inspect the request and the exact artifact the user pointed at.
+2. **Question it** - ask only what remains unclear after reading.
+3. **Trace it** - follow the current code, data, contracts, and tests.
+4. **Shape it** - write the current flow, target flow, boundary, and verification plan.
+5. **Cut it small** - make the narrowest change that solves the real problem.
+6. **Review the diff** - remove scope creep before claiming completion.
 
 The point is simple: no code from a guess.
 

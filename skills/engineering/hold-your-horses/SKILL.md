@@ -11,17 +11,29 @@ No code before the flow is clear.
 
 Slow down and run this sequence before implementing:
 
-1. **Question it.**
-2. **Trace it.**
-3. **Shape it.**
-4. **Cut it small.**
-5. **Review the diff.**
+1. **Read it.**
+2. **Question it.**
+3. **Trace it.**
+4. **Shape it.**
+5. **Cut it small.**
+6. **Review the diff.**
 
 Compress the ritual for tiny mechanical edits, but do not skip it when behavior, data, contracts, or production risk are involved. The point is not ceremony; the point is to avoid coding from a guess.
 
-## 1. Question it
+## 1. Read it
 
-Clarify the request before touching code.
+Use the context already available before asking the user anything.
+
+- Read the user's request carefully, including exact wording and constraints.
+- Inspect the exact artifact the user named: file, route, screen, command, error, issue, log line, data example, or PR comment.
+- Check nearby docs, tests, types, migrations, or config when they are directly attached to the named artifact.
+- Separate what is known from what is assumed.
+
+Do not ask a question until you have read the concrete target, unless access to that target is impossible.
+
+## 2. Question it
+
+Clarify what remains unclear after reading the request and concrete target.
 
 - Restate the desired outcome in one sentence.
 - Identify the user-facing behavior or operational result.
@@ -31,7 +43,7 @@ Clarify the request before touching code.
 
 Do not ask broad preference questions when the codebase can answer them.
 
-## 2. Trace it
+## 3. Trace it
 
 Inspect the current system before proposing the change.
 
@@ -45,7 +57,7 @@ Start from the exact artifact the user named: file, route, screen, command, erro
 
 If database access is relevant but unavailable, inspect schema/migration/model/query code and state what remains unverified.
 
-## 3. Shape it
+## 4. Shape it
 
 Before editing, write the working model in a compact block:
 
@@ -62,7 +74,7 @@ Use `Open question: none` only when the flow is actually clear.
 
 If tracing reveals that the original request is risky, wrong-layer, or larger than expected, stop and ask a follow-up before coding.
 
-## 4. Cut it small
+## 5. Cut it small
 
 Implement the narrowest change that makes the target flow true.
 
@@ -74,7 +86,7 @@ Implement the narrowest change that makes the target flow true.
 
 If the smallest correct change is larger than the agreed boundary, report why before expanding scope.
 
-## 5. Review the diff
+## 6. Review the diff
 
 Self-review before claiming completion.
 
