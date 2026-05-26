@@ -2,9 +2,10 @@
 
 Practical skills for coding agents.
 
-This repo is starting small on purpose. It currently publishes one skill:
+This repo is starting small on purpose. It currently publishes two skills:
 
 - **[hold-your-horses](./skills/engineering/hold-your-horses/SKILL.md)** - slow down vague or risky development requests before touching code.
+- **[prove-it](./skills/engineering/prove-it/SKILL.md)** - do not claim work is done, fixed, tested, or safe without proof.
 
 ## Hold Your Horses
 
@@ -20,6 +21,20 @@ The ritual is:
 6. **Review the diff** - remove scope creep before claiming completion.
 
 The point is simple: no code from a guess.
+
+## Prove It
+
+Use this when an agent is about to say something is fixed, complete, tested, safe, or ready to ship.
+
+The ritual is:
+
+1. **Find the claim** - state exactly what is being asserted.
+2. **Find the proof** - identify the strongest evidence for that claim.
+3. **Break the proof** - ask whether the evidence would fail if the claim were false.
+4. **Run the proof** - execute the narrowest check that supports the claim.
+5. **Name what remains unproven** - keep the truth boundary explicit.
+
+The point is simple: no claim without proof.
 
 ## Install
 

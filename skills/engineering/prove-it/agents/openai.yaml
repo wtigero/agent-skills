@@ -1,0 +1,7 @@
+interface:
+  display_name: "Prove It"
+  short_description: "Do not claim without proof"
+  default_prompt: "Use $prove-it to verify this claim before we call it done."
+
+policy:
+  allow_implicit_invocation: true
