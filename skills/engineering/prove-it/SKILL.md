@@ -17,7 +17,7 @@ Run this sequence before saying work is done, fixed, tested, or safe:
 4. **Run the proof.**
 5. **Name what remains unproven.**
 
-The point is not to run every test. The point is to make sure the evidence proves the exact claim being made.
+The point is not to run every test. The point is to make sure fresh evidence proves the exact claim being made.
 
 ## 1. Find the claim
 
@@ -36,6 +36,16 @@ If the claim is vague, narrow it before evaluating evidence.
 ## 2. Find the proof
 
 Identify the strongest available evidence for the claim.
+
+The proof must match the claim:
+
+| Claim | Strong proof |
+| --- | --- |
+| Bug fixed | Original failing reproduction now passes. |
+| Regression test works | Test fails without the fix and passes with it. |
+| New behavior works | User-visible workflow, API call, CLI command, or job reaches the changed path. |
+| Build passes | Build command exits 0 in this run. |
+| Safe to ship | Targeted checks pass and risk-specific gaps are named. |
 
 Prefer proof that reaches the real behavior:
 
@@ -65,6 +75,8 @@ If the proof can pass while the claim is false, it is not sufficient proof.
 
 ## 4. Run the proof
 
+Run fresh proof in the current session. Old logs, prior CI, cached output, memory, or another agent's success report can guide what to run, but they are not proof by themselves.
+
 Run the narrowest proof that actually supports the claim.
 
 - Start with the original repro, changed test, or targeted command.
@@ -86,22 +98,34 @@ Then list what remains unverified in plain terms. This is not a failure; it is t
 
 ## Output
 
-Use this compact format:
+Keep output scannable. Use headings, bullets, and blank lines; do not collapse the proof into one paragraph.
 
-```text
-Claim:
-Proof:
-Result:
-Verdict:
-Unproven:
+```markdown
+**Claim**
+- ...
+
+**Proof**
+- Command: `...`
+- Why this proves it: ...
+
+**Result**
+- ...
+
+**Verdict**
+- `proven` / `partially proven` / `not proven`
+
+**Unproven**
+- ...
 ```
 
 For code changes, include the exact test, command, reproduction, CI result, or manual check that supports the verdict.
 
 ## Guardrails
 
+- Do not use old verification output as proof unless it was rerun for this claim in the current session.
 - Do not accept "tests pass" unless the relevant tests are named.
 - Do not accept a regression test unless it would fail without the fix.
+- Do not use a build, lint, or typecheck result as proof of runtime behavior unless that is the claim.
 - Do not claim behavior from code inspection alone when a runnable proof exists.
 - Do not hide failed or skipped verification.
 - Do not broaden the claim beyond what the proof actually covers.

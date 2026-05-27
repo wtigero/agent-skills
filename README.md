@@ -31,9 +31,9 @@ Use this when an agent is about to say something is fixed, complete, tested, saf
 The ritual is:
 
 1. **Find the claim** - state exactly what is being asserted.
-2. **Find the proof** - identify the strongest evidence for that claim.
+2. **Find the proof** - identify the strongest evidence that matches that claim.
 3. **Break the proof** - ask whether the evidence would fail if the claim were false.
-4. **Run the proof** - execute the narrowest check that supports the claim.
+4. **Run the proof** - execute a fresh narrow check that supports the claim.
 5. **Name what remains unproven** - keep the truth boundary explicit.
 
 The point is simple: no claim without proof.
