@@ -61,14 +61,23 @@ If database access is relevant but unavailable, inspect schema/migration/model/q
 
 ## 4. Shape it
 
-Before editing, write the working model in a compact block:
+Before editing, write the working model as separate sections, not as a dense inline paragraph:
 
-```text
-Current flow:
-Target flow:
-Affected data/contracts:
-Risk:
-Open question:
+```markdown
+**Current Flow**
+- ...
+
+**Target Flow**
+- ...
+
+**Affected Data / Contracts**
+- ...
+
+**Risk**
+- ...
+
+**Open Question**
+- None.
 ```
 
 Use `Open question: none` only when the flow is actually clear.
@@ -87,12 +96,18 @@ Write the task list with enough detail to expose risk:
 - Contract, config, permission, deploy-order, or compatibility checks if affected.
 - Cleanup or refactor ideas that are tempting but not required.
 
-Use this compact format:
+Use separated sections:
 
-```text
-To do:
-Verification:
-Nice-to-have:
+```markdown
+**To Do**
+1. ...
+2. ...
+
+**Verification**
+- ...
+
+**Nice To Have**
+- ...
 ```
 
 The task list is a thinking tool, not permission to do everything on it.
@@ -101,12 +116,18 @@ The task list is a thinking tool, not permission to do everything on it.
 
 Analyze the task list again before implementation. Keep only what is necessary to make the target flow true without adding avoidable bugs or side effects.
 
-Split the plan:
+Split the plan into separated sections:
 
-```text
-Do now:
-Defer:
-Ask first:
+```markdown
+**Do Now**
+1. ...
+2. ...
+
+**Defer**
+- ...
+
+**Ask First**
+- None.
 ```
 
 Keep `Do now` narrow:
@@ -132,6 +153,8 @@ Implement only the `Do now` tasks.
 
 Self-review before claiming completion.
 
+Review as an outsider. Do not defend the diff because you wrote it.
+
 Check the actual diff for:
 
 - Scope creep or unrelated edits.
@@ -139,28 +162,51 @@ Check the actual diff for:
 - Weak tests that pass without exercising the traced path.
 - Debug prints, temporary files, local paths, secrets, or generated noise.
 - Missing verification for the success criteria.
+- Strange code shape, surprising control flow, duplicated logic, or abstractions that do not earn their complexity.
+- Code that could be replaced by a smaller existing helper, a simpler branch, a deletion, or a few lines.
 
-Fix only what is necessary. Do not start a broad cleanup pass during review.
+If the review finds a much simpler equivalent change, prefer the simpler change before completion. Fix only what is necessary. Do not start a broad cleanup pass during review.
 
 ## Output
 
-Before implementation, show the compact flow and trimmed plan when the work is non-trivial:
+Keep output scannable.
 
-```text
-Current flow:
-Target flow:
-Do now:
-Defer:
-Verification:
-Open question:
+- Use short headings and bullets.
+- Put a blank line between sections.
+- Prefer numbered tasks for `Do Now`.
+- Use `None.` for empty `Open Question`, `Defer`, or `Ask First` sections.
+- Do not collapse the flow, plan, and verification into one paragraph.
+
+Before implementation, show the flow and trimmed plan when the work is non-trivial:
+
+```markdown
+**Current Flow**
+- ...
+
+**Target Flow**
+- ...
+
+**Do Now**
+1. ...
+2. ...
+
+**Defer**
+- None.
+
+**Verification**
+- ...
+
+**Open Question**
+- None.
 ```
 
 After implementation, report:
 
-- What changed.
-- Why the change is small enough.
-- What was verified.
-- What remains unverified or intentionally out of scope.
+- **Changed** - what changed.
+- **Kept Small** - why the change is small enough.
+- **Simpler Alternative** - any smaller equivalent approach found during review, or `None.`
+- **Verified** - what was verified.
+- **Unverified** - what remains unverified or intentionally out of scope.
 
 ## Guardrails
 
