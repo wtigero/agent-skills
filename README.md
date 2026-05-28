@@ -14,12 +14,12 @@ Use this when an agent is about to jump into code before the request, current fl
 The ritual is:
 
 1. **Read it** - inspect the request and the exact artifact the user pointed at.
-2. **Question it** - ask only what remains unclear after reading.
+2. **Clarify it** - ask only what remains unclear after reading.
 3. **Trace it** - follow the current code, data, contracts, and tests.
-4. **Shape it** - write the current flow, target flow, boundary, and verification plan.
-5. **Plan it** - list the concrete tasks needed to reach the target flow.
-6. **Cut it small** - trim the plan to the necessary tasks only.
-7. **Change it** - make the smallest implementation that follows the trimmed plan.
+4. **Frame it** - write the as-is flow, to-be flow, affected surface, and risk.
+5. **Plan it** - list the concrete tasks needed to reach the to-be flow.
+6. **Trim it** - reduce the plan to the necessary tasks only.
+7. **Implement it** - make the smallest implementation that follows the trimmed plan.
 8. **Review the diff** - remove scope creep before claiming completion.
 
 The point is simple: no code from a guess.

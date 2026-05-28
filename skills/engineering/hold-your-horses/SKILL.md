@@ -12,12 +12,12 @@ No code before the flow is clear.
 Slow down and run this sequence before implementing:
 
 1. **Read it.**
-2. **Question it.**
+2. **Clarify it.**
 3. **Trace it.**
-4. **Shape it.**
+4. **Frame it.**
 5. **Plan it.**
-6. **Cut it small.**
-7. **Change it.**
+6. **Trim it.**
+7. **Implement it.**
 8. **Review the diff.**
 
 Compress the ritual for tiny mechanical edits, but do not skip it when behavior, data, contracts, or production risk are involved. The point is not ceremony; the point is to avoid coding from a guess.
@@ -33,7 +33,7 @@ Use the context already available before asking the user anything.
 
 Do not ask a question until you have read the concrete target, unless access to that target is impossible.
 
-## 2. Question it
+## 2. Clarify it
 
 Clarify what remains unclear after reading the request and concrete target.
 
@@ -55,19 +55,20 @@ Start from the exact artifact the user named: file, route, screen, command, erro
 - Existing branches, validation, permissions, and error handling.
 - Data models, migrations, queries, indexes, seeds, fixtures, or external tables when data is involved.
 - API, event, queue, CLI, config, exported type, or SDK contracts when other consumers may depend on the shape.
+- Existing shared helpers, utilities, components, libraries, middleware, validators, formatters, and domain services that already solve part of the problem.
 - Tests or checks that currently cover the path.
 
 If database access is relevant but unavailable, inspect schema/migration/model/query code and state what remains unverified.
 
-## 4. Shape it
+## 4. Frame it
 
 Before editing, write the working model as separate sections, not as a dense inline paragraph:
 
 ```markdown
-**Current Flow**
+**As Is**
 - ...
 
-**Target Flow**
+**To Be**
 - ...
 
 **Affected Data / Contracts**
@@ -86,7 +87,7 @@ If tracing reveals that the original request is risky, wrong-layer, or larger th
 
 ## 5. Plan it
 
-Turn the target flow into concrete tasks before editing.
+Turn the to-be flow into concrete tasks before editing.
 
 Write the task list with enough detail to expose risk:
 
@@ -106,15 +107,15 @@ Use separated sections:
 **Verification**
 - ...
 
-**Nice To Have**
+**Tempting But Deferred**
 - ...
 ```
 
 The task list is a thinking tool, not permission to do everything on it.
 
-## 6. Cut it small
+## 6. Trim it
 
-Analyze the task list again before implementation. Keep only what is necessary to make the target flow true without adding avoidable bugs or side effects.
+Analyze the task list again before implementation. Keep only what is necessary to make the to-be flow true without adding avoidable bugs or side effects.
 
 Split the plan into separated sections:
 
@@ -133,6 +134,7 @@ Split the plan into separated sections:
 Keep `Do now` narrow:
 
 - Prefer existing patterns, helpers, names, tests, and error handling.
+- Reuse an existing shared helper, component, or library before adding a new local implementation.
 - Keep public interfaces compatible unless the user explicitly approved a breaking change.
 - Separate behavior changes from cleanup.
 - Avoid opportunistic refactors, formatting churn, dependency swaps, and unrelated file edits.
@@ -140,12 +142,12 @@ Keep `Do now` narrow:
 
 If the smallest correct change is larger than the agreed boundary, report why before expanding scope.
 
-## 7. Change it
+## 7. Implement it
 
 Implement only the `Do now` tasks.
 
 - Work in the order that gives the fastest useful feedback.
-- Stop if the code contradicts the shaped flow or exposes a new blocking question.
+- Stop if the code contradicts the framed flow or exposes a new blocking question.
 - Keep any additional discovery separate from unrelated cleanup.
 - Do not silently pull deferred tasks back into scope.
 
@@ -164,6 +166,7 @@ Check the actual diff for:
 - Missing verification for the success criteria.
 - Strange code shape, surprising control flow, duplicated logic, or abstractions that do not earn their complexity.
 - Code that could be replaced by a smaller existing helper, a simpler branch, a deletion, or a few lines.
+- New local code that duplicates a shared helper, component, library, validator, formatter, or domain service.
 
 If the review finds a much simpler equivalent change, prefer the simpler change before completion. Fix only what is necessary. Do not start a broad cleanup pass during review.
 
@@ -180,10 +183,10 @@ Keep output scannable.
 Before implementation, show the flow and trimmed plan when the work is non-trivial:
 
 ```markdown
-**Current Flow**
+**As Is**
 - ...
 
-**Target Flow**
+**To Be**
 - ...
 
 **Do Now**
