@@ -1,6 +1,6 @@
 ---
 name: hold-your-horses
-description: Use when a development request is vague, risky, cross-cutting, data-related, or likely to be overbuilt; when the problem, current flow, affected data, contracts, or success criteria are not yet clear before implementation.
+description: Use when a development request is vague, risky, cross-cutting, data-related, broad, multi-file, unclear, or tempting to refactor; when the problem, flow, affected data, contracts, or success criteria are not yet clear before implementation.
 ---
 
 # Hold Your Horses
@@ -20,7 +20,9 @@ Slow down and run this sequence before implementing:
 7. **Implement it.**
 8. **Review the diff.**
 
-Compress the ritual for tiny mechanical edits, but do not skip it when behavior, data, contracts, or production risk are involved. The point is not ceremony; the point is to avoid coding from a guess.
+For tiny mechanical edits, use the compressed path: **Read it -> Implement it -> Review the diff.** Emit only `Changed`, `Verified`, and `Unverified`.
+
+Do not use the compressed path when behavior, data, contracts, shared helpers, or production risk are involved. The point is not ceremony; the point is to avoid coding from a guess.
 
 ## 1. Read it
 
@@ -62,7 +64,7 @@ If database access is relevant but unavailable, inspect schema/migration/model/q
 
 ## 4. Frame it
 
-Before editing, write the working model as separate sections, not as a dense inline paragraph:
+Before editing, think through the working model. These are thinking fields, not a required standalone user-facing report.
 
 ```markdown
 **As Is**
@@ -97,7 +99,7 @@ Write the task list with enough detail to expose risk:
 - Contract, config, permission, deploy-order, or compatibility checks if affected.
 - Cleanup or refactor ideas that are tempting but not required.
 
-Use separated sections:
+Use these thinking fields:
 
 ```markdown
 **To Do**
@@ -117,7 +119,7 @@ The task list is a thinking tool, not permission to do everything on it.
 
 Analyze the task list again before implementation. Keep only what is necessary to make the to-be flow true without adding avoidable bugs or side effects.
 
-Split the plan into separated sections:
+Split the plan into these thinking fields:
 
 ```markdown
 **Do Now**
@@ -145,6 +147,8 @@ If the smallest correct change is larger than the agreed boundary, report why be
 ## 7. Implement it
 
 Implement only the `Do now` tasks.
+
+The output of this step is the working diff, not another report.
 
 - Work in the order that gives the fastest useful feedback.
 - Stop if the code contradicts the framed flow or exposes a new blocking question.
@@ -179,6 +183,7 @@ Keep output scannable.
 - Prefer numbered tasks for `Do Now`.
 - Use `None.` for empty `Open Question`, `Defer`, or `Ask First` sections.
 - Do not collapse the flow, plan, and verification into one paragraph.
+- Emit the template below to the user. Do not emit every intermediate thinking template unless the work is risky or the user asks for the full reasoning.
 
 Before implementation, show the flow and trimmed plan when the work is non-trivial:
 

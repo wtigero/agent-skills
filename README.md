@@ -52,6 +52,12 @@ For Codex:
 ./scripts/link-codex-skills.sh
 ```
 
+For Kiro:
+
+```bash
+./scripts/link-kiro-skills.sh
+```
+
 List published skills:
 
 ```bash
