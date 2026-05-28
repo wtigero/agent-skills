@@ -7,6 +7,8 @@ description: Use when work is being claimed complete, fixed, tested, validated, 
 
 No claim without proof.
 
+Act as an external auditor of the claim. Do not defend the work because you wrote it, ran it, or want it to be done.
+
 ## Ritual
 
 Run this sequence before saying work is done, fixed, tested, or safe:
@@ -61,6 +63,8 @@ If the proof is missing, say so. Do not replace missing proof with confidence la
 ## 3. Break the proof
 
 Challenge whether the evidence would catch the problem returning.
+
+Try to make the claim false. If a passing check would still allow the claim to be false, the proof is weak.
 
 Ask:
 
@@ -127,5 +131,6 @@ For code changes, include the exact test, command, reproduction, CI result, or m
 - Do not accept a regression test unless it would fail without the fix.
 - Do not use a build, lint, or typecheck result as proof of runtime behavior unless that is the claim.
 - Do not claim behavior from code inspection alone when a runnable proof exists.
+- Do not defend the claim because you authored the fix or chose the test.
 - Do not hide failed or skipped verification.
 - Do not broaden the claim beyond what the proof actually covers.
