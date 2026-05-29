@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Links all shippable skills in the repository to ~/.kiro/skills, so that
-# they can be used by Kiro.
+# Copies all shippable skills in the repository to ~/.kiro/skills, so that
+# they can be used by Kiro without relying on symlinks.
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 DEST="$HOME/.kiro/skills"
@@ -33,11 +33,12 @@ while IFS= read -r -d '' skill_md; do
   name="$(basename "$src")"
   target="$DEST/$name"
 
-  if [ -e "$target" ] && [ ! -L "$target" ]; then
-    echo "skip $name: $target exists and is not a symlink" >&2
-    continue
-  fi
+  tmp="$DEST/.$name.tmp"
 
-  ln -sfn "$src" "$target"
-  echo "linked $name -> $src"
+  rm -rf "$tmp"
+  cp -R "$src" "$tmp"
+  rm -rf "$target"
+  mv "$tmp" "$target"
+
+  echo "copied $name -> $target"
 done
