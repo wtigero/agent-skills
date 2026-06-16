@@ -4,11 +4,14 @@ Practical skills for coding agents.
 
 Thai: [README.th.md](./README.th.md)
 
-This repo is starting small on purpose. It currently publishes three skills:
+This repo stays small on purpose. It currently publishes three skills:
 
 - **[hold-your-horses](./skills/engineering/hold-your-horses/SKILL.md)** - slow down vague or risky development requests before touching code.
 - **[prove-it](./skills/engineering/prove-it/SKILL.md)** - do not claim work is done, fixed, tested, or safe without proof.
 - **[council](./skills/engineering/council/SKILL.md)** - get an independent, read-only review from Codex, Claude Code, or both.
+
+This README is the public summary. The exact operating rules live in each
+`SKILL.md`.
 
 ## Hold Your Horses
 
@@ -18,16 +21,12 @@ Use this when a development request is vague, risky, cross-cutting,
 data-related, broad, multi-file, unclear, or tempting to refactor before the
 problem, flow, affected data, contracts, or success criteria are clear.
 
-The ritual is:
+It forces the agent to:
 
-1. **Read it** - inspect the request and the exact artifact the user pointed at.
-2. **Clarify intent** - ask only blocking questions the repo, runtime, docs, or database cannot answer.
-3. **Trace it** - follow the real entry points, data, contracts, helpers, and tests.
-4. **Frame it** - name the as-is flow, to-be flow, affected data/contracts, risk, and open questions.
-5. **Plan it** - turn the to-be flow into risk-revealing tasks and verification.
-6. **Trim it** - keep only what makes the to-be flow true without avoidable side effects.
-7. **Implement it** - do only the trimmed work, in the order with the fastest useful feedback.
-8. **Review the diff** - remove scope creep, weak tests, debug noise, and unearned complexity.
+- Read the concrete target instead of guessing.
+- Clarify only what is truly blocking.
+- Trace the real path through code, data, contracts, helpers, and tests.
+- Frame risk, trim the plan, implement narrowly, and review the diff.
 
 Tiny mechanical edit: use **Read it -> Implement it -> Review the diff** and
 emit only `Changed`, `Verified`, and `Unverified`. Do not compress behavior,
@@ -37,15 +36,21 @@ The point is simple: clear the flow, then touch the code.
 
 ## Prove It
 
+No claim without proof.
+
 Use this when an agent is about to say something is fixed, complete, tested, safe, or ready to ship.
 
-The ritual is:
+It forces the agent to:
 
-1. **Find the claim** - state exactly what is being asserted.
-2. **Find the proof** - identify the strongest evidence that matches that claim.
-3. **Break the proof** - ask whether the evidence would fail if the claim were false.
-4. **Run the proof** - execute a fresh narrow check that supports the claim.
-5. **Name what remains unproven** - keep the truth boundary explicit.
+- State one exact claim.
+- Pick the strongest proof that matches that claim.
+- Ask whether the proof would fail if the claim were false.
+- Run fresh proof now.
+- Name what remains unproven.
+
+Good proof reaches real behavior: a repro, workflow, API call, job, targeted
+test, affected build/check, or manual check with the relevant input and observed
+output.
 
 The point is simple: no claim without proof.
 
@@ -56,25 +61,16 @@ No rubber stamps. Bring outside eyes.
 Use this when you want an independent second opinion on a change from a model
 outside the one you are working in.
 
-The ritual is:
-
-1. **Choose the scope** - decide whether the council reviews git changes, files, or pasted content.
-2. **Summon outside reviewers** - route the review to Codex, Claude Code, or both.
-3. **Keep them blind** - do not feed one reviewer's answer into the other.
-4. **Demand evidence** - require findings to cite real code, snippets, or sources.
-5. **Return the disagreement** - show each reviewer's output without smoothing it into false consensus.
-
-It routes a **read-only** review to an external agent CLI -- Codex, Claude Code,
-or both -- over git changes, specific file paths, or pasted content:
+It routes a **read-only** outside review to Codex, Claude Code, or both:
 
 - `council` (or `council both`) - run Codex and Claude, returned side by side.
 - `council codex` / `council claude` - run just one.
 
-Every member reviews as an unbiased outside auditor: findings grounded in the
-real code, web research allowed, framed as severity-tagged recommendations
-rather than commands. The reviewers never edit -- Codex `review` is for
-read-only review, Codex `exec` runs `--sandbox read-only`, and Claude runs
-`--permission-mode plan`.
+The review rules stay simple:
+
+- Reviewers stay independent.
+- Findings must cite real evidence.
+- Disagreement is returned as-is instead of smoothed into fake consensus.
 
 If the reviewer CLI cannot run, Council prepares a manual review packet instead
 of pretending the review happened. You get reviewer output or a ready-to-paste
