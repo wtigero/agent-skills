@@ -2,10 +2,11 @@
 
 Practical skills for coding agents.
 
-This repo is starting small on purpose. It currently publishes two skills:
+This repo is starting small on purpose. It currently publishes three skills:
 
 - **[hold-your-horses](./skills/engineering/hold-your-horses/SKILL.md)** - slow down vague or risky development requests before touching code.
 - **[prove-it](./skills/engineering/prove-it/SKILL.md)** - do not claim work is done, fixed, tested, or safe without proof.
+- **[council](./skills/engineering/council/SKILL.md)** - get an independent, read-only review from Codex, Claude Code, or both.
 
 ## Hold Your Horses
 
@@ -37,6 +38,39 @@ The ritual is:
 5. **Name what remains unproven** - keep the truth boundary explicit.
 
 The point is simple: no claim without proof.
+
+## Council
+
+No rubber stamps. Bring outside eyes.
+
+Use this when you want an independent second opinion on a change from a model
+outside the one you are working in.
+
+The ritual is:
+
+1. **Choose the scope** - decide whether the council reviews git changes, files, or pasted content.
+2. **Summon outside reviewers** - route the review to Codex, Claude Code, or both.
+3. **Keep them blind** - do not feed one reviewer's answer into the other.
+4. **Demand evidence** - require findings to cite real code, snippets, or sources.
+5. **Return the disagreement** - show each reviewer's output without smoothing it into false consensus.
+
+It routes a **read-only** review to an external agent CLI -- Codex, Claude Code,
+or both -- over git changes, specific file paths, or pasted content:
+
+- `council` (or `council both`) - run Codex and Claude, returned side by side.
+- `council codex` / `council claude` - run just one.
+
+Every member reviews as an unbiased outside auditor: findings grounded in the
+real code, web research allowed, framed as severity-tagged recommendations
+rather than commands. The reviewers never edit -- Codex `review` is for
+read-only review, Codex `exec` runs `--sandbox read-only`, and Claude runs
+`--permission-mode plan`.
+
+If the reviewer CLI cannot run, Council prepares a manual review packet instead
+of pretending the review happened. You get reviewer output or a ready-to-paste
+brief, never fake certainty.
+
+The point is simple: return the outside view, even when it disagrees.
 
 ## Install
 

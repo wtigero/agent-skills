@@ -2,6 +2,7 @@
   "name": "agent-skills",
   "skills": [
     "./skills/engineering/hold-your-horses",
-    "./skills/engineering/prove-it"
+    "./skills/engineering/prove-it",
+    "./skills/engineering/council"
   ]
 }

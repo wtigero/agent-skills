@@ -1,0 +1,7 @@
+interface:
+  display_name: "Council"
+  short_description: "Independent read-only review from Codex and/or Claude"
+  default_prompt: "Use $council to get an unbiased outside review of these changes."
+
+policy:
+  allow_implicit_invocation: true
