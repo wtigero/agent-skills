@@ -2,6 +2,8 @@
 
 Practical skills for coding agents.
 
+Thai: [README.th.md](./README.th.md)
+
 This repo is starting small on purpose. It currently publishes three skills:
 
 - **[hold-your-horses](./skills/engineering/hold-your-horses/SKILL.md)** - slow down vague or risky development requests before touching code.
