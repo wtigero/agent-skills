@@ -12,7 +12,7 @@ No code before the flow is clear.
 Run before implementing:
 
 1. **Read it.**
-2. **Clarify it.**
+2. **Clarify intent.**
 3. **Trace it.**
 4. **Frame it.**
 5. **Plan it.**
@@ -30,12 +30,12 @@ Tiny mechanical edit: use **Read it -> Implement it -> Review the diff** and emi
 
 Do not ask until you have read the concrete target, unless access is impossible.
 
-## 2. Clarify it
+## 2. Clarify intent
 
 - Restate the desired outcome in one sentence.
 - Name the user-facing or operational result and success criteria.
 - Ask only blocking questions whose answers cannot be discovered from the repo, runtime, docs, or database.
-- State low-risk assumptions and continue.
+- If no question is needed, state the assumption and why it is safe to continue.
 
 Do not ask broad preference questions when the codebase can answer them.
 
@@ -72,7 +72,7 @@ Before editing, frame the working model. These are thinking fields, not a requir
 - None.
 ```
 
-Use `Open Question: None.` only when the flow is actually clear. If tracing shows the request is risky, wrong-layer, or larger than expected, stop and ask before coding.
+Use `Open Question: None.` only when the flow is actually clear. After tracing, reopen clarification before coding if an assumption was wrong, the target flow is unclear, or the change is larger than expected.
 
 ## 5. Plan it
 
@@ -119,6 +119,7 @@ Keep only what makes the to-be flow true without avoidable bugs or side effects.
 Keep `Do Now` narrow:
 
 - Prefer existing patterns, helpers, names, tests, and error handling before adding local code.
+- Every `Do Now` item must directly support `To Be` or `Verification`; otherwise move it to `Defer`.
 - Keep public interfaces compatible unless the user explicitly approved a breaking change.
 - Avoid opportunistic refactors, formatting churn, dependency swaps, and unrelated file edits.
 - Add or update focused tests when they prove the changed behavior or prevent regression.
