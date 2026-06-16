@@ -40,6 +40,8 @@ The point is simple: no claim without proof.
 
 ## Install
 
+Installers link the published skills from this repo into each agent's skill directory.
+
 For Claude Code:
 
 ```bash
@@ -68,4 +70,4 @@ List published skills:
 
 Published skills live under `skills/`. Each skill has a `SKILL.md` and optional `agents/openai.yaml` metadata for Codex.
 
-Only skills listed in `.claude-plugin/plugin.json` are part of the public bundle.
+`.claude-plugin/plugin.json` is the source of truth for the public bundle. Installers and `list-skills.sh` use that manifest.

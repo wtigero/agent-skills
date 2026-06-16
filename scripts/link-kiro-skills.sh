@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Copies all shippable skills in the repository to ~/.kiro/skills, so that
-# they can be used by Kiro without relying on symlinks.
+# Links all published skills in the repository to ~/.kiro/skills, so that
+# they can be used by Kiro.
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
+SCRIPT_DIR="$REPO/scripts"
 DEST="$HOME/.kiro/skills"
 
 if [ -L "$DEST" ]; then
@@ -20,25 +21,15 @@ fi
 
 mkdir -p "$DEST"
 
-find "$REPO/skills" -name SKILL.md \
-  -not -path '*/node_modules/*' \
-  -not -path '*/deprecated/*' \
-  -not -path '*/drafts/*' \
-  -not -path '*/in-progress/*' \
-  -not -path '*/local/*' \
-  -not -path '*/personal/*' \
-  -print0 |
-while IFS= read -r -d '' skill_md; do
-  src="$(dirname "$skill_md")"
+"$SCRIPT_DIR/published-skill-dirs.sh" |
+while IFS= read -r src; do
   name="$(basename "$src")"
   target="$DEST/$name"
 
-  tmp="$DEST/.$name.tmp"
+  if [ -e "$target" ] && [ ! -L "$target" ]; then
+    rm -rf "$target"
+  fi
 
-  rm -rf "$tmp"
-  cp -R "$src" "$tmp"
-  rm -rf "$target"
-  mv "$tmp" "$target"
-
-  echo "copied $name -> $target"
+  ln -sfn "$src" "$target"
+  echo "linked $name -> $src"
 done

@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Links all shippable skills in the repository to ~/.codex/skills, so that
+# Links all published skills in the repository to ~/.codex/skills, so that
 # they can be used by Codex.
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
+SCRIPT_DIR="$REPO/scripts"
 DEST="${CODEX_HOME:-$HOME/.codex}/skills"
 
 if [ -L "$DEST" ]; then
@@ -20,16 +21,8 @@ fi
 
 mkdir -p "$DEST"
 
-find "$REPO/skills" -name SKILL.md \
-  -not -path '*/node_modules/*' \
-  -not -path '*/deprecated/*' \
-  -not -path '*/drafts/*' \
-  -not -path '*/in-progress/*' \
-  -not -path '*/local/*' \
-  -not -path '*/personal/*' \
-  -print0 |
-while IFS= read -r -d '' skill_md; do
-  src="$(dirname "$skill_md")"
+"$SCRIPT_DIR/published-skill-dirs.sh" |
+while IFS= read -r src; do
   name="$(basename "$src")"
   target="$DEST/$name"
 

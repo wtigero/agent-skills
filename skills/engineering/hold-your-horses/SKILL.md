@@ -9,7 +9,7 @@ No code before the flow is clear.
 
 ## Ritual
 
-Slow down and run this sequence before implementing:
+Run before implementing:
 
 1. **Read it.**
 2. **Clarify it.**
@@ -20,51 +20,40 @@ Slow down and run this sequence before implementing:
 7. **Implement it.**
 8. **Review the diff.**
 
-For tiny mechanical edits, use the compressed path: **Read it -> Implement it -> Review the diff.** Emit only `Changed`, `Verified`, and `Unverified`.
-
-Do not use the compressed path when behavior, data, contracts, shared helpers, or production risk are involved. The point is not ceremony; the point is to avoid coding from a guess.
+Tiny mechanical edit: use **Read it -> Implement it -> Review the diff** and emit only `Changed`, `Verified`, and `Unverified`. Do not compress behavior, data, contracts, shared helpers, or production risk.
 
 ## 1. Read it
 
-Use the context already available before asking the user anything.
-
-- Read the user's request carefully, including exact wording and constraints.
 - Inspect the exact artifact the user named: file, route, screen, command, error, issue, log line, data example, or PR comment.
-- Check nearby docs, tests, types, migrations, or config when they are directly attached to the named artifact.
+- Read the request constraints and nearby docs, tests, types, migrations, or config attached to that artifact.
 - Separate what is known from what is assumed.
 
-Do not ask a question until you have read the concrete target, unless access to that target is impossible.
+Do not ask until you have read the concrete target, unless access is impossible.
 
 ## 2. Clarify it
 
-Clarify what remains unclear after reading the request and concrete target.
-
 - Restate the desired outcome in one sentence.
-- Identify the user-facing behavior or operational result.
-- Name the success criteria that would prove the work is done.
+- Name the user-facing or operational result and success criteria.
 - Ask only blocking questions whose answers cannot be discovered from the repo, runtime, docs, or database.
-- If the ambiguity is low-risk, state a reasonable assumption and continue.
+- State low-risk assumptions and continue.
 
 Do not ask broad preference questions when the codebase can answer them.
 
 ## 3. Trace it
 
-Inspect the current system before proposing the change.
+Start at the named artifact and follow the real path:
 
-Start from the exact artifact the user named: file, route, screen, command, error, issue, or data example. Then follow the real path:
-
-- Entry point and caller path.
-- Existing branches, validation, permissions, and error handling.
+- Entry point, callers, branches, validation, permissions, and errors.
 - Data models, migrations, queries, indexes, seeds, fixtures, or external tables when data is involved.
 - API, event, queue, CLI, config, exported type, or SDK contracts when other consumers may depend on the shape.
 - Existing shared helpers, utilities, components, libraries, middleware, validators, formatters, and domain services that already solve part of the problem.
 - Tests or checks that currently cover the path.
 
-If database access is relevant but unavailable, inspect schema/migration/model/query code and state what remains unverified.
+If database access matters but is unavailable, inspect schema/migration/model/query code and state what remains unverified.
 
 ## 4. Frame it
 
-Before editing, think through the working model. These are thinking fields, not a required standalone user-facing report.
+Before editing, frame the working model. These are thinking fields, not a required standalone report.
 
 ```markdown
 **As Is**
@@ -83,20 +72,16 @@ Before editing, think through the working model. These are thinking fields, not 
 - None.
 ```
 
-Use `Open question: none` only when the flow is actually clear.
-
-If tracing reveals that the original request is risky, wrong-layer, or larger than expected, stop and ask a follow-up before coding.
+Use `Open Question: None.` only when the flow is actually clear. If tracing shows the request is risky, wrong-layer, or larger than expected, stop and ask before coding.
 
 ## 5. Plan it
 
-Turn the to-be flow into concrete tasks before editing.
-
-Write the task list with enough detail to expose risk:
+Turn the to-be flow into risk-revealing tasks:
 
 - Code paths, files, modules, or handlers likely to change.
 - Data, schema, query, fixture, seed, or migration work if relevant.
 - Tests, reproductions, smoke checks, or manual verification needed.
-- Contract, config, permission, deploy-order, or compatibility checks if affected.
+- Contract, config, permission, deploy-order, or compatibility checks.
 - Cleanup or refactor ideas that are tempting but not required.
 
 Use these thinking fields:
@@ -117,9 +102,7 @@ The task list is a thinking tool, not permission to do everything on it.
 
 ## 6. Trim it
 
-Analyze the task list again before implementation. Keep only what is necessary to make the to-be flow true without adding avoidable bugs or side effects.
-
-Split the plan into these thinking fields:
+Keep only what makes the to-be flow true without avoidable bugs or side effects.
 
 ```markdown
 **Do Now**
@@ -133,12 +116,10 @@ Split the plan into these thinking fields:
 - None.
 ```
 
-Keep `Do now` narrow:
+Keep `Do Now` narrow:
 
-- Prefer existing patterns, helpers, names, tests, and error handling.
-- Reuse an existing shared helper, component, or library before adding a new local implementation.
+- Prefer existing patterns, helpers, names, tests, and error handling before adding local code.
 - Keep public interfaces compatible unless the user explicitly approved a breaking change.
-- Separate behavior changes from cleanup.
 - Avoid opportunistic refactors, formatting churn, dependency swaps, and unrelated file edits.
 - Add or update focused tests when they prove the changed behavior or prevent regression.
 
@@ -146,18 +127,14 @@ If the smallest correct change is larger than the agreed boundary, report why be
 
 ## 7. Implement it
 
-Implement only the `Do now` tasks.
+Implement only the `Do Now` tasks.
 
-The output of this step is the working diff, not another report.
-
-- Work in the order that gives the fastest useful feedback.
+- Work in the order with the fastest useful feedback.
 - Stop if the code contradicts the framed flow or exposes a new blocking question.
-- Keep any additional discovery separate from unrelated cleanup.
+- Keep discovery separate from unrelated cleanup.
 - Do not silently pull deferred tasks back into scope.
 
 ## 8. Review the diff
-
-Self-review before claiming completion.
 
 Review as an outsider. Do not defend the diff because you wrote it.
 
@@ -170,20 +147,17 @@ Check the actual diff for:
 - Missing verification for the success criteria.
 - Strange code shape, surprising control flow, duplicated logic, or abstractions that do not earn their complexity.
 - Code that could be replaced by a smaller existing helper, a simpler branch, a deletion, or a few lines.
-- New local code that duplicates a shared helper, component, library, validator, formatter, or domain service.
+- New local code that duplicates a shared helper, component, library, validator, formatter, or service.
 
-If the review finds a much simpler equivalent change, prefer the simpler change before completion. Fix only what is necessary. Do not start a broad cleanup pass during review.
+If a much simpler equivalent exists, prefer it before completion. Fix only what is necessary; do not start a broad cleanup pass.
 
 ## Output
 
-Keep output scannable.
-
-- Use short headings and bullets.
-- Put a blank line between sections.
+- Use short headings, bullets, and blank lines.
 - Prefer numbered tasks for `Do Now`.
 - Use `None.` for empty `Open Question`, `Defer`, or `Ask First` sections.
-- Do not collapse the flow, plan, and verification into one paragraph.
-- Emit the template below to the user. Do not emit every intermediate thinking template unless the work is risky or the user asks for the full reasoning.
+- Do not collapse flow, plan, and verification into one paragraph.
+- Emit the template below. Do not emit every thinking template unless work is risky or the user asks.
 
 Before implementation, show the flow and trimmed plan when the work is non-trivial:
 

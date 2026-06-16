@@ -7,6 +7,8 @@ A skill is public only when both are true:
 - It has a reference in the top-level `README.md`.
 - It has an entry in `.claude-plugin/plugin.json`.
 
+`.claude-plugin/plugin.json` is the installer/listing source of truth. Do not publish a skill by relying on filesystem placement alone.
+
 Local experiments must stay in ignored paths:
 
 - `skills/local/`
