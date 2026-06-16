@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Links all published skills in the repository to ~/.kiro/skills, so that
-# they can be used by Kiro.
+# Copies all published skills in the repository to ~/.kiro/skills, so that
+# they can be used by Kiro without relying on symlinks (Kiro does not resolve
+# symlinked skill directories).
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 SCRIPT_DIR="$REPO/scripts"
@@ -25,11 +26,12 @@ mkdir -p "$DEST"
 while IFS= read -r src; do
   name="$(basename "$src")"
   target="$DEST/$name"
+  tmp="$DEST/.$name.tmp"
 
-  if [ -e "$target" ] && [ ! -L "$target" ]; then
-    rm -rf "$target"
-  fi
+  rm -rf "$tmp"
+  cp -R "$src" "$tmp"
+  rm -rf "$target"
+  mv "$tmp" "$target"
 
-  ln -sfn "$src" "$target"
-  echo "linked $name -> $src"
+  echo "copied $name -> $target"
 done
