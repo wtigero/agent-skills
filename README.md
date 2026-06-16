@@ -10,20 +10,28 @@ This repo is starting small on purpose. It currently publishes three skills:
 
 ## Hold Your Horses
 
-Use this when an agent is about to jump into code before the request, current flow, data path, or impact is clear.
+No code before the flow is clear.
+
+Use this when a development request is vague, risky, cross-cutting,
+data-related, broad, multi-file, unclear, or tempting to refactor before the
+problem, flow, affected data, contracts, or success criteria are clear.
 
 The ritual is:
 
 1. **Read it** - inspect the request and the exact artifact the user pointed at.
-2. **Clarify it** - ask only what remains unclear after reading.
-3. **Trace it** - follow the current code, data, contracts, and tests.
-4. **Frame it** - write the as-is flow, to-be flow, affected surface, and risk.
-5. **Plan it** - list the concrete tasks needed to reach the to-be flow.
-6. **Trim it** - reduce the plan to the necessary tasks only.
-7. **Implement it** - make the smallest implementation that follows the trimmed plan.
-8. **Review the diff** - remove scope creep before claiming completion.
+2. **Clarify intent** - ask only blocking questions the repo, runtime, docs, or database cannot answer.
+3. **Trace it** - follow the real entry points, data, contracts, helpers, and tests.
+4. **Frame it** - name the as-is flow, to-be flow, affected data/contracts, risk, and open questions.
+5. **Plan it** - turn the to-be flow into risk-revealing tasks and verification.
+6. **Trim it** - keep only what makes the to-be flow true without avoidable side effects.
+7. **Implement it** - do only the trimmed work, in the order with the fastest useful feedback.
+8. **Review the diff** - remove scope creep, weak tests, debug noise, and unearned complexity.
 
-The point is simple: no code from a guess.
+Tiny mechanical edit: use **Read it -> Implement it -> Review the diff** and
+emit only `Changed`, `Verified`, and `Unverified`. Do not compress behavior,
+data, contracts, shared helpers, or production risk.
+
+The point is simple: clear the flow, then touch the code.
 
 ## Prove It
 
