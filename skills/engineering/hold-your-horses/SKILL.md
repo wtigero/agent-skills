@@ -47,6 +47,7 @@ Start at the named artifact and follow the real path:
 - Data models, migrations, queries, indexes, seeds, fixtures, or external tables when data is involved.
 - API, event, queue, CLI, config, exported type, or SDK contracts when other consumers may depend on the shape.
 - Existing shared helpers, utilities, components, libraries, middleware, validators, formatters, and domain services that already solve part of the problem.
+- Local project patterns near the target: naming, module boundaries, data access, errors, validation, UI components, and test style.
 - Tests or checks that currently cover the path.
 
 If database access matters but is unavailable, inspect schema/migration/model/query code and state what remains unverified.
@@ -119,6 +120,7 @@ Keep only what makes the to-be flow true without avoidable bugs or side effects.
 Keep `Do Now` narrow:
 
 - Prefer existing patterns, helpers, names, tests, and error handling before adding local code.
+- Follow the local project pattern unless it conflicts with `To Be`; name any deliberate deviation before coding.
 - Every `Do Now` item must directly support `To Be` or `Verification`; otherwise move it to `Defer`.
 - Keep public interfaces compatible unless the user explicitly approved a breaking change.
 - Avoid opportunistic refactors, formatting churn, dependency swaps, and unrelated file edits.
@@ -149,6 +151,7 @@ Check the actual diff for:
 - Strange code shape, surprising control flow, duplicated logic, or abstractions that do not earn their complexity.
 - Code that could be replaced by a smaller existing helper, a simpler branch, a deletion, or a few lines.
 - New local code that duplicates a shared helper, component, library, validator, formatter, or service.
+- Code that breaks local project patterns without a necessary reason.
 
 If a much simpler equivalent exists, prefer it before completion. Fix only what is necessary; do not start a broad cleanup pass.
 
