@@ -74,9 +74,21 @@ Before a Mode A run, confirm there is something to review:
 `git diff --shortstat --cached`. Treat untracked files as reviewable. Only say
 "nothing to review" when the relevant status is genuinely empty.
 
-For untracked files, collect their paths from `git status --short
---untracked-files=all` and include them explicitly in the reviewer prompt. Do
-not rely on `git diff` alone; it does not contain untracked file contents.
+If Mode A is empty, reread the user's request before stopping. If the user named
+files, directories, commands, errors, snippets, docs, or pasted content, switch
+to Mode B and review that scope instead. Only report "nothing to review" when
+both git changes and the user's explicit/implicit review target are empty or
+unresolvable.
+
+If Mode A is empty and the user's intent does not identify a concrete Mode B
+target, ask one short clarification before invoking any reviewer: "There are no
+uncommitted changes. What should the council review -- a path, branch, commit,
+or pasted content?" Do not run Codex or Claude until the review scope is clear.
+
+For reviewers that inspect `git diff` directly, collect untracked paths from
+`git status --short --untracked-files=all` and include them explicitly. Do not
+rely on `git diff` alone; it does not contain untracked file contents. Codex
+`review --uncommitted` already includes staged, unstaged, and untracked changes.
 
 ## Commands per member
 
@@ -85,13 +97,11 @@ Pass the **Review stance** as the prompt/instructions in every command below
 
 **Codex** (`codex review` is for read-only review; `codex exec` runs
 `--sandbox read-only`. If `codex review` requests write or edit permissions,
-stop and use the manual review packet fallback. Web search is on by default --
-add the top-level `--search` flag for live results, e.g. `codex --search exec ...`):
+stop and use the manual review packet fallback):
 
 ```bash
 # Mode A -- git changes
-codex review --uncommitted "<stance> Review the uncommitted git changes.
-  Include untracked paths listed by git status."
+codex review --uncommitted "<stance> Review the uncommitted git changes."
 # or --base <branch> / --commit <sha>
 
 # Mode B -- paths or piped content
@@ -147,10 +157,13 @@ Do not present the packet as reviewer output.
 
 1. Pick members from the routing table.
 2. Pick scope (a git diff/branch -> A; explicit paths or pasted content -> B).
-3. For Mode A, confirm there is something to review (see above).
+3. For Mode A, confirm there is something to review (see above). If there is no
+   git diff, reread the user's intent and switch to Mode B when a path, file,
+   command, error, snippet, doc, or pasted content was requested. If no concrete
+   target is identifiable, ask a short clarification before invoking reviewers.
 4. Run each selected member's command with the stance prepended. Include
-   untracked paths explicitly when they exist. In "both" mode,
-   run sequentially.
+   untracked paths explicitly when using a reviewer path that relies on
+   `git diff`. In "both" mode, run sequentially.
 5. If a member cannot run, produce the manual review packet fallback for that
    member and label it as not reviewed.
 6. Return each member's output **verbatim**, under its `### Codex` / `### Claude`
