@@ -13,12 +13,15 @@ repo นี้ตั้งใจเริ่มเล็กก่อน ตอ�
 ไฟล์นี้เป็น summary เอาไว้อ่านภาพรวมและรสชาติพอ. กติกาจริงที่ agent ต้องทำตาม
 อยู่ใน `SKILL.md` ของแต่ละสกิล อย่าเอา README ไปเถียงกับ source of truth.
 
+แต่ละสกิลใช้เดี่ยวได้ ถ้าใช้ร่วมกันก็ใช้ flow และหลักฐานที่ยังตรงกับงานต่อได้
+แล้วรวมผลไว้ในรายงานเดียว ไม่ต้องเริ่มพิธีใหม่ทุกครั้ง.
+
 ## Hold Your Horses
 
 No code before the flow is clear.
 
-ใช้ตอน request ยังเบลอ เสี่ยง แตะหลายไฟล์/data/contract หรือคันมืออยาก refactor
-ทั้งที่ flow กับ success criteria ยังไม่ชัด.
+ใช้ก่อนลงมือเมื่อ flow, data, contract, หรือ success criteria ยังไม่ชัด
+หรือจะเปลี่ยนงานกว้างๆ/refactor ทั้งที่ขอบเขตกับผลกระทบยังไม่แน่.
 
 มันบังคับ agent ให้:
 
@@ -27,10 +30,10 @@ No code before the flow is clear.
 - ไล่ path จริงผ่าน code, data, contracts, helpers, tests.
 - frame risk, trim งาน, implement แคบๆ, แล้ว review diff.
 
-ถ้าเป็น mechanical edit เล็กจริง ให้ใช้แค่ **Read it -> Implement it -> Review the diff**
-แล้วรายงานเฉพาะ `Changed`, `Verified`, และ `Unverified`. แต่ถ้าแตะ behavior, data,
-contracts, shared helpers, หรือ production risk แล้วทำเนียนย่อขั้นตอน อันนั้นไม่ใช่ไว
-อันนั้นซุย.
+ปรับความลึกตามสิ่งที่ยังไม่รู้และผลกระทบ ไม่ใช่นับไฟล์. ถ้า flow ชัดและงานจำกัด
+ให้ใช้ทางสั้น: อ่าน ไล่ path ที่เปลี่ยน implement review diff แล้ว verify.
+รายงาน `Changed`, `Verified`, และ `Unverified`; เพิ่มเหตุผลเรื่อง scope หรือทางเลือก
+เมื่อมีประเด็นจริง. ถ้า data, contract, หรือ production risk ยังไม่ชัด ก็ต้องไล่ต่อ.
 
 ใจความคือ: เข้าใจ flow ก่อน แล้วค่อยแตะ code. ไม่งั้นก็แค่พา bug ไปเดินเล่น.
 
@@ -39,18 +42,20 @@ contracts, shared helpers, หรือ production risk แล้วทำเน
 No claim without proof.
 
 ใช้ก่อน agent จะพูดว่า "เสร็จแล้ว", "แก้แล้ว", "ทดสอบแล้ว", "พร้อม ship",
-หรือ "ปลอดภัย" ทั้งที่ proof ยังอ่อนหรือไม่ได้รันใหม่.
+หรือ "ปลอดภัย" ทั้งที่ proof ยังอ่อนหรือไม่ตรงกับสถานะงานที่กำลังอ้าง.
 
 มันบังคับ agent ให้:
 
 - จับ claim ให้ชัด อย่าให้คำพูดมันลื่น.
 - หา proof ที่ตรง claim ที่สุด.
 - ถามว่าถ้า claim ไม่จริง proof นี้จะพังไหม.
-- รัน proof สดรอบนี้.
+- ตรวจว่า proof ยังตรงกับ code, input, และ environment; ถ้าเปลี่ยนหรือหลักฐานไม่ครบก็ค่อยรันใหม่.
 - บอกให้หมดว่าอะไรยังไม่ได้พิสูจน์ อย่าซ่อนใต้พรม.
 
 หลักฐานที่ดีต้องแตะ behavior จริง เช่น repro, workflow, API call, targeted test,
 หรือ manual check พร้อม input และ observed output.
+ผล CI หรือ check เดิมใช้ต่อได้เมื่อดูผลจริงได้และสถานะที่เกี่ยวข้องยังตรงกัน.
+อาการหาย ยืนยัน root cause และพร้อม release เป็นคนละ claim อย่าใช้หลักฐานหนึ่งแทนทุกข้อ.
 แค่ "ดูโค้ดแล้วน่าจะได้" ไม่ใช่ proof มันคือดูดวง.
 
 ใจความคือ: อย่า claim ถ้ายังพิสูจน์ไม่ได้. ไม่มีใบเสร็จ ก็อย่ามั่นหน้า.
@@ -79,7 +84,7 @@ Council ส่ง review แบบ **read-only** ไปยัง Codex, Claude C
 
 ## Install
 
-installer จะ link published skills จาก repo นี้เข้า skill directory ของแต่ละ agent.
+installer จะ link published skills เข้า Codex กับ Claude Code และ copy เข้า Kiro.
 ไม่ต้องก็อปมือให้เหนื่อย.
 
 สำหรับ Claude Code:

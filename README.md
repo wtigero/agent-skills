@@ -13,13 +13,16 @@ This repo stays small on purpose. It currently publishes three skills:
 This README is the public summary. The exact operating rules live in each
 `SKILL.md`.
 
+Each skill works on its own. When combining them, reuse established flow and
+applicable evidence, and include the outcome in one completion report.
+
 ## Hold Your Horses
 
 No code before the flow is clear.
 
-Use this when a development request is vague, risky, cross-cutting,
-data-related, broad, multi-file, unclear, or tempting to refactor before the
-problem, flow, affected data, contracts, or success criteria are clear.
+Use this before implementation when the problem, flow, affected data, contracts,
+or success criteria are unclear, or a broad change or proposed refactor has
+uncertain scope or impact.
 
 It forces the agent to:
 
@@ -28,9 +31,10 @@ It forces the agent to:
 - Trace the real path through code, data, contracts, helpers, and tests.
 - Frame risk, trim the plan, implement narrowly, and review the diff.
 
-Tiny mechanical edit: use **Read it -> Implement it -> Review the diff** and
-emit only `Changed`, `Verified`, and `Unverified`. Do not compress behavior,
-data, contracts, shared helpers, or production risk.
+Scale the depth to uncertainty and impact. Clear, bounded changes use a short
+path: read, trace the affected path, implement, review the diff, and verify.
+Report `Changed`, `Verified`, and `Unverified`; add scope decisions or alternatives
+when they matter. Do not shorten unresolved data, contract, or production risk.
 
 The point is simple: clear the flow, then touch the code.
 
@@ -45,12 +49,13 @@ It forces the agent to:
 - State one exact claim.
 - Pick the strongest proof that matches that claim.
 - Ask whether the proof would fail if the claim were false.
-- Run fresh proof now.
+- Check that proof matches the relevant code, inputs, and environment; rerun when it no longer does.
 - Name what remains unproven.
 
 Good proof reaches real behavior: a repro, workflow, API call, job, targeted
 test, affected build/check, or manual check with the relevant input and observed
-output.
+output. A matching, inspectable CI or earlier check can be reused. Symptom
+resolution, root-cause confirmation, and release readiness are separate claims.
 
 The point is simple: no claim without proof.
 
@@ -80,7 +85,8 @@ The point is simple: return the outside view, even when it disagrees.
 
 ## Install
 
-Installers link the published skills from this repo into each agent's skill directory.
+Installers link published skills into Codex and Claude Code's skill directories,
+and copy them into Kiro's.
 
 For Claude Code:
 

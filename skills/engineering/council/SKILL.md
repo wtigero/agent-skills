@@ -24,9 +24,10 @@ Run when the user asks for an outside review, second opinion, or council:
 
 If the council cannot speak, prepare the brief. The work should not stall.
 
-This skill is **review-only**. Do not fix, patch, refactor, stage, commit, or
-edit project files during this skill. A manual review packet is allowed only as
-the documented fallback below.
+Reviewer runs are **review-only**. Do not fix, patch, refactor, stage, commit, or
+edit project files while conducting the reviews. A manual review packet is
+allowed as the documented fallback below. If the user also authorized fixes,
+continue in a separate implementation phase after returning the reviews.
 
 ## Review stance (every member must follow)
 
@@ -85,24 +86,28 @@ target, ask one short clarification before invoking any reviewer: "There are no
 uncommitted changes. What should the council review -- a path, branch, commit,
 or pasted content?" Do not run Codex or Claude until the review scope is clear.
 
-For reviewers that inspect `git diff` directly, collect untracked paths from
+For reviewers that inspect `git diff`, collect untracked paths from
 `git status --short --untracked-files=all` and include them explicitly. Do not
-rely on `git diff` alone; it does not contain untracked file contents. Codex
-`review --uncommitted` already includes staged, unstaged, and untracked changes.
+rely on `git diff` alone; it does not contain untracked file contents.
 
 ## Commands per member
 
 Pass the **Review stance** as the prompt/instructions in every command below
 (shown as `<stance>`).
 
-**Codex** (`codex review` is for read-only review; `codex exec` runs
-`--sandbox read-only`. If `codex review` requests write or edit permissions,
-stop and use the manual review packet fallback):
+**Codex** uses `codex exec --sandbox read-only` for both modes so the review
+stance and sandbox are explicit. Do not combine `codex review --uncommitted`
+with a positional stance; CLI versions that reject that combination never
+start the review.
 
 ```bash
 # Mode A -- git changes
-codex review --uncommitted "<stance> Review the uncommitted git changes."
-# or --base <branch> / --commit <sha>
+codex exec --sandbox read-only "<stance> Review uncommitted changes: git diff,
+  git diff --cached, and untracked files from git status --short --untracked-files=all."
+
+# Mode A -- branch or commit selected by the user
+codex exec --sandbox read-only "<stance> Review git diff <base>...HEAD."
+codex exec --sandbox read-only "<stance> Review the changes introduced by <sha>."
 
 # Mode B -- paths or piped content
 codex exec --sandbox read-only "<stance> Read <paths> and review them."
@@ -122,8 +127,10 @@ claude -p "<stance> Read <paths> and review them." --permission-mode plan
 cat <file> | claude -p "<stance> Review the code from stdin." --permission-mode plan
 ```
 
-If Claude cannot reach the web in your setup, append
+If Claude's web tools are denied by tool permissions, append
 `--allowedTools "WebSearch WebFetch Read Grep Glob Bash(git status:*) Bash(git diff:*)"`.
+This does not fix network or authentication failures. When an external claim
+cannot be checked, mark it `unverified` and continue the available review.
 
 ## Fallback -- manual review packet
 
@@ -171,9 +178,9 @@ Do not present the packet as reviewer output.
 
 ## Boundaries
 
-- Review-only. Codex `review` must not be allowed to edit; Codex `exec` always
-  runs `--sandbox read-only`; Claude always `--permission-mode plan`. Never fix,
-  refactor, or commit during this skill. If
-  the user wants fixes after seeing the council, that is a separate, explicit step.
+- Reviewer runs stay read-only: Codex always uses `--sandbox read-only`; Claude
+  always uses `--permission-mode plan`. Fixes belong to a separate implementation
+  phase. Continue with fixes already authorized by the user; otherwise ask before
+  changing code.
 - Do not invent findings. On a CLI error (not logged in, missing path, empty
   diff), report the exact error and which member produced it.

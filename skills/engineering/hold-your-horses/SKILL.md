@@ -1,6 +1,6 @@
 ---
 name: hold-your-horses
-description: Use when a development request is vague, risky, cross-cutting, data-related, broad, multi-file, unclear, or tempting to refactor; when the problem, flow, affected data, contracts, or success criteria are not yet clear before implementation.
+description: Use before implementation when the desired behavior, affected flow, data, contracts, or success criteria are unclear, or when a broad change or proposed refactor has uncertain scope or impact.
 ---
 
 # Hold Your Horses
@@ -20,7 +20,16 @@ Run before implementing:
 7. **Implement it.**
 8. **Review the diff.**
 
-Tiny mechanical edit: use **Read it -> Implement it -> Review the diff** and emit only `Changed`, `Verified`, and `Unverified`. Do not compress behavior, data, contracts, shared helpers, or production risk.
+Scale the depth to uncertainty and impact, not the number of files. For a clear,
+bounded change, use **Read it -> Trace the affected path -> Implement it ->
+Review the diff**, run the relevant verification, and report `Changed`,
+`Verified`, and `Unverified`. Tiny mechanical edits need only nearby context.
+Do not shorten the investigation while affected data, contracts, shared callers,
+or production impact remain unclear.
+
+Reuse flow, constraints, plans, and evidence already established in this task
+while they still match the affected code and environment. Reopen only the parts
+invalidated by new observations or changes.
 
 ## 1. Read it
 
@@ -73,7 +82,7 @@ Before editing, frame the working model. These are thinking fields, not a requir
 - None.
 ```
 
-Use `Open Question: None.` only when the flow is actually clear. After tracing, reopen clarification before coding if an assumption was wrong, the target flow is unclear, or the change is larger than expected.
+After tracing, reopen clarification before coding if an assumption was wrong, the target flow is unclear, or the change is larger than expected.
 
 ## 5. Plan it
 
@@ -159,11 +168,13 @@ If a much simpler equivalent exists, prefer it before completion. Fix only what 
 
 - Use short headings, bullets, and blank lines.
 - Prefer numbered tasks for `Do Now`.
-- Use `None.` for empty `Open Question`, `Defer`, or `Ask First` sections.
-- Do not collapse flow, plan, and verification into one paragraph.
-- Emit the template below. Do not emit every thinking template unless work is risky or the user asks.
+- Omit empty `Open Question`, `Defer`, or `Ask First` sections.
+- Keep flow, scope, and verification distinguishable when the work needs a detailed plan.
+- Use the template below when it helps explain unresolved scope or risk. Do not emit every thinking template unless work is risky or the user asks.
 
-Before implementation, show the flow and trimmed plan when the work is non-trivial:
+Before implementation, show the flow and trimmed plan when uncertainty or impact
+requires the full workflow. Add `Defer` or `Open Question` only when there is
+something to report:
 
 ```markdown
 **As Is**
@@ -176,23 +187,19 @@ Before implementation, show the flow and trimmed plan when the work is non-trivi
 1. ...
 2. ...
 
-**Defer**
-- None.
-
 **Verification**
 - ...
-
-**Open Question**
-- None.
 ```
 
 After implementation, report:
 
 - **Changed** - what changed.
-- **Kept Small** - why the change is small enough.
-- **Simpler Alternative** - any smaller equivalent approach found during review, or `None.`
 - **Verified** - what was verified.
 - **Unverified** - what remains unverified or intentionally out of scope.
+
+Include `Kept Small` or `Simpler Alternative` when a scope decision or trade-off
+matters. When another skill also checks completion, include its evidence and
+limits here rather than producing a second completion report.
 
 ## Guardrails
 
