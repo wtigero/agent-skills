@@ -1,0 +1,7 @@
+interface:
+  display_name: "Bug Hunter"
+  short_description: "Find root causes with decisive experiments"
+  default_prompt: "Use $bug-hunter to investigate this failure and test its cause."
+
+policy:
+  allow_implicit_invocation: true

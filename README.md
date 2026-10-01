@@ -4,11 +4,12 @@ Practical skills for coding agents.
 
 Thai: [README.th.md](./README.th.md)
 
-This repo stays small on purpose. It currently publishes three skills:
+This repo stays small on purpose. It currently publishes four skills:
 
 - **[hold-your-horses](./skills/engineering/hold-your-horses/SKILL.md)** - slow down vague or risky development requests before touching code.
 - **[prove-it](./skills/engineering/prove-it/SKILL.md)** - do not claim work is done, fixed, tested, or safe without proof.
 - **[council](./skills/engineering/council/SKILL.md)** - get an independent, read-only review from Codex, Claude Code, or both.
+- **[bug-hunter](./skills/engineering/bug-hunter/SKILL.md)** - trace failures and test competing causes before choosing a fix.
 
 This README is the public summary. The exact operating rules live in each
 `SKILL.md`.
@@ -82,6 +83,26 @@ of pretending the review happened. You get reviewer output or a ready-to-paste
 brief, never fake certainty.
 
 The point is simple: return the outside view, even when it disagrees.
+
+## Bug Hunter
+
+Find the cause. Bring the evidence.
+
+Use this when a bug, intermittent failure, or performance regression needs
+diagnosis before choosing a fix.
+
+It guides the agent to:
+
+- Build a feedback loop that reproduces the reported symptom.
+- Trace the fail path and test predictions that distinguish plausible causes.
+- Keep an experiment ledger and check explanations against earlier observations.
+- Fix within scope, verify the original scenario, and remove temporary probes.
+
+Preliminary hypotheses can help build a repro, but remain provisional until
+tested. A hypothesis surviving disproof is still a candidate. Intermittent and
+performance failures need comparable repeated runs, not a single clean result.
+
+The point is simple: follow the failure and bring evidence for the cause.
 
 ## Install
 
