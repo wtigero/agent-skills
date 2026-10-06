@@ -4,6 +4,7 @@
     "./skills/engineering/hold-your-horses",
     "./skills/engineering/prove-it",
     "./skills/engineering/council",
-    "./skills/engineering/bug-hunter"
+    "./skills/engineering/bug-hunter",
+    "./skills/writing/write-like-me"
   ]
 }

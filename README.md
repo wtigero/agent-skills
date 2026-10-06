@@ -1,15 +1,16 @@
 # agent-skills
 
-Practical skills for coding agents.
+Practical skills for coding and writing.
 
 Thai: [README.th.md](./README.th.md)
 
-This repo stays small on purpose. It currently publishes four skills:
+This repo stays small on purpose. It currently publishes five skills:
 
 - **[hold-your-horses](./skills/engineering/hold-your-horses/SKILL.md)** - slow down vague or risky development requests before touching code.
 - **[prove-it](./skills/engineering/prove-it/SKILL.md)** - do not claim work is done, fixed, tested, or safe without proof.
 - **[council](./skills/engineering/council/SKILL.md)** - get an independent, read-only review from Codex, Claude Code, or both.
 - **[bug-hunter](./skills/engineering/bug-hunter/SKILL.md)** - trace failures and test competing causes before choosing a fix.
+- **[write-like-me](./skills/writing/write-like-me/SKILL.md)** - turn your ideas into articles and posts in your own voice, using plain words.
 
 This README is the public summary. The exact operating rules live in each
 `SKILL.md`.
@@ -103,6 +104,26 @@ tested. A hypothesis surviving disproof is still a candidate. Intermittent and
 performance failures need comparable repeated runs, not a single clean result.
 
 The point is simple: follow the failure and bring evidence for the cause.
+
+## Write Like Me
+
+Your ideas, in words you would use yourself.
+
+Use this for articles, posts, Thai notes you want to write in English, or drafts
+that feel generic or unlike you.
+
+It draws out your point and real examples, uses your writing samples when
+available, and drafts with common words and correct grammar. It edits out filler
+without inventing personal stories or polishing away your voice. Short pieces
+do not need a long interview or outline.
+
+For example:
+
+```text
+Use $write-like-me to turn these notes into a short English post.
+Keep my direct tone and use words I can say myself.
+Ask if my point or example is missing.
+```
 
 ## Install
 

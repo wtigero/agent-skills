@@ -1,0 +1,7 @@
+interface:
+  display_name: "Write Like Me"
+  short_description: "Write articles and posts in your own plain voice"
+  default_prompt: "Use $write-like-me to turn my ideas into an article or post in my own voice, with plain words and no invented experiences."
+
+policy:
+  allow_implicit_invocation: true
