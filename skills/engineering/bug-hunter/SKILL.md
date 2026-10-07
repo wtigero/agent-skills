@@ -22,6 +22,12 @@ When a fix is part of the request, continue through verification and cleanup.
 - Observe the failure before using the check to claim a fix. Preserve the original scenario when minimizing it; a nearby failure is a different investigation.
 - Preliminary hypotheses can guide repro construction, but remain provisional until tested.
 
+If the project has a `verify-project` skill, inspect only the relevant route and
+references. Reuse its launch, health check, driver, and cleanup to build a repro
+another session can repeat. Otherwise start with the existing project harness.
+Record the command, inputs, expected failure, observed result, and evidence path;
+launching successfully does not mean the reported feature was reproduced.
+
 If the failure cannot be reproduced, inspect available logs, captured artifacts,
 and source paths. State the missing observation and ask only for access or inputs
 that cannot be discovered. Continue useful investigation without calling the
@@ -79,6 +85,11 @@ context changes.
 Check each new hypothesis against earlier observations. If results conflict,
 investigate changed conditions or probe effects and refine the explanation.
 Do not silently discard a run that contradicts the preferred cause.
+
+Keep the contradictory output itself, not just the latest explanation. Before
+fixing, choose a controlled check that would produce different results under
+the remaining causes. If only symptom relief is observed, report a mitigation
+and leave root-cause confirmation open.
 
 ## 5. Establish the cause and fix within scope
 

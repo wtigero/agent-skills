@@ -1,0 +1,2 @@
+SYNTHETIC RECORDED REVIEW FIXTURE, not a live reviewer run.
+blocking: billing.py:2 loses a cent for input "0.29": int(float("0.29") * 100) returns 28, but currency conversion requires 29. Use exact decimal conversion with a documented rounding policy.

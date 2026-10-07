@@ -5,3 +5,6 @@ skills/local/
 skills/personal/
 skills/drafts/
 skills/deprecated/
+
+__pycache__/
+.evaluation/

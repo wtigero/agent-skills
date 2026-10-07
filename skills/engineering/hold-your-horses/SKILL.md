@@ -55,6 +55,8 @@ Start at the named artifact and follow the real path:
 - Entry point, callers, branches, validation, permissions, and errors.
 - Data models, migrations, queries, indexes, seeds, fixtures, or external tables when data is involved.
 - API, event, queue, CLI, config, exported type, or SDK contracts when other consumers may depend on the shape.
+- Consumers outside the direct call graph: serialized API responses, exports, persisted data, scheduled jobs, scripts, and other systems that read them. Search for field names, wire examples, and contract fixtures as well as function references. An empty caller search does not establish compatibility.
+- Dependency behavior at the version actually installed or locked. Read local types/source or that version's official documentation before relying on an API from memory; record any behavior that still needs a runtime check.
 - Existing shared helpers, utilities, components, libraries, middleware, validators, formatters, and domain services that already solve part of the problem.
 - Local project patterns near the target: naming, module boundaries, data access, errors, validation, UI components, and test style.
 - Tests or checks that currently cover the path.
@@ -64,6 +66,13 @@ If database access matters but is unavailable, inspect schema/migration/model/qu
 ## 4. Frame it
 
 Before editing, frame the working model. These are thinking fields, not a required standalone report.
+
+Name the facts the change depends on and how to check them before editing. For
+example: "the existing export reader still accepts this response" needs a real
+consumer/contract check; "there are no callers" does not prove it. Resolve facts
+that determine the safe implementation first. If a relevant `verify-project`
+skill exists, inspect its matching route and reuse it; do not generate a new
+verifier just to make a small edit.
 
 ```markdown
 **As Is**
@@ -207,3 +216,4 @@ limits here rather than producing a second completion report.
 - Do not code through an unresolved blocking question.
 - Do not treat code inspection as database verification when live data matters.
 - Do not claim the flow is clear if affected consumers or data paths were not inspected.
+- Multiple agents are optional. Use them only when independent work answers a concrete uncertainty; keep the same scope and one completion report.

@@ -44,6 +44,11 @@ Prepend this stance to the prompt of every member you invoke:
 > correctness and security issues from style preferences. The author decides --
 > do not demand changes. Review only; do not edit anything.
 
+Read [the finding rubric](references/finding-rubric.md) and include it in each
+review brief. Every finding needs evidence, a concrete consequence and severity,
+and relevance to the requested scope. Respect the user's chosen models and
+budget; invoking Council is not permission to escalate to a more expensive model.
+
 ## Routing -- who reviews
 
 | User says | Run |
@@ -55,6 +60,10 @@ Prepend this stance to the prompt of every member you invoke:
 Default when no engine is named: **both**. In "both" mode, label the two
 outputs `### Codex` and `### Claude`, and keep them independent -- do not feed one
 member's review into the other; each reviews the code fresh.
+
+This interface is the same when using the skill from Pi or OpenCode: reviewers
+are still the Codex and Claude CLIs. Do not invent Pi/OpenCode review commands
+or install an agent extension to satisfy the request.
 
 ## Prerequisites
 
@@ -173,8 +182,19 @@ Do not present the packet as reviewer output.
    `git diff`. In "both" mode, run sequentially.
 5. If a member cannot run, produce the manual review packet fallback for that
    member and label it as not reviewed.
-6. Return each member's output **verbatim**, under its `### Codex` / `### Claude`
-   heading. If the two disagree, show both -- do not merge the disagreement away.
+6. Preserve each member's complete output **verbatim**, under its `### Codex` /
+   `### Claude` heading or in a linked raw artifact when too long to inline.
+   Retain errors, exit status, and partial output if a run fails. Do not replace
+   the raw review with a summary. If the two disagree, show both.
+7. Check each finding against the scoped code and the rubric. Add a separately
+   labeled **Aggregator assessment** with `supported`, `unverified`, or `not
+   supported` and a reason/evidence pointer for each finding. This is your
+   assessment, not a rewritten reviewer verdict. Keep unresolved disagreement
+   visible; do not infer consensus from silence or a failed CLI.
+
+Use one completion report containing the raw reviews (or links), the aggregator
+assessment, and unavailable-member packets. Additional agents beyond the chosen
+reviewer CLIs are not required.
 
 ## Boundaries
 

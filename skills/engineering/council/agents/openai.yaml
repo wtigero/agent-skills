@@ -1,6 +1,6 @@
 interface:
   display_name: "Council"
-  short_description: "Independent read-only review from Codex and/or Claude"
+  short_description: "Independent reviews with evidence and disagreement"
   default_prompt: "Use $council to get an unbiased outside review of these changes."
 
 policy:

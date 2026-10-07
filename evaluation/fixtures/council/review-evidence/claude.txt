@@ -1,0 +1,3 @@
+SYNTHETIC RECORDED REVIEW FIXTURE, not a live reviewer run.
+No precision problem: billing.py:2 always returns the exact number of cents for a decimal string, so the Codex precision concern is not supported.
+blocking: billing.py:2 permits SQL injection because the value comes from untrusted input. Parameterize the database query here.

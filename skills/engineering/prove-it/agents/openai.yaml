@@ -1,6 +1,6 @@
 interface:
   display_name: "Prove It"
-  short_description: "Do not claim without proof"
+  short_description: "Match each claim to relevant, current evidence"
   default_prompt: "Use $prove-it to verify this claim before we call it done."
 
 policy:
