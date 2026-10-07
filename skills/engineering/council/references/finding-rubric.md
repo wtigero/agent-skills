@@ -14,3 +14,8 @@ supported`, with evidence and any remaining uncertainty. If reviewers reach
 different conclusions, show the disputed fact and the check needed to resolve
 it. A vote is not proof. A failed reviewer run is an availability result, not an
 approval or rejection of the code.
+
+When the disputed behavior is runnable in this checkout, execute the smallest
+check that distinguishes the claims and retain its actual output. Repeating a
+reviewer's explanation does not resolve the dispute. If the check cannot run,
+keep that fact `unverified` and state the missing check.
