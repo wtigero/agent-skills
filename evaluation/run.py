@@ -68,7 +68,7 @@ def prepare(runtime, scenario, variant, root, baseline):
     shutil.copytree(REPO / "evaluation/fixtures" / case, workspace)
     source = REPO
     if variant == "baseline":
-        source = root / "sources" / baseline
+        source = root / "sources" / runtime / baseline
         if not source.exists():
             archive = git("archive", "--format=zip", baseline)
             source.mkdir(parents=True)
