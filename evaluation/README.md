@@ -21,11 +21,15 @@ Its CLIs return an actual controlled availability error; there are no simulated
 live LLM reviews. This covers aggregation/disagreement plus fallback, not the
 quality of real outside reviewers. Council's production reviewer interface stays
 Codex/Claude, including when the caller is Pi/OpenCode.
+Native Codex sandbox shells can reconstruct PATH. Its controlled trial names
+the wrapper executables explicitly; a run that reaches a global reviewer is a
+protocol deviation and cannot qualify this availability case.
 
 The verifier fixture exercises a real local HTTP API via the project's existing
 Python harness; it does not establish browser/UI coverage. All fixtures use the
 standard library and owned processes/data. Mechanical oracles check resulting
-behavior separately, but **human transcript review** decides skill acceptance.
+behavior separately, but **transcript review** decides skill acceptance; record
+who performed that review and do not present an agent's assessment as human QA.
 An oracle passing later does not prove the agent ran a matching check itself.
 
 ## Run
@@ -56,12 +60,31 @@ Codex and Claude use their existing auth locations **in place**; user config/MCP
 loading is disabled where CLI flags allow. Designated project skill paths are
 explicit in every prompt, preventing ambiguity with legacy same-name skills.
 Record any remaining user-context contamination during transcript review.
+Pi receives `/skill:<first-skill> <task>` through stdin so its native skill
+expansion runs; the prompt also names any other required skills and references.
+Pi's `@file` is an attachment block and must not be mistaken for a native skill
+invocation. An invocation change requires a fresh baseline/candidate pair.
+If native Codex protected-path rules deny the requested project skill directory,
+retain the blocked gate. A passing API harness cannot substitute for generating
+and loading the skill. This Windows qualification also tried a narrowly scoped
+`--add-dir`; the native elevated sandbox rejected writable descendants under
+read-only carveouts before shell startup, so that failed option is not a default.
 
-Pi and OpenCode can reuse an existing OpenCode Go API credential with
-`--opencode-go-auth`. The runner reads the configured key, passes it only in the
-child process environment and redacts it from captured streams. It never copies,
-links, prints or writes credentials. Alternatively use providers already
-configured in environment variables, without that flag. No auth is created.
+This round uses the existing Claude subscription and OpenAI for Pi/OpenCode.
+`--openai-subscription-auth` reads an already valid Codex ChatGPT access token
+in place and passes it only through the child environment. Pi 1.0.4 uses its
+native `openai-codex` subscription transport with an `apiKey` environment reference
+in temporary `models.json` (the value is a subscription bearer, not a Platform
+API key); OpenCode 1.18.31 uses its built-in `openai` OAuth
+transport and `OPENCODE_AUTH_CONTENT`. No resolved credential or refresh token
+is copied, linked, printed or written. Captured streams redact the access token.
+The runner blocks tokens that expire before the trial's timeout plus a minute;
+refresh through Codex before retrying. User auth/configuration is not modified.
+These are subscription routes, separate from paid OpenAI Platform API keys.
+
+Alternatively use an already configured `OPENAI_API_KEY` with the native
+`openai` provider and without that flag. Provider changes require fresh paired
+trials; earlier OpenCode Go runs are retained but excluded from the OpenAI gate.
 
 Each result retains prompt, actual command, raw stdout/stderr, final report,
 revision, skill fingerprints, CLI version, provider, requested/observed model,

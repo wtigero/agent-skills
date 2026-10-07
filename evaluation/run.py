@@ -2,6 +2,7 @@
 """Opt-in live evaluations. Calls configured providers; never run this in CI."""
 
 import argparse
+import base64
 from datetime import datetime, timezone
 import hashlib
 import io
@@ -87,23 +88,47 @@ def prepare(runtime, scenario, variant, root, baseline):
     return workspace
 
 
-def environment(runtime, home, original_home, auth_bridge):
+def environment(runtime, home, original_home, openai_subscription=False, timeout=360):
     env = os.environ.copy()
     env.update(HOME=str(home), USERPROFILE=str(home), XDG_CONFIG_HOME=str(home / ".config"),
                XDG_DATA_HOME=str(home / ".local/share"), XDG_STATE_HOME=str(home / ".local/state"),
                XDG_CACHE_HOME=str(home / ".cache"), PI_CODING_AGENT_DIR=str(home / ".pi/agent"), PI_TELEMETRY="0")
     # Credentials remain at their original configured location. No copies/symlinks
-    # of auth files are made. The optional Go bridge passes a key only in child env.
+    # of auth files are made. Optional subscription reuse passes access only in
+    # child env, through the runtime's native provider; never a refresh token.
     env["CODEX_HOME"] = os.environ.get("CODEX_HOME", str(original_home / ".codex"))
     env["CLAUDE_CONFIG_DIR"] = os.environ.get("CLAUDE_CONFIG_DIR", str(original_home / ".claude"))
+    if runtime == "codex" and os.name == "nt":
+        # Native sandbox credentials/profile belong to the real Windows user.
+        env["USERPROFILE"] = str(original_home)
     secrets = []
-    if auth_bridge and runtime in ("pi", "opencode"):
-        auth = original_home / ".local/share/opencode/auth.json"
-        configured = json.loads(auth.read_text(encoding="utf-8")).get("opencode-go", {})
-        if configured.get("type") != "api" or not configured.get("key"):
-            raise RuntimeError("existing OpenCode Go API credential is unavailable; no auth file changed")
-        env["OPENCODE_API_KEY"] = configured["key"]
-        secrets.append(configured["key"])
+    if openai_subscription:
+        if runtime not in ("pi", "opencode"):
+            raise RuntimeError("subscription reuse is only for Pi/OpenCode")
+        configured = json.loads((Path(env["CODEX_HOME"]) / "auth.json").read_text(encoding="utf-8"))
+        token = configured.get("tokens", {}).get("access_token", "")
+        try:
+            claims = json.loads(base64.urlsafe_b64decode(token.split(".")[1] + "==="))
+            expires = claims["exp"]
+            account = claims.get("https://api.openai.com/auth", {}).get("chatgpt_account_id")
+        except (ValueError, KeyError, IndexError, TypeError):
+            raise RuntimeError("configured Codex subscription token metadata is unavailable") from None
+        if configured.get("auth_mode") != "chatgpt" or not account:
+            raise RuntimeError("a configured ChatGPT subscription is required; no auth file changed")
+        if not isinstance(expires, (int, float)) or expires <= time.time() + timeout + 60:
+            raise RuntimeError("subscription access expires too soon; refresh it in Codex before retrying")
+        secrets.append(token)
+        if runtime == "pi":
+            env["AGENT_SKILLS_OPENAI_ACCESS_TOKEN"] = token
+            auth_dir = Path(env["PI_CODING_AGENT_DIR"])
+            auth_dir.mkdir(parents=True)
+            # A configuration reference only, never the resolved credential.
+            (auth_dir / "models.json").write_text(json.dumps({"providers": {"openai-codex": {
+                "apiKey": "$AGENT_SKILLS_OPENAI_ACCESS_TOKEN"}}}), encoding="utf-8")
+        else:
+            env["OPENCODE_AUTH_CONTENT"] = json.dumps({"openai": {
+                "type": "oauth", "access": token, "refresh": "", "expires": int(expires * 1000),
+                "accountId": account}})
     if runtime == "opencode":
         env["OPENCODE_CONFIG_CONTENT"] = json.dumps({"autoupdate": False, "share": "disabled",
             "permission": {"*": "allow", "external_directory": "deny", "webfetch": "deny", "websearch": "deny", "task": "deny"}})
@@ -114,6 +139,9 @@ def command(runtime, config, workspace, prompt_file):
     base, model, effort = config["command"], config["model"], config["effort"]
     if runtime == "codex":
         return base + ["exec", "--ignore-user-config", "--ignore-rules", "--ephemeral", "--json",
+                       "--disable", "plugins", "--disable", "apps", "--disable", "memories", "--disable", "hooks", "--disable", "multi_agent",
+                       "--enable", "skip_host_skill_discovery",
+                       *( ["-c", 'windows.sandbox="elevated"'] if os.name == "nt" else [] ),
                        "--sandbox", "workspace-write", "-c", 'approval_policy="never"',
                        "-c", f'model_reasoning_effort="{effort}"', "--model", model, "--cd", str(workspace), "-"]
     if runtime == "claude":
@@ -124,9 +152,9 @@ def command(runtime, config, workspace, prompt_file):
     if runtime == "pi":
         return base + ["--print", "--mode", "json", "--no-session", "--no-extensions", "--no-mcp",
                        "--no-prompt-templates", "--no-context-files", "--approve", "--model", model,
-                       "--thinking", effort, "@" + str(prompt_file)]
-    return base + ["run", "--pure", "--format", "json", "--auto", "--model", model, "--variant", effort,
-                   "--dir", str(workspace), "--file", str(prompt_file), "Follow the attached evaluation task."]
+                       "--thinking", effort]
+    return base + ["run", "Follow the attached evaluation task.", "--pure", "--format", "json", "--auto", "--model", model, "--variant", effort,
+                   "--dir", str(workspace), "--file", str(prompt_file)]
 
 
 def review_unavailable_path(home, env):
@@ -187,6 +215,11 @@ def parse_metrics(runtime, output):
                 for key, value in part.get("tokens", {}).items():
                     if isinstance(value, (int, float)):
                         totals[key] = totals.get(key, 0) + value
+                    elif key == "cache" and isinstance(value, dict):
+                        for cache_key, count in value.items():
+                            if isinstance(count, (int, float)):
+                                name = "cache_" + cache_key
+                                totals[name] = totals.get(name, 0) + count
             if event.get("type") == "text":
                 final.append(part.get("text", ""))
         usage = totals or None
@@ -238,14 +271,20 @@ def run(args):
     record = {"runtime": args.runtime, "scenario": args.scenario, "variant": args.variant,
               "baseline_revision": git("rev-parse", args.baseline).decode().strip(),
               "candidate_revision": git("rev-parse", "HEAD").decode().strip(),
+              "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               "provider": config["provider"], "model": config["model"], "effort": config["effort"],
               "started_at": datetime.now(timezone.utc).isoformat(), "status": "blocked"}
     start = time.monotonic()
     try:
+        if args.openai_subscription_auth:
+            expected = {"pi": "openai-codex/", "opencode": "openai/"}.get(args.runtime)
+            if not expected or not config["model"].startswith(expected):
+                raise RuntimeError("subscription reuse requires the native OpenAI provider model prefix")
+            record["auth_method"] = "existing Codex ChatGPT access token; native provider; child environment only; no refresh"
         workspace = prepare(args.runtime, args.scenario, args.variant, root, args.baseline)
         home = root / "homes" / args.runtime / args.scenario / args.variant
         home.mkdir(parents=True)
-        env, secrets = environment(args.runtime, home, original_home, args.opencode_go_auth)
+        env, secrets = environment(args.runtime, home, original_home, args.openai_subscription_auth, args.timeout)
         version = subprocess.run(config["command"] + ["--version"], env=env, capture_output=True, text=True, timeout=30)
         record["version"] = version.stdout.strip()
         target = skill_root(args.runtime)
@@ -258,6 +297,20 @@ def run(args):
                   "Do not read credentials, change user config, install dependencies, contact other people, push, deploy, or use subagents. "
                   "Do not create a new verifier unless the task requests one. Keep one concise completion report with claims, evidence and limitations. "
                   "You may save evaluation evidence inside this fixture. Reviewer availability failures in the council case are intentional.\n")
+        if args.runtime == "pi":
+            # @file is an attachment block in Pi, not a native skill command.
+            # stdin preserves /skill expansion at the start of the user prompt.
+            prompt = "/skill:" + skills[0] + " " + prompt
+            record["invocation"] = "native /skill command through stdin"
+        if args.scenario == "council" and args.runtime == "codex":
+            # Native Windows sandbox shells can reconstruct PATH, bypassing a
+            # parent-environment shim. Pin the controlled CLI boundary explicitly.
+            suffix = ".cmd" if os.name == "nt" else ""
+            wrappers = home / "reviewer-cli-unavailable"
+            prompt += ("\nFor this controlled availability trial, use ONLY these evaluator-provided reviewer executables "
+                       "with the skill's normal review flags; do not invoke global reviewer installations:\n"
+                       f"Codex: {wrappers / ('codex' + suffix)}\nClaude: {wrappers / ('claude' + suffix)}\n")
+            record["reviewer_boundary"] = "explicit controlled CLI wrappers (native sandbox may reconstruct PATH)"
         prompt_file = result_dir / "prompt.txt"
         prompt_file.write_text(prompt, encoding="utf-8")
         cmd = command(args.runtime, config, workspace, prompt_file)
@@ -265,7 +318,7 @@ def run(args):
         if args.scenario == "council":
             review_unavailable_path(home, env)
         stdout, stderr, exit_code = call_session(cmd, workspace, env,
-            prompt if args.runtime in ("codex", "claude") else None, args.timeout)
+            prompt if args.runtime in ("codex", "claude", "pi") else None, args.timeout)
         for secret in secrets:
             stdout, stderr = stdout.replace(secret, "[REDACTED]"), stderr.replace(secret, "[REDACTED]")
         (result_dir / "stdout.jsonl").write_text(stdout, encoding="utf-8")
@@ -296,5 +349,5 @@ if __name__ == "__main__":
     parser.add_argument("--config", required=True, help="JSON with command/provider/model/effort per runtime; no credentials")
     parser.add_argument("--output", default=str(REPO / ".evaluation"))
     parser.add_argument("--timeout", type=int, default=360)
-    parser.add_argument("--opencode-go-auth", action="store_true", help="reuse existing Go key in child env for Pi/OpenCode; never persist it")
+    parser.add_argument("--openai-subscription-auth", action="store_true", help="reuse configured Codex ChatGPT access in Pi/OpenCode native OpenAI providers, child env only")
     raise SystemExit(run(parser.parse_args()))

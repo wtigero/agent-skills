@@ -1,6 +1,6 @@
 {
-  "codex": {"command": ["codex"], "provider": "existing ChatGPT/Codex account", "model": "gpt-6.1-sol", "effort": "medium"},
+  "codex": {"command": ["codex"], "provider": "existing ChatGPT/Codex account", "model": "gpt-6-sol", "effort": "medium"},
   "claude": {"command": ["claude"], "provider": "existing Claude account", "model": "sonnet", "effort": "medium"},
-  "pi": {"command": ["pi"], "provider": "opencode-go", "model": "opencode-go/gpt-6-luna", "effort": "medium"},
-  "opencode": {"command": ["opencode"], "provider": "opencode-go", "model": "opencode-go/gpt-6-luna", "effort": "medium"}
+  "pi": {"command": ["pi"], "provider": "OpenAI ChatGPT subscription (native openai-codex)", "model": "openai-codex/gpt-6-luna", "effort": "medium"},
+  "opencode": {"command": ["opencode"], "provider": "OpenAI ChatGPT subscription (native openai)", "model": "openai/gpt-6-luna", "effort": "medium"}
 }

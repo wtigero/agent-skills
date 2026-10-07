@@ -1,0 +1,226 @@
+{
+  "codex/artifacts/verification/20261007T154106Z-4f7fc854/receipt.json": {
+    "started_at": "2026-10-07T15:41:07.020375+00:00",
+    "command": [
+      "verify.py",
+      "--evidence",
+      "<EVALUATION>\\live-3\\workspaces\\codex\\verifier\\candidate\\artifacts\\verification\\20261007T154106Z-4f7fc854"
+    ],
+    "python": "3.13.13",
+    "feature": "create-and-list-task",
+    "passed": true,
+    "owned_data_dir": "<USER_HOME>\\AppData\\Local\\Temp\\verify-task-3znrdd_h",
+    "url": "http://127.0.0.1:11465",
+    "pid": 5332,
+    "post_status": 201,
+    "created": {
+      "id": "verify-aae7fac2980e4f0eb1eb31f082a8e9ea",
+      "title": "write a verifier"
+    },
+    "listed": [
+      {
+        "id": "verify-aae7fac2980e4f0eb1eb31f082a8e9ea",
+        "title": "write a verifier"
+      }
+    ],
+    "process_stopped": true,
+    "owned_data_removed": true,
+    "finished_at": "2026-10-07T15:41:07.316142+00:00"
+  },
+  "claude/artifacts/verification/cold-session/receipt.json": {
+    "started_at": "2026-10-07T15:17:10.796843+00:00",
+    "command": [
+      "verify.py",
+      "--evidence",
+      "artifacts/verification/cold-session"
+    ],
+    "python": "3.13.13",
+    "feature": "create-and-list-task",
+    "passed": true,
+    "owned_data_dir": "<USER_HOME>\\AppData\\Local\\Temp\\verify-task-l1uf7my3",
+    "url": "http://127.0.0.1:2787",
+    "pid": 60348,
+    "post_status": 201,
+    "created": {
+      "id": "verify-d4a826c9e43247928ccf5ff636232829",
+      "title": "write a verifier"
+    },
+    "listed": [
+      {
+        "id": "verify-d4a826c9e43247928ccf5ff636232829",
+        "title": "write a verifier"
+      }
+    ],
+    "process_stopped": true,
+    "owned_data_removed": true,
+    "finished_at": "2026-10-07T15:17:11.120825+00:00"
+  },
+  "claude/artifacts/verification/cold-test/receipt.json": {
+    "started_at": "2026-10-07T15:16:42.104902+00:00",
+    "command": [
+      "verify.py",
+      "--evidence",
+      "artifacts/verification/cold-test"
+    ],
+    "python": "3.13.13",
+    "feature": "create-and-list-task",
+    "passed": true,
+    "owned_data_dir": "<USER_HOME>\\AppData\\Local\\Temp\\verify-task-4qjn7zqn",
+    "url": "http://127.0.0.1:5104",
+    "pid": 46276,
+    "post_status": 201,
+    "created": {
+      "id": "verify-79d3690bba71435c9cdfdc701e573089",
+      "title": "write a verifier"
+    },
+    "listed": [
+      {
+        "id": "verify-79d3690bba71435c9cdfdc701e573089",
+        "title": "write a verifier"
+      }
+    ],
+    "process_stopped": true,
+    "owned_data_removed": true,
+    "finished_at": "2026-10-07T15:16:42.521723+00:00"
+  },
+  "claude/artifacts/verification/creator-run/receipt.json": {
+    "started_at": "2026-10-07T15:16:20.144062+00:00",
+    "command": [
+      "verify.py",
+      "--evidence",
+      "artifacts/verification/creator-run"
+    ],
+    "python": "3.13.13",
+    "feature": "create-and-list-task",
+    "passed": true,
+    "owned_data_dir": "<USER_HOME>\\AppData\\Local\\Temp\\verify-task-blob0ije",
+    "url": "http://127.0.0.1:2164",
+    "pid": 80788,
+    "post_status": 201,
+    "created": {
+      "id": "verify-3dbef432f6514bbc8c5378bfbaa448ea",
+      "title": "write a verifier"
+    },
+    "listed": [
+      {
+        "id": "verify-3dbef432f6514bbc8c5378bfbaa448ea",
+        "title": "write a verifier"
+      }
+    ],
+    "process_stopped": true,
+    "owned_data_removed": true,
+    "finished_at": "2026-10-07T15:16:20.483190+00:00"
+  },
+  "pi/artifacts/verification/cold-session/receipt.json": {
+    "started_at": "2026-10-07T15:46:59.604812+00:00",
+    "command": [
+      "verify.py",
+      "--evidence",
+      "artifacts/verification/cold-session"
+    ],
+    "python": "3.13.13",
+    "feature": "create-and-list-task",
+    "passed": true,
+    "owned_data_dir": "<USER_HOME>\\AppData\\Local\\Temp\\verify-task-fp0w6j8i",
+    "url": "http://127.0.0.1:4475",
+    "pid": 16768,
+    "post_status": 201,
+    "created": {
+      "id": "verify-f054f71954154979a581286c27264f14",
+      "title": "write a verifier"
+    },
+    "listed": [
+      {
+        "id": "verify-f054f71954154979a581286c27264f14",
+        "title": "write a verifier"
+      }
+    ],
+    "process_stopped": true,
+    "owned_data_removed": true,
+    "finished_at": "2026-10-07T15:46:59.985039+00:00"
+  },
+  "pi/artifacts/verification/create-and-list-task/receipt.json": {
+    "started_at": "2026-10-07T15:46:25.441128+00:00",
+    "command": [
+      "verify.py",
+      "--evidence",
+      "artifacts/verification/create-and-list-task"
+    ],
+    "python": "3.13.13",
+    "feature": "create-and-list-task",
+    "passed": true,
+    "owned_data_dir": "<USER_HOME>\\AppData\\Local\\Temp\\verify-task-p1wnwko0",
+    "url": "http://127.0.0.1:10023",
+    "pid": 84828,
+    "post_status": 201,
+    "created": {
+      "id": "verify-cbe2d1761ac44c8ca019c8f872277f98",
+      "title": "write a verifier"
+    },
+    "listed": [
+      {
+        "id": "verify-cbe2d1761ac44c8ca019c8f872277f98",
+        "title": "write a verifier"
+      }
+    ],
+    "process_stopped": true,
+    "owned_data_removed": true,
+    "finished_at": "2026-10-07T15:46:25.758365+00:00"
+  },
+  "opencode/artifacts/verification/cold-session/receipt.json": {
+    "started_at": "2026-10-07T15:38:19.356317+00:00",
+    "command": [
+      "verify.py",
+      "--evidence",
+      "artifacts/verification/cold-session"
+    ],
+    "python": "3.13.13",
+    "feature": "create-and-list-task",
+    "passed": true,
+    "owned_data_dir": "<USER_HOME>\\AppData\\Local\\Temp\\verify-task-zfy3s_c7",
+    "url": "http://127.0.0.1:8107",
+    "pid": 69132,
+    "post_status": 201,
+    "created": {
+      "id": "verify-e63a7dfbd4e549ffa7326fbd89d033c4",
+      "title": "write a verifier"
+    },
+    "listed": [
+      {
+        "id": "verify-e63a7dfbd4e549ffa7326fbd89d033c4",
+        "title": "write a verifier"
+      }
+    ],
+    "process_stopped": true,
+    "owned_data_removed": true,
+    "finished_at": "2026-10-07T15:38:19.714347+00:00"
+  },
+  "opencode/artifacts/verification/create-and-list-task/receipt.json": {
+    "started_at": "2026-10-07T15:37:27.678097+00:00",
+    "command": [
+      "verify.py",
+      "--evidence",
+      "artifacts/verification/create-and-list-task"
+    ],
+    "python": "3.13.13",
+    "feature": "create-and-list-task",
+    "passed": true,
+    "owned_data_dir": "<USER_HOME>\\AppData\\Local\\Temp\\verify-task-u5ljcwie",
+    "url": "http://127.0.0.1:12599",
+    "pid": 70696,
+    "post_status": 201,
+    "created": {
+      "id": "verify-2f6b295490d1455ea6bfe5d133b7cfa9",
+      "title": "write a verifier"
+    },
+    "listed": [
+      {
+        "id": "verify-2f6b295490d1455ea6bfe5d133b7cfa9",
+        "title": "write a verifier"
+      }
+    ],
+    "process_stopped": true,
+    "owned_data_removed": true,
+    "finished_at": "2026-10-07T15:37:28.031169+00:00"
+  }
+}

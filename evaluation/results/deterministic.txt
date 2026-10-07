@@ -1,0 +1,59 @@
+Windows Git Bash
+test_list_and_absolute_paths (test_bundle.BundleTests.test_list_and_absolute_paths) ... ok
+test_missing_python_preflight (test_bundle.BundleTests.test_missing_python_preflight) ... ok
+test_public_metadata_and_references (test_bundle.BundleTests.test_public_metadata_and_references) ... ok
+test_codex_home_override_is_respected (test_bundle.InstallerTests.test_codex_home_override_is_respected) ... ok
+test_conflict_preserves_directory_and_installs_nothing (test_bundle.InstallerTests.test_conflict_preserves_directory_and_installs_nothing) ... ok
+test_copy_install_and_repeat_preserves_timestamps_all_entrypoints (test_bundle.InstallerTests.test_copy_install_and_repeat_preserves_timestamps_all_entrypoints) ... ok
+test_duplicate_names_in_user_and_project_roots_are_preserved (test_bundle.InstallerTests.test_duplicate_names_in_user_and_project_roots_are_preserved) ... ok
+test_fake_symlink_copy_is_rejected (test_bundle.InstallerTests.test_fake_symlink_copy_is_rejected) ... ok
+test_foreign_and_broken_symlinks_preserved_then_backed_up (test_bundle.InstallerTests.test_foreign_and_broken_symlinks_preserved_then_backed_up) ... skipped "native symlink privilege unavailable: [WinError 1314] A required privilege is not held by the client: '<USER_HOME>\\\\AppData\\\\Local\\\\Temp\\\\agent skills space mhzh96pu\\\\foreign' -> '<USER_HOME>\\\\AppData\\\\Local\\\\Temp\\\\agent skills space mhzh96pu\\\\temporary home\\\\.agents\\\\skills\\\\hold-your-horses'"
+test_invalid_manifest_is_atomic_and_unknown_replace_is_rejected (test_bundle.InstallerTests.test_invalid_manifest_is_atomic_and_unknown_replace_is_rejected) ... ok
+test_linked_backup_root_refused (test_bundle.InstallerTests.test_linked_backup_root_refused) ... skipped "native symlink privilege unavailable: [WinError 1314] A required privilege is not held by the client: '<USER_HOME>\\\\AppData\\\\Local\\\\Temp\\\\agent skills space pbr2whur\\\\elsewhere' -> '<USER_HOME>\\\\AppData\\\\Local\\\\Temp\\\\agent skills space pbr2whur\\\\temporary home\\\\.agents\\\\agent-skills-backups'"
+test_linked_install_root_refused_without_touching_source (test_bundle.InstallerTests.test_linked_install_root_refused_without_touching_source) ... skipped "native symlink privilege unavailable: [WinError 1314] A required privilege is not held by the client: '<USER_HOME>\\\\AppData\\\\Local\\\\Temp\\\\agent skills space 490q77ti\\\\checkout with spaces\\\\skills' -> '<USER_HOME>\\\\AppData\\\\Local\\\\Temp\\\\agent skills space 490q77ti\\\\temporary home\\\\.agents\\\\skills'"
+test_real_symlinks_and_repeat (test_bundle.InstallerTests.test_real_symlinks_and_repeat) ... skipped "native symlink privilege unavailable: [WinError 1314] A required privilege is not held by the client: '<USER_HOME>\\\\AppData\\\\Local\\\\Temp\\\\agent skills space l9lo5mm9\\\\checkout with spaces' -> '<USER_HOME>\\\\AppData\\\\Local\\\\Temp\\\\agent skills space l9lo5mm9\\\\probe link'"
+test_replace_backs_up_entire_original_outside_discovery (test_bundle.InstallerTests.test_replace_backs_up_entire_original_outside_discovery) ... ok
+test_symlink_failure_does_not_masquerade_as_copy (test_bundle.InstallerTests.test_symlink_failure_does_not_masquerade_as_copy) ... ok
+test_windows_junction_install_root_is_refused (test_bundle.InstallerTests.test_windows_junction_install_root_is_refused) ... ok
+test_expired_or_near_expiry_blocks_before_creating_auth_config (test_evaluation.EvaluationSetupTests.test_expired_or_near_expiry_blocks_before_creating_auth_config) ... ok
+test_native_providers_reuse_access_without_persisting_credentials (test_evaluation.EvaluationSetupTests.test_native_providers_reuse_access_without_persisting_credentials) ... ok
+test_opencode_usage_retains_cache_and_reasoning_counters (test_evaluation.EvaluationSetupTests.test_opencode_usage_retains_cache_and_reasoning_counters) ... ok
+test_unrelated_runtime_cannot_receive_subscription_access (test_evaluation.EvaluationSetupTests.test_unrelated_runtime_cannot_receive_subscription_access) ... ok
+test_api_fixture_reaches_real_wire_consumer (test_fixtures.FixtureTests.test_api_fixture_reaches_real_wire_consumer) ... ok
+test_bug_fixture_contradicts_cache_theory (test_fixtures.FixtureTests.test_bug_fixture_contradicts_cache_theory) ... ok
+test_verifier_fixture_runs_feature_cleans_up_and_retains_evidence (test_fixtures.FixtureTests.test_verifier_fixture_runs_feature_cleans_up_and_retains_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 38.868s
+
+OK (skipped=4)
+
+Linux Ubuntu/WSL
+test_list_and_absolute_paths (test_bundle.BundleTests.test_list_and_absolute_paths) ... ok
+test_missing_python_preflight (test_bundle.BundleTests.test_missing_python_preflight) ... ok
+test_public_metadata_and_references (test_bundle.BundleTests.test_public_metadata_and_references) ... ok
+test_codex_home_override_is_respected (test_bundle.InstallerTests.test_codex_home_override_is_respected) ... ok
+test_conflict_preserves_directory_and_installs_nothing (test_bundle.InstallerTests.test_conflict_preserves_directory_and_installs_nothing) ... ok
+test_copy_install_and_repeat_preserves_timestamps_all_entrypoints (test_bundle.InstallerTests.test_copy_install_and_repeat_preserves_timestamps_all_entrypoints) ... ok
+test_duplicate_names_in_user_and_project_roots_are_preserved (test_bundle.InstallerTests.test_duplicate_names_in_user_and_project_roots_are_preserved) ... ok
+test_fake_symlink_copy_is_rejected (test_bundle.InstallerTests.test_fake_symlink_copy_is_rejected) ... ok
+test_foreign_and_broken_symlinks_preserved_then_backed_up (test_bundle.InstallerTests.test_foreign_and_broken_symlinks_preserved_then_backed_up) ... ok
+test_invalid_manifest_is_atomic_and_unknown_replace_is_rejected (test_bundle.InstallerTests.test_invalid_manifest_is_atomic_and_unknown_replace_is_rejected) ... ok
+test_linked_backup_root_refused (test_bundle.InstallerTests.test_linked_backup_root_refused) ... ok
+test_linked_install_root_refused_without_touching_source (test_bundle.InstallerTests.test_linked_install_root_refused_without_touching_source) ... ok
+test_real_symlinks_and_repeat (test_bundle.InstallerTests.test_real_symlinks_and_repeat) ... ok
+test_replace_backs_up_entire_original_outside_discovery (test_bundle.InstallerTests.test_replace_backs_up_entire_original_outside_discovery) ... ok
+test_symlink_failure_does_not_masquerade_as_copy (test_bundle.InstallerTests.test_symlink_failure_does_not_masquerade_as_copy) ... ok
+test_windows_junction_install_root_is_refused (test_bundle.InstallerTests.test_windows_junction_install_root_is_refused) ... skipped 'Windows junction protection'
+test_expired_or_near_expiry_blocks_before_creating_auth_config (test_evaluation.EvaluationSetupTests.test_expired_or_near_expiry_blocks_before_creating_auth_config) ... ok
+test_native_providers_reuse_access_without_persisting_credentials (test_evaluation.EvaluationSetupTests.test_native_providers_reuse_access_without_persisting_credentials) ... ok
+test_opencode_usage_retains_cache_and_reasoning_counters (test_evaluation.EvaluationSetupTests.test_opencode_usage_retains_cache_and_reasoning_counters) ... ok
+test_unrelated_runtime_cannot_receive_subscription_access (test_evaluation.EvaluationSetupTests.test_unrelated_runtime_cannot_receive_subscription_access) ... ok
+test_api_fixture_reaches_real_wire_consumer (test_fixtures.FixtureTests.test_api_fixture_reaches_real_wire_consumer) ... ok
+test_bug_fixture_contradicts_cache_theory (test_fixtures.FixtureTests.test_bug_fixture_contradicts_cache_theory) ... ok
+test_verifier_fixture_runs_feature_cleans_up_and_retains_evidence (test_fixtures.FixtureTests.test_verifier_fixture_runs_feature_cleans_up_and_retains_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 6.137s
+
+OK (skipped=1)

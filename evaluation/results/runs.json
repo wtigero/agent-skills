@@ -1,0 +1,3723 @@
+{
+  "scope": "Local case-specific qualification; manual transcript review; no ranking or publication",
+  "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+  "candidate_skill_fingerprints": {
+    "hold-your-horses": "5b0fab0ea2579266199cb5c2f49130b2a3b238e1695b2349afb74ae6b2046b23",
+    "prove-it": "0c6a74eca9cbf73dcd7cca0e73cb01bf0d2b520526321463b957c2ad89b21d64",
+    "council": "8017289c1ce9d546b5083b76c93baa10fc4247b26eaf726a8626c77b648fdebf",
+    "bug-hunter": "57ba7154fc41c3a36892dd3741ff889272e0ced4a6386213e4bff08cf7f33fa1",
+    "create-verifier": "19e7a3038944feb2e1968400ea3513d798085fc92bf2c2a3987751d840a8811f",
+    "write-like-me": "de4f5fe44bdbe5af98e50b1b405afae4914566be994bf9c3671c52d3fbe1727e"
+  },
+  "runs": [
+    {
+      "runtime": "codex",
+      "scenario": "small",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "45885ad3a74232ab691a2ec01dd68c014de47126e7f0cc13a541f87394ca5fda",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:16:14.383829+00:00",
+      "status": "completed_needs_review",
+      "version": "codex-cli 0.157.1",
+      "skill_fingerprints": {
+        "hold-your-horses": "71c045713655b4170428f54ddfab3410b8c80724e8c2ccab39f207778401b7bb",
+        "prove-it": "e49267fc169e789f52aaa1a67653ae4a6fb31f69704c1c67e756641e0f7c533e"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "C:/Program Files/nodejs/node_modules/@openai/codex/bin/codex.js",
+        "exec",
+        "--ignore-user-config",
+        "--ignore-rules",
+        "--ephemeral",
+        "--json",
+        "--disable",
+        "plugins",
+        "--disable",
+        "apps",
+        "--disable",
+        "memories",
+        "--disable",
+        "hooks",
+        "--disable",
+        "multi_agent",
+        "--enable",
+        "skip_host_skill_discovery",
+        "-c",
+        "windows.sandbox=\"elevated\"",
+        "--sandbox",
+        "workspace-write",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--model",
+        "gpt-6-sol",
+        "--cd",
+        "<EVALUATION>\\live-3\\workspaces\\codex\\small\\baseline",
+        "-"
+      ],
+      "usage": {
+        "input_tokens": 117505,
+        "cached_input_tokens": 91264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 905,
+        "reasoning_output_tokens": 123
+      },
+      "actual_model": null,
+      "event_count": 19,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "greeting assertion passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " greeting.py | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+      "elapsed_seconds": 51.964,
+      "finished_at": "2026-10-07T15:17:06.347921+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "The designated skills were loaded; only greeting punctuation changed. A direct greeting assertion matched the claim and the unrelated arithmetic receipt was explicitly rejected."
+      },
+      "raw_location": ".evaluation/live-3/results/codex/small/baseline",
+      "raw_sha256": {
+        "final.md": "d187555d84a61e73248901482c9ef1c4fa2ee9d6ccf4c5a597f7fedf919b624b",
+        "prompt.txt": "b24c2a497b7623e7b3ea8955b1f1b15fdbb4e7da9f1c60b7cef04a286cbc7548",
+        "run.json": "2706b94e3c6f72ea01c8b3ad2329e81568753cc5c884180132f1ebf3566a18b9",
+        "stderr.txt": "48cc7bf62daf507637379d7205a0e2f8cfe202812c625713ef32edfe38859cda",
+        "stdout.jsonl": "19ae09a8c4e97ccff77f424a3ddab9ab6d52f57792a270527fb2e6a18fedbf5c"
+      },
+      "native_session_ids": [
+        "01a116ef-cab6-7933-8adc-0a8d1f11fbbb"
+      ],
+      "fixture_revision": "2697cfdecfca38683403592faab06b60355d4c40"
+    },
+    {
+      "runtime": "codex",
+      "scenario": "small",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "45885ad3a74232ab691a2ec01dd68c014de47126e7f0cc13a541f87394ca5fda",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:22:11.412918+00:00",
+      "status": "completed_needs_review",
+      "version": "codex-cli 0.157.1",
+      "skill_fingerprints": {
+        "hold-your-horses": "5b0fab0ea2579266199cb5c2f49130b2a3b238e1695b2349afb74ae6b2046b23",
+        "prove-it": "0c6a74eca9cbf73dcd7cca0e73cb01bf0d2b520526321463b957c2ad89b21d64"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "C:/Program Files/nodejs/node_modules/@openai/codex/bin/codex.js",
+        "exec",
+        "--ignore-user-config",
+        "--ignore-rules",
+        "--ephemeral",
+        "--json",
+        "--disable",
+        "plugins",
+        "--disable",
+        "apps",
+        "--disable",
+        "memories",
+        "--disable",
+        "hooks",
+        "--disable",
+        "multi_agent",
+        "--enable",
+        "skip_host_skill_discovery",
+        "-c",
+        "windows.sandbox=\"elevated\"",
+        "--sandbox",
+        "workspace-write",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--model",
+        "gpt-6-sol",
+        "--cd",
+        "<EVALUATION>\\live-3\\workspaces\\codex\\small\\candidate",
+        "-"
+      ],
+      "usage": {
+        "input_tokens": 189897,
+        "cached_input_tokens": 163328,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1667,
+        "reasoning_output_tokens": 272
+      },
+      "actual_model": null,
+      "event_count": 25,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "greeting assertion passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " greeting.py | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+      "elapsed_seconds": 77.458,
+      "finished_at": "2026-10-07T15:23:28.871278+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "The designated skills were loaded; only greeting punctuation changed. A direct greeting assertion matched the claim and the unrelated arithmetic receipt was explicitly rejected."
+      },
+      "raw_location": ".evaluation/live-3/results/codex/small/candidate",
+      "raw_sha256": {
+        "final.md": "39cdefc24129cff7f62b468981f839328023c461310626e67a0b4faf7bd82349",
+        "prompt.txt": "dfdf7e41d25e63f7266b1b0604799cef5edf48b2bd8b44b79cf49cfeaeea07f3",
+        "run.json": "a71fed338074d5535f7456141e76cd8255bac6bc441401348c39bf9d7f3b4cf5",
+        "stderr.txt": "ddf9b96d26f02a76039d1afb0cad7a2af43d7bb22e4a817060fe4a973c1f4dd4",
+        "stdout.jsonl": "3015e9960f5f945257e61f37101b54271d13cebe569a4c2e3f7fbe9287775113"
+      },
+      "native_session_ids": [
+        "01a116f5-3daa-7541-b39e-4cde21f2da96"
+      ],
+      "fixture_revision": "44b8443a54e0622b5f0106f7328dbbfa1794d910"
+    },
+    {
+      "runtime": "codex",
+      "scenario": "api",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "45885ad3a74232ab691a2ec01dd68c014de47126e7f0cc13a541f87394ca5fda",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:23:29.275925+00:00",
+      "status": "completed_needs_review",
+      "version": "codex-cli 0.157.1",
+      "skill_fingerprints": {
+        "hold-your-horses": "71c045713655b4170428f54ddfab3410b8c80724e8c2ccab39f207778401b7bb",
+        "prove-it": "e49267fc169e789f52aaa1a67653ae4a6fb31f69704c1c67e756641e0f7c533e"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "C:/Program Files/nodejs/node_modules/@openai/codex/bin/codex.js",
+        "exec",
+        "--ignore-user-config",
+        "--ignore-rules",
+        "--ephemeral",
+        "--json",
+        "--disable",
+        "plugins",
+        "--disable",
+        "apps",
+        "--disable",
+        "memories",
+        "--disable",
+        "hooks",
+        "--disable",
+        "multi_agent",
+        "--enable",
+        "skip_host_skill_discovery",
+        "-c",
+        "windows.sandbox=\"elevated\"",
+        "--sandbox",
+        "workspace-write",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--model",
+        "gpt-6-sol",
+        "--cd",
+        "<EVALUATION>\\live-3\\workspaces\\codex\\api\\baseline",
+        "-"
+      ],
+      "usage": {
+        "input_tokens": 318611,
+        "cached_input_tokens": 300032,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3141,
+        "reasoning_output_tokens": 627
+      },
+      "actual_model": null,
+      "event_count": 45,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "{\"response\": {\"invoice_id\": \"inv-7\", \"total_cents\": 1250, \"total\": 12.5}, \"consumer\": \"reporting/month_end.py\", \"consumer_total\": \"12.50\"}\nwire and consumer assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " api.py        | 3 ++-\n verify_api.py | 5 +++--\n 2 files changed, 5 insertions(+), 3 deletions(-)\n",
+      "elapsed_seconds": 137.328,
+      "finished_at": "2026-10-07T15:25:46.603774+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Found the scheduled JSON consumer outside Python callers, retained integer total_cents, added numeric total, and executed the existing real HTTP/consumer harness. Independent result oracle passed."
+      },
+      "raw_location": ".evaluation/live-3/results/codex/api/baseline",
+      "raw_sha256": {
+        "final.md": "161b88c1d6a4a3320a41e2b8a54c2fb5b8802591095ac1c8830720fc770d4061",
+        "oracle-api.json": "c1e97ad0d99f4f744a24f683d9c3962f076f089998f6545c48d6086971512dc7",
+        "prompt.txt": "4c333ddeca48f332da432419b2c3deaae4717faa6438bcc788588f02f8b41ba1",
+        "run.json": "1cffa900bdaef134437bc4accef59e5b4b11ce2831fa23710155ce60d69a63d6",
+        "stderr.txt": "67fceb77d7a285adc8b4415306beb72d685a815c473f5c4ee792756809473dab",
+        "stdout.jsonl": "8c6dfbb5b5c5df9a6542d88d03ddabe0f01481e00630f58d8a76fb60c2016043"
+      },
+      "native_session_ids": [
+        "01a116f6-6b2c-7800-bf06-ff5fdbf822dd"
+      ],
+      "fixture_revision": "271639b9835efb4472429231c014b253a3be07ac"
+    },
+    {
+      "runtime": "codex",
+      "scenario": "api",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "9c0423a0fa0ab650bac7487aa69b003437a9aa81636b459231367c8b79814104",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:25:47.018613+00:00",
+      "status": "completed_needs_review",
+      "version": "codex-cli 0.157.1",
+      "skill_fingerprints": {
+        "hold-your-horses": "5b0fab0ea2579266199cb5c2f49130b2a3b238e1695b2349afb74ae6b2046b23",
+        "prove-it": "0c6a74eca9cbf73dcd7cca0e73cb01bf0d2b520526321463b957c2ad89b21d64"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "C:/Program Files/nodejs/node_modules/@openai/codex/bin/codex.js",
+        "exec",
+        "--ignore-user-config",
+        "--ignore-rules",
+        "--ephemeral",
+        "--json",
+        "--disable",
+        "plugins",
+        "--disable",
+        "apps",
+        "--disable",
+        "memories",
+        "--disable",
+        "hooks",
+        "--disable",
+        "multi_agent",
+        "--enable",
+        "skip_host_skill_discovery",
+        "-c",
+        "windows.sandbox=\"elevated\"",
+        "--sandbox",
+        "workspace-write",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--model",
+        "gpt-6-sol",
+        "--cd",
+        "<EVALUATION>\\live-3\\workspaces\\codex\\api\\candidate",
+        "-"
+      ],
+      "usage": {
+        "input_tokens": 415060,
+        "cached_input_tokens": 378880,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4184,
+        "reasoning_output_tokens": 971
+      },
+      "actual_model": null,
+      "event_count": 61,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "{\"response\": {\"invoice_id\": \"inv-7\", \"total_cents\": 1250, \"total\": 12.5}, \"consumer\": \"reporting/month_end.py\", \"consumer_total\": \"12.50\"}\nwire and consumer assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " api.py        | 3 ++-\n verify_api.py | 6 ++++--\n 2 files changed, 6 insertions(+), 3 deletions(-)\n",
+      "elapsed_seconds": 179.803,
+      "finished_at": "2026-10-07T15:28:46.821849+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Found the scheduled JSON consumer outside Python callers, retained integer total_cents, added numeric total, and executed the existing real HTTP/consumer harness. Independent result oracle passed."
+      },
+      "raw_location": ".evaluation/live-3/results/codex/api/candidate",
+      "raw_sha256": {
+        "final.md": "91e82e0e7700e64ac18e283a6424eaf87b074d184f0c7b15b2ccfbb9996d07c0",
+        "oracle-api.json": "c1e97ad0d99f4f744a24f683d9c3962f076f089998f6545c48d6086971512dc7",
+        "prompt.txt": "8e3085dac9dccc157681ecf62161fe80cd4dc976d89188bbd0abf498250178d5",
+        "run.json": "06928ee85f5e9d3b05888a9cdc94674f114df5702b6d6d1e6d1b6a6819f9247a",
+        "stderr.txt": "d99cf25864c21c489555b3581fb17a2050667048dabec1beed0b8f8c28bcfa08",
+        "stdout.jsonl": "168cf64b55395b46117d610faebb9711d83c6fd5c9b448455c8d268e2696fa3f"
+      },
+      "native_session_ids": [
+        "01a116f8-8859-76f0-8d22-628bd92b76f4"
+      ],
+      "fixture_revision": "07f3af7308c71cd65953ca985b9d2263d07eef46"
+    },
+    {
+      "runtime": "codex",
+      "scenario": "bug",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "ccc86fed6daed6048e120b82f8d17d77aaea61a3a2e591597ca821dd66c6e582",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:28:47.288980+00:00",
+      "status": "completed_needs_review",
+      "version": "codex-cli 0.157.1",
+      "skill_fingerprints": {
+        "bug-hunter": "458dcc4ecac07afe4ff973d994c4c330bb4dde43ce37f8ce60b473f0bd5ff847",
+        "prove-it": "e49267fc169e789f52aaa1a67653ae4a6fb31f69704c1c67e756641e0f7c533e"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "C:/Program Files/nodejs/node_modules/@openai/codex/bin/codex.js",
+        "exec",
+        "--ignore-user-config",
+        "--ignore-rules",
+        "--ephemeral",
+        "--json",
+        "--disable",
+        "plugins",
+        "--disable",
+        "apps",
+        "--disable",
+        "memories",
+        "--disable",
+        "hooks",
+        "--disable",
+        "multi_agent",
+        "--enable",
+        "skip_host_skill_discovery",
+        "-c",
+        "windows.sandbox=\"elevated\"",
+        "--sandbox",
+        "workspace-write",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--model",
+        "gpt-6-sol",
+        "--cd",
+        "<EVALUATION>\\live-3\\workspaces\\codex\\bug\\baseline",
+        "-"
+      ],
+      "usage": {
+        "input_tokens": 259110,
+        "cached_input_tokens": 231424,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2941,
+        "reasoning_output_tokens": 619
+      },
+      "actual_model": null,
+      "event_count": 33,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "quote assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " quote.py | 3 +--\n 1 file changed, 1 insertion(+), 2 deletions(-)\n",
+      "elapsed_seconds": 131.621,
+      "finished_at": "2026-10-07T15:30:58.909879+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Compared cached and uncached bulk inputs before editing, retained the contradictory cache observation, isolated the quantity-minus-one calculation, and checked original inputs after the fix. Independent result oracle passed."
+      },
+      "raw_location": ".evaluation/live-3/results/codex/bug/baseline",
+      "raw_sha256": {
+        "final.md": "41a121443d0d0e66d707b7727d8f6cf1fdd029fcf354e6517fc930d25d317e89",
+        "prompt.txt": "f39a4275c9941a028aa50c0fbec1b67c5c481ea2b63d7f8d63414823200a330d",
+        "run.json": "e5267d6de1055f613ed408f7327fe60813e6a668f64cd2d6653ff41e5252f1f3",
+        "stderr.txt": "8b7270bfaa44d0f7eedbee19c0c632ee170c8f40b20347e2627d835babc46466",
+        "stdout.jsonl": "ba0e1a445ee29bf781c14e44de2bd28973567402b529c34e1235b2a8d28758a8"
+      },
+      "native_session_ids": [
+        "01a116fb-468f-7e82-9b41-0ccc4607e47b"
+      ],
+      "fixture_revision": "3bd018f7438eff31d3e4dee0cebbad7f142d27e8"
+    },
+    {
+      "runtime": "codex",
+      "scenario": "bug",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "ccc86fed6daed6048e120b82f8d17d77aaea61a3a2e591597ca821dd66c6e582",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:30:59.317656+00:00",
+      "status": "completed_needs_review",
+      "version": "codex-cli 0.157.1",
+      "skill_fingerprints": {
+        "bug-hunter": "57ba7154fc41c3a36892dd3741ff889272e0ced4a6386213e4bff08cf7f33fa1",
+        "prove-it": "0c6a74eca9cbf73dcd7cca0e73cb01bf0d2b520526321463b957c2ad89b21d64"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "C:/Program Files/nodejs/node_modules/@openai/codex/bin/codex.js",
+        "exec",
+        "--ignore-user-config",
+        "--ignore-rules",
+        "--ephemeral",
+        "--json",
+        "--disable",
+        "plugins",
+        "--disable",
+        "apps",
+        "--disable",
+        "memories",
+        "--disable",
+        "hooks",
+        "--disable",
+        "multi_agent",
+        "--enable",
+        "skip_host_skill_discovery",
+        "-c",
+        "windows.sandbox=\"elevated\"",
+        "--sandbox",
+        "workspace-write",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--model",
+        "gpt-6-sol",
+        "--cd",
+        "<EVALUATION>\\live-3\\workspaces\\codex\\bug\\candidate",
+        "-"
+      ],
+      "usage": {
+        "input_tokens": 364227,
+        "cached_input_tokens": 332032,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3618,
+        "reasoning_output_tokens": 944
+      },
+      "actual_model": null,
+      "event_count": 44,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "quote assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " quote.py | 3 +--\n 1 file changed, 1 insertion(+), 2 deletions(-)\n",
+      "elapsed_seconds": 198.684,
+      "finished_at": "2026-10-07T15:34:18.001960+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Compared cached and uncached bulk inputs before editing, retained the contradictory cache observation, isolated the quantity-minus-one calculation, and checked original inputs after the fix. Independent result oracle passed."
+      },
+      "raw_location": ".evaluation/live-3/results/codex/bug/candidate",
+      "raw_sha256": {
+        "final.md": "596e837e3c58300e535e4d907e6fa9800df60522f666ed267a5983cab37faf48",
+        "prompt.txt": "ba0fa14cfc4a6a77e2ed115e8bc77eeab70934591d2da1f43d41e789f7dce59e",
+        "run.json": "1d321444ac395882337b09972f90a66827afb23db394fd5d099cc8a4969716bf",
+        "stderr.txt": "9738799d22b6623ba14c55c2d4f545fe87f66f601a1fe8a5ba390b0274253c05",
+        "stdout.jsonl": "cd90c37da451c7f278b80c94fe938fe04b5a29dd845dbd8a834e0eae48c3b05e"
+      },
+      "native_session_ids": [
+        "01a116fd-4d42-71d1-82a2-f0aa93d05d60"
+      ],
+      "fixture_revision": "af58582f89831d9aebc7953c539a4e02d96df9d8"
+    },
+    {
+      "runtime": "codex",
+      "scenario": "council",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "119b848f109cd3e2c54485b608a70b6fa2fe3f99fc28d90448a5e9b33d4d0db7",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:43:33.912420+00:00",
+      "status": "completed_needs_review",
+      "version": "codex-cli 0.157.1",
+      "skill_fingerprints": {
+        "council": "436ae5e6a36735368f7236e4dc73bfbbf156b597081189bf2f02a12ff255f6b0"
+      },
+      "reviewer_boundary": "explicit controlled CLI wrappers (native sandbox may reconstruct PATH)",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "C:/Program Files/nodejs/node_modules/@openai/codex/bin/codex.js",
+        "exec",
+        "--ignore-user-config",
+        "--ignore-rules",
+        "--ephemeral",
+        "--json",
+        "--disable",
+        "plugins",
+        "--disable",
+        "apps",
+        "--disable",
+        "memories",
+        "--disable",
+        "hooks",
+        "--disable",
+        "multi_agent",
+        "--enable",
+        "skip_host_skill_discovery",
+        "-c",
+        "windows.sandbox=\"elevated\"",
+        "--sandbox",
+        "workspace-write",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--model",
+        "gpt-6-sol",
+        "--cd",
+        "<EVALUATION>\\codex-council-controlled\\workspaces\\codex\\council\\baseline",
+        "-"
+      ],
+      "usage": {
+        "input_tokens": 161087,
+        "cached_input_tokens": 147840,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2741,
+        "reasoning_output_tokens": 865
+      },
+      "actual_model": null,
+      "event_count": 20,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 100.352,
+      "finished_at": "2026-10-07T15:45:14.264533+00:00",
+      "review": {
+        "verdict": "fail",
+        "observations": "Finding checks, preserved disagreement and truthful CLI failures were observed, but the fallback did not include a complete ready-to-paste packet. This baseline failure is a comparison, not a candidate release failure."
+      },
+      "raw_location": ".evaluation/codex-council-controlled/results/codex/council/baseline",
+      "raw_sha256": {
+        "final.md": "c6f76d858a161587168d2972fc44f0743bc31e3370d55549fbb9466ee6f7a1e1",
+        "prompt.txt": "c49c986e269336b98d57cd69c81119f48cc97256154dcf14525a7868f7c83096",
+        "run.json": "f600747a257f48ad275a5f96bd4a4d55fa9ad3984070b10819429e93accafcaa",
+        "stderr.txt": "e5b3253f0a93a0d3d1eb4b09af46562433de0d426fbe5a8f498701ae5233a621",
+        "stdout.jsonl": "a90575697be85649eaf8d3a680fb2d2f4ad60d6966593fc32ff694fa70e639e8"
+      },
+      "native_session_ids": [
+        "01a11708-d7a6-7482-95a9-91d48b4b1e70"
+      ],
+      "fixture_revision": "b41fe8205e415b073dd7dc7f281204d7794c289a",
+      "council_inputs_preserved": true
+    },
+    {
+      "runtime": "codex",
+      "scenario": "council",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "119b848f109cd3e2c54485b608a70b6fa2fe3f99fc28d90448a5e9b33d4d0db7",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:45:14.636745+00:00",
+      "status": "completed_needs_review",
+      "version": "codex-cli 0.157.1",
+      "skill_fingerprints": {
+        "council": "8017289c1ce9d546b5083b76c93baa10fc4247b26eaf726a8626c77b648fdebf"
+      },
+      "reviewer_boundary": "explicit controlled CLI wrappers (native sandbox may reconstruct PATH)",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "C:/Program Files/nodejs/node_modules/@openai/codex/bin/codex.js",
+        "exec",
+        "--ignore-user-config",
+        "--ignore-rules",
+        "--ephemeral",
+        "--json",
+        "--disable",
+        "plugins",
+        "--disable",
+        "apps",
+        "--disable",
+        "memories",
+        "--disable",
+        "hooks",
+        "--disable",
+        "multi_agent",
+        "--enable",
+        "skip_host_skill_discovery",
+        "-c",
+        "windows.sandbox=\"elevated\"",
+        "--sandbox",
+        "workspace-write",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--model",
+        "gpt-6-sol",
+        "--cd",
+        "<EVALUATION>\\codex-council-controlled\\workspaces\\codex\\council\\candidate",
+        "-"
+      ],
+      "usage": {
+        "input_tokens": 277018,
+        "cached_input_tokens": 259328,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5061,
+        "reasoning_output_tokens": 1113
+      },
+      "actual_model": null,
+      "event_count": 45,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 190.129,
+      "finished_at": "2026-10-07T15:48:24.765977+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Preserved original synthetic reports and scoped code; reproduced the numeric dispute, rejected unsupported SQL injection, separated aggregator findings and exit-78 availability errors, and retained a complete manual fallback packet."
+      },
+      "raw_location": ".evaluation/codex-council-controlled/results/codex/council/candidate",
+      "raw_sha256": {
+        "final.md": "24ce497ee6155dd723472bd312edec9f3b0416e5409b79c3df5336abd4988b58",
+        "prompt.txt": "f63ec6484d56340b99144db4f83b10a74490caf58b52557bafd8b68accfcfdf9",
+        "run.json": "8feedec031ad223b77f40352fe178b97a311ef4bca8928a630f84c8bb6882301",
+        "stderr.txt": "7b5322c5256973ec595b2e1655700005197592139aaef71f0f970829bb977218",
+        "stdout.jsonl": "6112d821e2202e290d64b075e973a973287a82d8cf0d5dfffbec8f1acb8eb3b1"
+      },
+      "native_session_ids": [
+        "01a1170a-5b61-7931-b26a-f49b4f7c8c7f"
+      ],
+      "fixture_revision": "7d3346041a44f35c8ec5f1668e76dd3e1a0b861a",
+      "council_inputs_preserved": true
+    },
+    {
+      "runtime": "codex",
+      "scenario": "verifier",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "ccc86fed6daed6048e120b82f8d17d77aaea61a3a2e591597ca821dd66c6e582",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:37:58.553538+00:00",
+      "status": "completed_needs_review",
+      "version": "codex-cli 0.157.1",
+      "skill_fingerprints": {
+        "create-verifier": "19e7a3038944feb2e1968400ea3513d798085fc92bf2c2a3987751d840a8811f"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "C:/Program Files/nodejs/node_modules/@openai/codex/bin/codex.js",
+        "exec",
+        "--ignore-user-config",
+        "--ignore-rules",
+        "--ephemeral",
+        "--json",
+        "--disable",
+        "plugins",
+        "--disable",
+        "apps",
+        "--disable",
+        "memories",
+        "--disable",
+        "hooks",
+        "--disable",
+        "multi_agent",
+        "--enable",
+        "skip_host_skill_discovery",
+        "-c",
+        "windows.sandbox=\"elevated\"",
+        "--sandbox",
+        "workspace-write",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--model",
+        "gpt-6-sol",
+        "--cd",
+        "<EVALUATION>\\live-3\\workspaces\\codex\\verifier\\candidate",
+        "-"
+      ],
+      "usage": {
+        "input_tokens": 349391,
+        "cached_input_tokens": 326272,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 7469,
+        "reasoning_output_tokens": 2397
+      },
+      "actual_model": null,
+      "event_count": 48,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 215.091,
+      "finished_at": "2026-10-07T15:41:33.644715+00:00",
+      "review": {
+        "verdict": "blocked",
+        "observations": "Native Windows workspace sandbox denied writing the requested .agents/skills/verify-project. The real API feature and cleanup passed, but no project skill was generated."
+      },
+      "raw_location": ".evaluation/live-3/results/codex/verifier/candidate",
+      "raw_sha256": {
+        "final.md": "3d34cebd865866858a36e763abc381fce984fef9c58d76866e487e975708af38",
+        "prompt.txt": "cbad809d50c4edc393bbea2554f99b1483608648e69f26df090bb5a5ee17e26b",
+        "run.json": "16f63ed688cd47e87954914cfcc91668a75cbb66410fa6d3b10bcc2d6628954a",
+        "stderr.txt": "c6d244fdd08a6f01663bda16bd67c6c5efe61e502106fdad7660bf09f47f0487",
+        "stdout.jsonl": "76656382530d167c4ef4e816e1dca403850e9ee61a5b529c729a3c6d29a4f630"
+      },
+      "native_session_ids": [
+        "01a11703-b270-7161-8c90-d58dc2816402"
+      ],
+      "fixture_revision": "6208d968f22799f89924dbabb7f9d10e18131704"
+    },
+    {
+      "runtime": "codex",
+      "scenario": "handoff",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "107518d0dcb9da4dc6827b0bc3840350ee56237c0b6e4d6df78043fa216f3f9d",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:41:34.065380+00:00",
+      "status": "blocked",
+      "blocker": "generator has not created verify-project; handoff is blocked",
+      "elapsed_seconds": 0.0,
+      "finished_at": "2026-10-07T15:41:34.065562+00:00",
+      "review": {
+        "verdict": "blocked",
+        "observations": "No generated project skill existed, so the fresh-session handoff could not start. A passing creator harness run is not counted as handoff proof."
+      },
+      "raw_location": ".evaluation/live-3/results/codex/handoff/candidate",
+      "raw_sha256": {
+        "run.json": "c007c62d0177583806d017c84f177eb9e7a13a5ec6198704e8a5638b5c4b46bd"
+      },
+      "native_session_ids": [],
+      "fixture_revision": "6208d968f22799f89924dbabb7f9d10e18131704"
+    },
+    {
+      "runtime": "claude",
+      "scenario": "small",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "provider": "claude.ai firstParty",
+      "model": "sonnet",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:04:09.415182+00:00",
+      "status": "completed_needs_review",
+      "version": "2.1.290 (Claude Code)",
+      "skill_fingerprints": {
+        "hold-your-horses": "71c045713655b4170428f54ddfab3410b8c80724e8c2ccab39f207778401b7bb",
+        "prove-it": "e49267fc169e789f52aaa1a67653ae4a6fb31f69704c1c67e756641e0f7c533e"
+      },
+      "command": [
+        "<USER_HOME>/.local/bin/claude.exe",
+        "-p",
+        "--output-format",
+        "stream-json",
+        "--verbose",
+        "--no-session-persistence",
+        "--strict-mcp-config",
+        "--setting-sources",
+        "",
+        "--permission-mode",
+        "acceptEdits",
+        "--permission-prompts",
+        "none",
+        "--allowedTools",
+        "Read,Edit,Write,Bash,Glob,Grep,Skill",
+        "--model",
+        "sonnet",
+        "--effort",
+        "medium"
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 13314,
+        "cache_read_input_tokens": 85215,
+        "output_tokens": 1428,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 13314,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 439,
+            "cache_read_input_tokens": 26146,
+            "cache_creation_input_tokens": 712,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 712
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "actual_model": "claude-sonnet-5-5",
+      "event_count": 18,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "greeting assertion passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " greeting.py | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+      "elapsed_seconds": 20.283,
+      "finished_at": "2026-10-07T15:04:29.697731+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "The designated skills were loaded; only greeting punctuation changed. A direct greeting assertion matched the claim and the unrelated arithmetic receipt was explicitly rejected."
+      },
+      "raw_location": ".evaluation/live-1/results/claude/small/baseline",
+      "raw_sha256": {
+        "final.md": "fa9a5a2c8863b18a2705188599f9b8042ae91ee9737bd61d93b4205b8b60e950",
+        "prompt.txt": "06ded85bc3b348fc042b5f087c20437ab745125f6d514c433439406388b8fe4a",
+        "run.json": "4602db9b299c80723082c1fd572d59e863f5a9a8f34db1bff0d478b0ae43801b",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "5d0082bcb238f3aea927b30222a159e04a81c9ee54d41ebbdc527978ea431b88"
+      },
+      "native_session_ids": [
+        "a3645523-021e-4ea6-aae6-e69a573edb40"
+      ],
+      "fixture_revision": "6869e934a3af383b2b4b539348ae60a1e49b0a91"
+    },
+    {
+      "runtime": "claude",
+      "scenario": "small",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "ed9f3a258d5d7e5dae383f46dcb1502ffa92823ecc0776e5fcf1bf625bcf5afe",
+      "provider": "claude.ai firstParty",
+      "model": "sonnet",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:06:31.001445+00:00",
+      "status": "completed_needs_review",
+      "version": "2.1.290 (Claude Code)",
+      "skill_fingerprints": {
+        "hold-your-horses": "5b0fab0ea2579266199cb5c2f49130b2a3b238e1695b2349afb74ae6b2046b23",
+        "prove-it": "0c6a74eca9cbf73dcd7cca0e73cb01bf0d2b520526321463b957c2ad89b21d64"
+      },
+      "command": [
+        "<USER_HOME>/.local/bin/claude.exe",
+        "-p",
+        "--output-format",
+        "stream-json",
+        "--verbose",
+        "--no-session-persistence",
+        "--strict-mcp-config",
+        "--setting-sources",
+        "",
+        "--permission-mode",
+        "acceptEdits",
+        "--permission-prompts",
+        "none",
+        "--allowedTools",
+        "Read,Edit,Write,Bash,Glob,Grep,Skill",
+        "--model",
+        "sonnet",
+        "--effort",
+        "medium"
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "cache_creation_input_tokens": 14019,
+        "cache_read_input_tokens": 114066,
+        "output_tokens": 1214,
+        "output_tokens_details": {
+          "thinking_tokens": 33
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 14019,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 438,
+            "cache_read_input_tokens": 27335,
+            "cache_creation_input_tokens": 232,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 232
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "actual_model": "claude-sonnet-5-5",
+      "event_count": 20,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "greeting assertion passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " greeting.py | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+      "elapsed_seconds": 23.57,
+      "finished_at": "2026-10-07T15:06:54.571285+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "The designated skills were loaded; only greeting punctuation changed. A direct greeting assertion matched the claim and the unrelated arithmetic receipt was explicitly rejected."
+      },
+      "raw_location": ".evaluation/live-1/results/claude/small/candidate",
+      "raw_sha256": {
+        "final.md": "7e39299155f55bd3ffacf2fc11bca88a42280222ee72296d6cf1ee85ce5f4f1f",
+        "prompt.txt": "749a32b136fe458ebe9e924fb4266e7380947ee7f0998b76000f0a8084763a14",
+        "run.json": "047c1c7b471b51c0c063cd77a8cd43748d2710d087219a53c8ed6c52785dbd12",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "d6179fba6662d1c3468c854b47efd3d72a4e7eae571fb7938d4a4685f82eddbe"
+      },
+      "native_session_ids": [
+        "38d4f343-177c-421f-a448-9a5837934809"
+      ],
+      "fixture_revision": "a3339f7f19f013d38deda2c9852080afa4e3680f"
+    },
+    {
+      "runtime": "claude",
+      "scenario": "api",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "ed9f3a258d5d7e5dae383f46dcb1502ffa92823ecc0776e5fcf1bf625bcf5afe",
+      "provider": "claude.ai firstParty",
+      "model": "sonnet",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:08:14.220500+00:00",
+      "status": "completed_needs_review",
+      "version": "2.1.290 (Claude Code)",
+      "skill_fingerprints": {
+        "hold-your-horses": "71c045713655b4170428f54ddfab3410b8c80724e8c2ccab39f207778401b7bb",
+        "prove-it": "e49267fc169e789f52aaa1a67653ae4a6fb31f69704c1c67e756641e0f7c533e"
+      },
+      "command": [
+        "<USER_HOME>/.local/bin/claude.exe",
+        "-p",
+        "--output-format",
+        "stream-json",
+        "--verbose",
+        "--no-session-persistence",
+        "--strict-mcp-config",
+        "--setting-sources",
+        "",
+        "--permission-mode",
+        "acceptEdits",
+        "--permission-prompts",
+        "none",
+        "--allowedTools",
+        "Read,Edit,Write,Bash,Glob,Grep,Skill",
+        "--model",
+        "sonnet",
+        "--effort",
+        "medium"
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "cache_creation_input_tokens": 14024,
+        "cache_read_input_tokens": 113019,
+        "output_tokens": 1329,
+        "output_tokens_details": {
+          "thinking_tokens": 70
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 14024,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 545,
+            "cache_read_input_tokens": 27379,
+            "cache_creation_input_tokens": 193,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 193
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "actual_model": "claude-sonnet-5-5",
+      "event_count": 19,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "{\"response\": {\"invoice_id\": \"inv-7\", \"total_cents\": 1250, \"total\": 12.5}, \"consumer\": \"reporting/month_end.py\", \"consumer_total\": \"12.50\"}\nwire and consumer assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " api.py | 3 ++-\n 1 file changed, 2 insertions(+), 1 deletion(-)\n",
+      "elapsed_seconds": 22.188,
+      "finished_at": "2026-10-07T15:08:36.408759+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Found the scheduled JSON consumer outside Python callers, retained integer total_cents, added numeric total, and executed the existing real HTTP/consumer harness. Independent result oracle passed."
+      },
+      "raw_location": ".evaluation/live-1/results/claude/api/baseline",
+      "raw_sha256": {
+        "final.md": "319170cb45c2b1e5d9073cea9447ecd38e837f1b661fb157b352bb3294d2b1fe",
+        "oracle-api.json": "c1e97ad0d99f4f744a24f683d9c3962f076f089998f6545c48d6086971512dc7",
+        "prompt.txt": "bf5b96387871aa4035f3103d1402b4164aaa9ecff3e95b60ec81962a56d83052",
+        "run.json": "ac3eba2b5224394b3de1d58acb40390bafcfbc1dbd5966cf43a6aaacbd13eddb",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "22a498b1c2272d694030c42791cbc41856ae4235702b5a7a6cc7432f8e6dd432"
+      },
+      "native_session_ids": [
+        "d9d4185f-373a-4fbb-adf8-3f51edf76f70"
+      ],
+      "fixture_revision": "ffbf5c4c50c20d89e4e65cdc984cc6a7015002e1"
+    },
+    {
+      "runtime": "claude",
+      "scenario": "api",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "ed9f3a258d5d7e5dae383f46dcb1502ffa92823ecc0776e5fcf1bf625bcf5afe",
+      "provider": "claude.ai firstParty",
+      "model": "sonnet",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:08:36.823466+00:00",
+      "status": "completed_needs_review",
+      "version": "2.1.290 (Claude Code)",
+      "skill_fingerprints": {
+        "hold-your-horses": "5b0fab0ea2579266199cb5c2f49130b2a3b238e1695b2349afb74ae6b2046b23",
+        "prove-it": "0c6a74eca9cbf73dcd7cca0e73cb01bf0d2b520526321463b957c2ad89b21d64"
+      },
+      "command": [
+        "<USER_HOME>/.local/bin/claude.exe",
+        "-p",
+        "--output-format",
+        "stream-json",
+        "--verbose",
+        "--no-session-persistence",
+        "--strict-mcp-config",
+        "--setting-sources",
+        "",
+        "--permission-mode",
+        "acceptEdits",
+        "--permission-prompts",
+        "none",
+        "--allowedTools",
+        "Read,Edit,Write,Bash,Glob,Grep,Skill",
+        "--model",
+        "sonnet",
+        "--effort",
+        "medium"
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 14503,
+        "cache_read_input_tokens": 87002,
+        "output_tokens": 1548,
+        "output_tokens_details": {
+          "thinking_tokens": 46
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 14503,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 622,
+            "cache_read_input_tokens": 27500,
+            "cache_creation_input_tokens": 551,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 551
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "actual_model": "claude-sonnet-5-5",
+      "event_count": 15,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "{\"response\": {\"invoice_id\": \"inv-7\", \"total_cents\": 1250, \"total\": 12.5}, \"consumer\": \"reporting/month_end.py\", \"consumer_total\": \"12.50\"}\nwire and consumer assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " api.py | 3 ++-\n 1 file changed, 2 insertions(+), 1 deletion(-)\n",
+      "elapsed_seconds": 21.938,
+      "finished_at": "2026-10-07T15:08:58.761432+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Found the scheduled JSON consumer outside Python callers, retained integer total_cents, added numeric total, and executed the existing real HTTP/consumer harness. Independent result oracle passed. The existing harness was used directly; automatic selection of the provided verify-project guide was not demonstrated."
+      },
+      "raw_location": ".evaluation/live-1/results/claude/api/candidate",
+      "raw_sha256": {
+        "final.md": "8730a6b93adb45237d673d4ce4678d870bf5bcdb5dbb91bd9eb6266f1841a1ec",
+        "oracle-api.json": "c1e97ad0d99f4f744a24f683d9c3962f076f089998f6545c48d6086971512dc7",
+        "prompt.txt": "9922f46f9b30b9650ad2154dc4eac6fb12c0596552caccaf40a2e52c5fb7f80c",
+        "run.json": "4c5442fcedb8f7eaa798a60237fcaa138a9731cfc922b2798579fe1dbfc47736",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "259f3cab8b61144f6d51572d12189aef7b912b545a7d6391585c4529f55d23af"
+      },
+      "native_session_ids": [
+        "8d5f879a-5f7f-499c-9612-fd16996de28e"
+      ],
+      "fixture_revision": "a94f2547f31c698e8aaebce5c86a2e3d4c5c1a3f"
+    },
+    {
+      "runtime": "claude",
+      "scenario": "bug",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "45885ad3a74232ab691a2ec01dd68c014de47126e7f0cc13a541f87394ca5fda",
+      "provider": "claude.ai firstParty",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:14:05.355338+00:00",
+      "status": "completed_needs_review",
+      "version": "2.1.290 (Claude Code)",
+      "skill_fingerprints": {
+        "bug-hunter": "458dcc4ecac07afe4ff973d994c4c330bb4dde43ce37f8ce60b473f0bd5ff847",
+        "prove-it": "e49267fc169e789f52aaa1a67653ae4a6fb31f69704c1c67e756641e0f7c533e"
+      },
+      "command": [
+        "<USER_HOME>/.local/bin/claude.exe",
+        "-p",
+        "--output-format",
+        "stream-json",
+        "--verbose",
+        "--no-session-persistence",
+        "--strict-mcp-config",
+        "--setting-sources",
+        "",
+        "--permission-mode",
+        "acceptEdits",
+        "--permission-prompts",
+        "none",
+        "--allowedTools",
+        "Read,Edit,Write,Bash,Glob,Grep,Skill",
+        "--model",
+        "claude-sonnet-5-5",
+        "--effort",
+        "medium"
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "cache_creation_input_tokens": 15099,
+        "cache_read_input_tokens": 114399,
+        "output_tokens": 2627,
+        "output_tokens_details": {
+          "thinking_tokens": 209
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 15099,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 792,
+            "cache_read_input_tokens": 27969,
+            "cache_creation_input_tokens": 678,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 678
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "actual_model": "claude-sonnet-5-5",
+      "event_count": 44,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "quote assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " quote.py | 3 +--\n 1 file changed, 1 insertion(+), 2 deletions(-)\n",
+      "elapsed_seconds": 31.098,
+      "finished_at": "2026-10-07T15:14:36.453168+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Compared cached and uncached bulk inputs before editing, retained the contradictory cache observation, isolated the quantity-minus-one calculation, and checked original inputs after the fix. Independent result oracle passed."
+      },
+      "raw_location": ".evaluation/live-1/results/claude/bug/baseline",
+      "raw_sha256": {
+        "final.md": "f66ebb08df2f3f94d85b2edf344086280257be8b04afdfbd5b8780f04d672d7e",
+        "prompt.txt": "dcbdab2fcbd441e1b52eeaa4c5ac5e32ca275e884eecdcaa444e4666bc99709d",
+        "run.json": "41f0d2e56f7e71d2fadf200b4864467f3824a6f05f7e05dddb866568d806b021",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "fb12c5fd1aeb6ca811daee4b3605a363630a3c9ff39ab6cf001916f57823d1a1"
+      },
+      "native_session_ids": [
+        "f02adc0d-bb9f-4482-bf63-358b42737bc6"
+      ],
+      "fixture_revision": "3d65cfdfdffcdd1b1a6dc7a2ec610cba43433b74"
+    },
+    {
+      "runtime": "claude",
+      "scenario": "bug",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "45885ad3a74232ab691a2ec01dd68c014de47126e7f0cc13a541f87394ca5fda",
+      "provider": "claude.ai firstParty",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:14:36.901159+00:00",
+      "status": "completed_needs_review",
+      "version": "2.1.290 (Claude Code)",
+      "skill_fingerprints": {
+        "bug-hunter": "57ba7154fc41c3a36892dd3741ff889272e0ced4a6386213e4bff08cf7f33fa1",
+        "prove-it": "0c6a74eca9cbf73dcd7cca0e73cb01bf0d2b520526321463b957c2ad89b21d64"
+      },
+      "command": [
+        "<USER_HOME>/.local/bin/claude.exe",
+        "-p",
+        "--output-format",
+        "stream-json",
+        "--verbose",
+        "--no-session-persistence",
+        "--strict-mcp-config",
+        "--setting-sources",
+        "",
+        "--permission-mode",
+        "acceptEdits",
+        "--permission-prompts",
+        "none",
+        "--allowedTools",
+        "Read,Edit,Write,Bash,Glob,Grep,Skill",
+        "--model",
+        "claude-sonnet-5-5",
+        "--effort",
+        "medium"
+      ],
+      "usage": {
+        "input_tokens": 12,
+        "cache_creation_input_tokens": 15374,
+        "cache_read_input_tokens": 141115,
+        "output_tokens": 2754,
+        "output_tokens_details": {
+          "thinking_tokens": 327
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 15374,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 781,
+            "cache_read_input_tokens": 28702,
+            "cache_creation_input_tokens": 220,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 220
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "actual_model": "claude-sonnet-5-5",
+      "event_count": 79,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "quote assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " quote.py | 3 +--\n 1 file changed, 1 insertion(+), 2 deletions(-)\n",
+      "elapsed_seconds": 38.79,
+      "finished_at": "2026-10-07T15:15:15.690821+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Compared cached and uncached bulk inputs before editing, retained the contradictory cache observation, isolated the quantity-minus-one calculation, and checked original inputs after the fix. Independent result oracle passed."
+      },
+      "raw_location": ".evaluation/live-1/results/claude/bug/candidate",
+      "raw_sha256": {
+        "final.md": "5e2e7f29cfafd1f4392c53e8721ce2a9f08bc04bb445569e6d5ed5d7de6b3a6e",
+        "prompt.txt": "22f7a4d055609aade8c42db06ec0a0ee562e667f99b5881f214b108dbd780906",
+        "run.json": "80bf880cbadcf62ceb19f8f667d90f4b351de91f7d7004c79cec63e50153860f",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "66afc2a1b4f2627bf1474ac7dc1adb51e56ce62dca5ebac10343fea7cda112ee"
+      },
+      "native_session_ids": [
+        "972143fe-7102-49b8-aa8f-6ccb93dbaa28"
+      ],
+      "fixture_revision": "d741e31837eb30ad6ca8d827fa224f4f28ec68b5"
+    },
+    {
+      "runtime": "claude",
+      "scenario": "council",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "45885ad3a74232ab691a2ec01dd68c014de47126e7f0cc13a541f87394ca5fda",
+      "provider": "claude.ai firstParty",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:15:16.095673+00:00",
+      "status": "completed_needs_review",
+      "version": "2.1.290 (Claude Code)",
+      "skill_fingerprints": {
+        "council": "436ae5e6a36735368f7236e4dc73bfbbf156b597081189bf2f02a12ff255f6b0"
+      },
+      "command": [
+        "<USER_HOME>/.local/bin/claude.exe",
+        "-p",
+        "--output-format",
+        "stream-json",
+        "--verbose",
+        "--no-session-persistence",
+        "--strict-mcp-config",
+        "--setting-sources",
+        "",
+        "--permission-mode",
+        "acceptEdits",
+        "--permission-prompts",
+        "none",
+        "--allowedTools",
+        "Read,Edit,Write,Bash,Glob,Grep,Skill",
+        "--model",
+        "claude-sonnet-5-5",
+        "--effort",
+        "medium"
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 11367,
+        "cache_read_input_tokens": 81464,
+        "output_tokens": 1757,
+        "output_tokens_details": {
+          "thinking_tokens": 55
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 11367,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 858,
+            "cache_read_input_tokens": 24396,
+            "cache_creation_input_tokens": 519,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 519
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "actual_model": "claude-sonnet-5-5",
+      "event_count": 17,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 21.563,
+      "finished_at": "2026-10-07T15:15:37.658705+00:00",
+      "review": {
+        "verdict": "fail",
+        "observations": "Finding checks, preserved disagreement and truthful CLI failures were observed, but the fallback did not include a complete ready-to-paste packet. This baseline failure is a comparison, not a candidate release failure."
+      },
+      "raw_location": ".evaluation/live-1/results/claude/council/baseline",
+      "raw_sha256": {
+        "final.md": "78609f3e22c5f405898e267c805f6de2b3dceb4072dd51803590c13bf595eb2b",
+        "prompt.txt": "2c3d68e6b5f1a883a90cb09aee962ed5665a060ae85ad32133ff22c55cc2db3b",
+        "run.json": "32443a6c39546abf7ca8c7b3d58095a7948c524f69bd14b09da04aaeec42a0bc",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "d4aa8acbc764cd7ad187610112a09e0b63485c16c7dd7d316f548592b1cb6043"
+      },
+      "native_session_ids": [
+        "eefbaf6c-dd59-4d9d-a141-371933ec58d8"
+      ],
+      "fixture_revision": "96f29f4e55ec5955c509d6c6a97827e0a869e5d2",
+      "council_inputs_preserved": true
+    },
+    {
+      "runtime": "claude",
+      "scenario": "council",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "ccc86fed6daed6048e120b82f8d17d77aaea61a3a2e591597ca821dd66c6e582",
+      "provider": "claude.ai firstParty",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:36:19.198728+00:00",
+      "status": "completed_needs_review",
+      "version": "2.1.290 (Claude Code)",
+      "skill_fingerprints": {
+        "council": "8017289c1ce9d546b5083b76c93baa10fc4247b26eaf726a8626c77b648fdebf"
+      },
+      "command": [
+        "<USER_HOME>/.local/bin/claude.exe",
+        "-p",
+        "--output-format",
+        "stream-json",
+        "--verbose",
+        "--no-session-persistence",
+        "--strict-mcp-config",
+        "--setting-sources",
+        "",
+        "--permission-mode",
+        "acceptEdits",
+        "--permission-prompts",
+        "none",
+        "--allowedTools",
+        "Read,Edit,Write,Bash,Glob,Grep,Skill",
+        "--model",
+        "claude-sonnet-5-5",
+        "--effort",
+        "medium"
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "cache_creation_input_tokens": 13477,
+        "cache_read_input_tokens": 108957,
+        "output_tokens": 2893,
+        "output_tokens_details": {
+          "thinking_tokens": 95
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 13477,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 1038,
+            "cache_read_input_tokens": 26122,
+            "cache_creation_input_tokens": 903,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 903
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "actual_model": "claude-sonnet-5-5",
+      "event_count": 19,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 31.008,
+      "finished_at": "2026-10-07T15:36:50.206824+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Preserved original synthetic reports and scoped code; reproduced the numeric dispute, rejected unsupported SQL injection, separated aggregator findings and exit-78 availability errors, and retained a complete manual fallback packet."
+      },
+      "raw_location": ".evaluation/council-final/results/claude/council/candidate",
+      "raw_sha256": {
+        "final.md": "5c0516677c405c2ab5518e188fb98640abe9eb3c682c0b0dbc475185fbb4ec5b",
+        "prompt.txt": "89fd5181b8fbba8abeefec86eb07876638b2a614ea3194d2e920b35db562db42",
+        "run.json": "cca1a82eaf888e2dd1c3ab83de30bb3839b156f48889341a4dcb4a592738fc58",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "a693362449bb67e9c2c108bdf3a4a896dd43e59e817504ed43b16d270f1e829d"
+      },
+      "native_session_ids": [
+        "5901b6c2-a31a-43cd-8056-3137d188cff8"
+      ],
+      "fixture_revision": "24ce3b285a0b3cc5bd37b0924b365bc25163d66d",
+      "council_inputs_preserved": true
+    },
+    {
+      "runtime": "claude",
+      "scenario": "verifier",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "45885ad3a74232ab691a2ec01dd68c014de47126e7f0cc13a541f87394ca5fda",
+      "provider": "claude.ai firstParty",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:16:03.954665+00:00",
+      "status": "completed_needs_review",
+      "version": "2.1.290 (Claude Code)",
+      "skill_fingerprints": {
+        "create-verifier": "19e7a3038944feb2e1968400ea3513d798085fc92bf2c2a3987751d840a8811f"
+      },
+      "command": [
+        "<USER_HOME>/.local/bin/claude.exe",
+        "-p",
+        "--output-format",
+        "stream-json",
+        "--verbose",
+        "--no-session-persistence",
+        "--strict-mcp-config",
+        "--setting-sources",
+        "",
+        "--permission-mode",
+        "acceptEdits",
+        "--permission-prompts",
+        "none",
+        "--allowedTools",
+        "Read,Edit,Write,Bash,Glob,Grep,Skill",
+        "--model",
+        "claude-sonnet-5-5",
+        "--effort",
+        "medium"
+      ],
+      "usage": {
+        "input_tokens": 14,
+        "cache_creation_input_tokens": 16922,
+        "cache_read_input_tokens": 166018,
+        "output_tokens": 4685,
+        "output_tokens_details": {
+          "thinking_tokens": 126
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 16922,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 679,
+            "cache_read_input_tokens": 30035,
+            "cache_creation_input_tokens": 435,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 435
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "actual_model": "claude-sonnet-5-5",
+      "event_count": 26,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 52.781,
+      "finished_at": "2026-10-07T15:16:56.735749+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Created only the requested target with valid local references and all five guide sections; reused the unchanged existing harness for a real create/list/persistence feature and durable cleanup receipts."
+      },
+      "raw_location": ".evaluation/live-1/results/claude/verifier/candidate",
+      "raw_sha256": {
+        "final.md": "b0b91dd8ab617c34126bb4a229e972df95d0f4326cd3503bdd7b3d6c22451aa1",
+        "prompt.txt": "24d9dba21291df1317fa5a00bf6400312414b671b633f399cff4548e5b57b218",
+        "run.json": "682151f39bd6325ffa44f14f23b7516eae15ab96575c4cf2e91b28bed6c18734",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "ad4b3b4383d07208880874625ef7ceb3e94dd82497d2d481213c06f5728e45b1"
+      },
+      "native_session_ids": [
+        "0469e339-c7c2-402f-85b6-4ec97bce6ead"
+      ],
+      "fixture_revision": "b0be7a8abaa210711c23cde13a6697b5291075b7"
+    },
+    {
+      "runtime": "claude",
+      "scenario": "handoff",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "45885ad3a74232ab691a2ec01dd68c014de47126e7f0cc13a541f87394ca5fda",
+      "provider": "claude.ai firstParty",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:16:57.189118+00:00",
+      "status": "completed_needs_review",
+      "version": "2.1.290 (Claude Code)",
+      "skill_fingerprints": {
+        "verify-project": "c65639c83e2811f29acd0bcfc20bfcaf684f7c23841479f42e2228365500401b"
+      },
+      "command": [
+        "<USER_HOME>/.local/bin/claude.exe",
+        "-p",
+        "--output-format",
+        "stream-json",
+        "--verbose",
+        "--no-session-persistence",
+        "--strict-mcp-config",
+        "--setting-sources",
+        "",
+        "--permission-mode",
+        "acceptEdits",
+        "--permission-prompts",
+        "none",
+        "--allowedTools",
+        "Read,Edit,Write,Bash,Glob,Grep,Skill",
+        "--model",
+        "claude-sonnet-5-5",
+        "--effort",
+        "medium"
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 8753,
+        "cache_read_input_tokens": 79145,
+        "output_tokens": 1753,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 8753,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 742,
+            "cache_read_input_tokens": 22574,
+            "cache_creation_input_tokens": 1589,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1589
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "actual_model": "claude-sonnet-5-5",
+      "event_count": 14,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 20.708,
+      "finished_at": "2026-10-07T15:17:17.897197+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "A distinct native CLI session loaded the generated guide/references, executed a fresh feature input, saved new receipts, and verified process/data cleanup plus surviving evidence."
+      },
+      "raw_location": ".evaluation/live-1/results/claude/handoff/candidate",
+      "raw_sha256": {
+        "final.md": "d13b5c07fd377f1c101545f69f9cdbb5793e955801b9d0b9a0690f548055d06d",
+        "prompt.txt": "98633ce7b0295e2e0b5a9e74847187891c9c29809cb47c040b4832a9d0f69a42",
+        "run.json": "223ce59c790d69109e94d066ed87361edca7365f4586eebdbcb5d493a07a7e35",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "11d6832c98ca6338eb9943c5353f62281e558b12e6e0fa935758623368bca3ba"
+      },
+      "native_session_ids": [
+        "7071e513-66b1-470c-ba97-141d840261e4"
+      ],
+      "fixture_revision": "b0be7a8abaa210711c23cde13a6697b5291075b7"
+    },
+    {
+      "runtime": "pi",
+      "scenario": "small",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "107518d0dcb9da4dc6827b0bc3840350ee56237c0b6e4d6df78043fa216f3f9d",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:40:21.255692+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.0.4",
+      "skill_fingerprints": {
+        "hold-your-horses": "71c045713655b4170428f54ddfab3410b8c80724e8c2ccab39f207778401b7bb",
+        "prove-it": "e49267fc169e789f52aaa1a67653ae4a6fb31f69704c1c67e756641e0f7c533e"
+      },
+      "invocation": "native /skill command through stdin",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "<PINNED_PI>/node_modules/@earendil-works/pi-coding-agent/dist/cli.js",
+        "--print",
+        "--mode",
+        "json",
+        "--no-session",
+        "--no-extensions",
+        "--no-mcp",
+        "--no-prompt-templates",
+        "--no-context-files",
+        "--approve",
+        "--model",
+        "openai-codex/gpt-6-luna",
+        "--thinking",
+        "medium"
+      ],
+      "usage": {
+        "input": 18065,
+        "output": 564,
+        "cacheRead": 23552,
+        "cacheWrite": 0,
+        "reasoning": 15,
+        "totalTokens": 42181
+      },
+      "actual_model": "gpt-6-luna",
+      "event_count": 378,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "greeting assertion passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " greeting.py | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+      "elapsed_seconds": 34.844,
+      "finished_at": "2026-10-07T15:40:56.099690+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "The designated skills were loaded; only greeting punctuation changed. A direct greeting assertion matched the claim and the unrelated arithmetic receipt was explicitly rejected."
+      },
+      "raw_location": ".evaluation/pi-native/results/pi/small/baseline",
+      "raw_sha256": {
+        "final.md": "46867f5eae49433c5c48f4abfff55a79e3b3796f476621c1ac41deeac8aacdbf",
+        "prompt.txt": "1fce9689ad1fd816784e37fa6dd627084c547a54c441261ee4bd23645a3d6893",
+        "run.json": "b55f51313d0dcf86ec185660f4299b536e944a90fb74109badc0b448d5163e2d",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "10fb1209e6b2847fa1a5427515dd8429f891782333e152bbe74c854e7c37f290"
+      },
+      "native_session_ids": [
+        "01a11705-e28d-76a7-aba9-3d4f5eca79c9"
+      ],
+      "native_skill_expansion_observed": true,
+      "fixture_revision": "9e5c23ed31ffe9bb57ad80bc0c29ec0e09f0c0c4"
+    },
+    {
+      "runtime": "pi",
+      "scenario": "small",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "107518d0dcb9da4dc6827b0bc3840350ee56237c0b6e4d6df78043fa216f3f9d",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:40:56.513372+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.0.4",
+      "skill_fingerprints": {
+        "hold-your-horses": "5b0fab0ea2579266199cb5c2f49130b2a3b238e1695b2349afb74ae6b2046b23",
+        "prove-it": "0c6a74eca9cbf73dcd7cca0e73cb01bf0d2b520526321463b957c2ad89b21d64"
+      },
+      "invocation": "native /skill command through stdin",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "<PINNED_PI>/node_modules/@earendil-works/pi-coding-agent/dist/cli.js",
+        "--print",
+        "--mode",
+        "json",
+        "--no-session",
+        "--no-extensions",
+        "--no-mcp",
+        "--no-prompt-templates",
+        "--no-context-files",
+        "--approve",
+        "--model",
+        "openai-codex/gpt-6-luna",
+        "--thinking",
+        "medium"
+      ],
+      "usage": {
+        "input": 19987,
+        "output": 576,
+        "cacheRead": 26624,
+        "cacheWrite": 0,
+        "reasoning": 37,
+        "totalTokens": 47187
+      },
+      "actual_model": "gpt-6-luna",
+      "event_count": 347,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "greeting assertion passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " greeting.py | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+      "elapsed_seconds": 24.522,
+      "finished_at": "2026-10-07T15:41:21.034996+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "The designated skills were loaded; only greeting punctuation changed. A direct greeting assertion matched the claim and the unrelated arithmetic receipt was explicitly rejected."
+      },
+      "raw_location": ".evaluation/pi-native/results/pi/small/candidate",
+      "raw_sha256": {
+        "final.md": "f60e1973afd868a684f7574688e38d88585f1a75ce5a56472400c8bff44736df",
+        "prompt.txt": "aadc16b15a4d4cbc967c9f987fc74478b771cb263173d0aeded0de2d8d813284",
+        "run.json": "75a5ffb35da5705d7a4aeed2109ecc11ec561d7e102e8721a21d4fd104214ff0",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "41f3867ce3dfa78be8c2df1312e6657a1fff909ecee05c0f54d959f4de0afcbf"
+      },
+      "native_session_ids": [
+        "01a11706-6bfa-755e-91e6-39f4924136a0"
+      ],
+      "native_skill_expansion_observed": true,
+      "fixture_revision": "e1b5e142ba3f18162497f1fe4ceed5ecd38a0f1b"
+    },
+    {
+      "runtime": "pi",
+      "scenario": "api",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "107518d0dcb9da4dc6827b0bc3840350ee56237c0b6e4d6df78043fa216f3f9d",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:41:21.432450+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.0.4",
+      "skill_fingerprints": {
+        "hold-your-horses": "71c045713655b4170428f54ddfab3410b8c80724e8c2ccab39f207778401b7bb",
+        "prove-it": "e49267fc169e789f52aaa1a67653ae4a6fb31f69704c1c67e756641e0f7c533e"
+      },
+      "invocation": "native /skill command through stdin",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "<PINNED_PI>/node_modules/@earendil-works/pi-coding-agent/dist/cli.js",
+        "--print",
+        "--mode",
+        "json",
+        "--no-session",
+        "--no-extensions",
+        "--no-mcp",
+        "--no-prompt-templates",
+        "--no-context-files",
+        "--approve",
+        "--model",
+        "openai-codex/gpt-6-luna",
+        "--thinking",
+        "medium"
+      ],
+      "usage": {
+        "input": 11253,
+        "output": 699,
+        "cacheRead": 33280,
+        "cacheWrite": 0,
+        "reasoning": 0,
+        "totalTokens": 45232
+      },
+      "actual_model": "gpt-6-luna",
+      "event_count": 470,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "{\"response\": {\"invoice_id\": \"inv-7\", \"total_cents\": 1250, \"total\": 12.5}, \"consumer\": \"reporting/month_end.py\", \"consumer_total\": \"12.50\"}\nwire and consumer assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " api.py | 3 ++-\n 1 file changed, 2 insertions(+), 1 deletion(-)\n",
+      "elapsed_seconds": 25.932,
+      "finished_at": "2026-10-07T15:41:47.364373+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Found the scheduled JSON consumer outside Python callers, retained integer total_cents, added numeric total, and executed the existing real HTTP/consumer harness. Independent result oracle passed."
+      },
+      "raw_location": ".evaluation/pi-native/results/pi/api/baseline",
+      "raw_sha256": {
+        "final.md": "1c13dde5b64bc9fd0c9274668d09cdac01552f4b4a4c722afe98bb1e6f8e8e2e",
+        "oracle-api.json": "c1e97ad0d99f4f744a24f683d9c3962f076f089998f6545c48d6086971512dc7",
+        "prompt.txt": "ff55a5043a974e559948b4aa317ac5a67e12ee1bc4b59ca2b3fa05847043fcbb",
+        "run.json": "22e33e23d5cdc187b7e73d662b9e4438b3ea38a60f3ce1329e96a3a8a933a738",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "6ecc2f2e475ee24c63ed6196688a967052a7f6026cd4c6115b147d97eeb0140d"
+      },
+      "native_session_ids": [
+        "01a11706-ccdc-74d2-8ff4-1380f5895a59"
+      ],
+      "native_skill_expansion_observed": true,
+      "fixture_revision": "c058d3bab994908addc19902fe3f5a0d8ab1fdc4"
+    },
+    {
+      "runtime": "pi",
+      "scenario": "api",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "107518d0dcb9da4dc6827b0bc3840350ee56237c0b6e4d6df78043fa216f3f9d",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:41:47.820767+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.0.4",
+      "skill_fingerprints": {
+        "hold-your-horses": "5b0fab0ea2579266199cb5c2f49130b2a3b238e1695b2349afb74ae6b2046b23",
+        "prove-it": "0c6a74eca9cbf73dcd7cca0e73cb01bf0d2b520526321463b957c2ad89b21d64"
+      },
+      "invocation": "native /skill command through stdin",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "<PINNED_PI>/node_modules/@earendil-works/pi-coding-agent/dist/cli.js",
+        "--print",
+        "--mode",
+        "json",
+        "--no-session",
+        "--no-extensions",
+        "--no-mcp",
+        "--no-prompt-templates",
+        "--no-context-files",
+        "--approve",
+        "--model",
+        "openai-codex/gpt-6-luna",
+        "--thinking",
+        "medium"
+      ],
+      "usage": {
+        "input": 11855,
+        "output": 840,
+        "cacheRead": 35840,
+        "cacheWrite": 0,
+        "reasoning": 69,
+        "totalTokens": 48535
+      },
+      "actual_model": "gpt-6-luna",
+      "event_count": 586,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "{\"response\": {\"invoice_id\": \"inv-7\", \"total_cents\": 1250, \"total\": 12.5}, \"consumer\": \"reporting/month_end.py\", \"consumer_total\": \"12.50\"}\nwire and consumer assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " api.py | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+      "elapsed_seconds": 54.22,
+      "finished_at": "2026-10-07T15:42:42.040520+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Found the scheduled JSON consumer outside Python callers, retained integer total_cents, added numeric total, and executed the existing real HTTP/consumer harness. Independent result oracle passed. The existing harness was used directly; automatic selection of the provided verify-project guide was not demonstrated."
+      },
+      "raw_location": ".evaluation/pi-native/results/pi/api/candidate",
+      "raw_sha256": {
+        "final.md": "d5632daceafdee6ca7f260f335aeec331415cd0b4fd13dd5db63de457e4ebd88",
+        "oracle-api.json": "c1e97ad0d99f4f744a24f683d9c3962f076f089998f6545c48d6086971512dc7",
+        "prompt.txt": "dc135f39c4cbbdbdc91b430d99e2b8fc723e099d5f162e56bd4df9514cc0f7ad",
+        "run.json": "9ff768a58cb1367f12158d7f4645fb9ec41cf6db9f9458dd0da48cce01cc777c",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "125b135c76581d4b8249df17c6874e9a0b6e6c3a1c1ee4f9c86246d1bd994ce0"
+      },
+      "native_session_ids": [
+        "01a11707-371e-74be-823c-f45eee9b4898"
+      ],
+      "native_skill_expansion_observed": true,
+      "fixture_revision": "46e74084f7933d1fbae6054b7b75263b5d43efe8"
+    },
+    {
+      "runtime": "pi",
+      "scenario": "bug",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "107518d0dcb9da4dc6827b0bc3840350ee56237c0b6e4d6df78043fa216f3f9d",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:42:42.435394+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.0.4",
+      "skill_fingerprints": {
+        "bug-hunter": "458dcc4ecac07afe4ff973d994c4c330bb4dde43ce37f8ce60b473f0bd5ff847",
+        "prove-it": "e49267fc169e789f52aaa1a67653ae4a6fb31f69704c1c67e756641e0f7c533e"
+      },
+      "invocation": "native /skill command through stdin",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "<PINNED_PI>/node_modules/@earendil-works/pi-coding-agent/dist/cli.js",
+        "--print",
+        "--mode",
+        "json",
+        "--no-session",
+        "--no-extensions",
+        "--no-mcp",
+        "--no-prompt-templates",
+        "--no-context-files",
+        "--approve",
+        "--model",
+        "openai-codex/gpt-6-luna",
+        "--thinking",
+        "medium"
+      ],
+      "usage": {
+        "input": 13023,
+        "output": 1410,
+        "cacheRead": 48128,
+        "cacheWrite": 0,
+        "reasoning": 149,
+        "totalTokens": 62561
+      },
+      "actual_model": "gpt-6-luna",
+      "event_count": 1041,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "quote assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " quote.py | 3 +--\n 1 file changed, 1 insertion(+), 2 deletions(-)\n",
+      "elapsed_seconds": 54.768,
+      "finished_at": "2026-10-07T15:43:37.203257+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Compared cached and uncached bulk inputs before editing, retained the contradictory cache observation, isolated the quantity-minus-one calculation, and checked original inputs after the fix. Independent result oracle passed."
+      },
+      "raw_location": ".evaluation/pi-native/results/pi/bug/baseline",
+      "raw_sha256": {
+        "final.md": "d5e534f52b30d6f19364f0f468ef272a678862dbf3b09a65e084f48c7e2b09bc",
+        "prompt.txt": "e78b34882f62ea9e30a4e1e89b5fc32165bd0ba7e94c023ab9e56c6ca7a1b942",
+        "run.json": "20c082abf8effbbe9c56631d45d274558855d272aa3fc9b53b41c5ac5015ba91",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "42f997fba19a9956ffd5a67c6d0a88060ce29615c116a75cf9cfa94e507b88ba"
+      },
+      "native_session_ids": [
+        "01a11708-0919-720f-a475-98cc4fa79959"
+      ],
+      "native_skill_expansion_observed": true,
+      "fixture_revision": "34ae39d16a96456e717f9e95ba43efe63ac410bf"
+    },
+    {
+      "runtime": "pi",
+      "scenario": "bug",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "119b848f109cd3e2c54485b608a70b6fa2fe3f99fc28d90448a5e9b33d4d0db7",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:43:37.613552+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.0.4",
+      "skill_fingerprints": {
+        "bug-hunter": "57ba7154fc41c3a36892dd3741ff889272e0ced4a6386213e4bff08cf7f33fa1",
+        "prove-it": "0c6a74eca9cbf73dcd7cca0e73cb01bf0d2b520526321463b957c2ad89b21d64"
+      },
+      "invocation": "native /skill command through stdin",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "<PINNED_PI>/node_modules/@earendil-works/pi-coding-agent/dist/cli.js",
+        "--print",
+        "--mode",
+        "json",
+        "--no-session",
+        "--no-extensions",
+        "--no-mcp",
+        "--no-prompt-templates",
+        "--no-context-files",
+        "--approve",
+        "--model",
+        "openai-codex/gpt-6-luna",
+        "--thinking",
+        "medium"
+      ],
+      "usage": {
+        "input": 17798,
+        "output": 1163,
+        "cacheRead": 50688,
+        "cacheWrite": 0,
+        "reasoning": 113,
+        "totalTokens": 69649
+      },
+      "actual_model": "gpt-6-luna",
+      "event_count": 991,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "quote assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " quote.py | 3 +--\n 1 file changed, 1 insertion(+), 2 deletions(-)\n",
+      "elapsed_seconds": 45.939,
+      "finished_at": "2026-10-07T15:44:23.552299+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Compared cached and uncached bulk inputs before editing, retained the contradictory cache observation, isolated the quantity-minus-one calculation, and checked original inputs after the fix. Independent result oracle passed."
+      },
+      "raw_location": ".evaluation/pi-native/results/pi/bug/candidate",
+      "raw_sha256": {
+        "final.md": "76201bfdeae60482a11e6efca3f1bc588639422b17fc011860af26cca629afb2",
+        "prompt.txt": "c170cea1940d6fba957541e9d9739aabcf899e848b10d1101852e9f4c6f41a39",
+        "run.json": "b5df72a287b8ef4d86f7f539757f1562c804ab224f48d55a7e5aa7b8415eb870",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "f52f3bc621d453e0e1676a3ec6961ce651913efb5e464188fc94079c4dba71f4"
+      },
+      "native_session_ids": [
+        "01a11708-e173-71f5-9bd0-94c106e61594"
+      ],
+      "native_skill_expansion_observed": true,
+      "fixture_revision": "6cfecffb56635b2d8b01de98a3d51728c7bbd9d4"
+    },
+    {
+      "runtime": "pi",
+      "scenario": "council",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "119b848f109cd3e2c54485b608a70b6fa2fe3f99fc28d90448a5e9b33d4d0db7",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:44:23.940803+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.0.4",
+      "skill_fingerprints": {
+        "council": "436ae5e6a36735368f7236e4dc73bfbbf156b597081189bf2f02a12ff255f6b0"
+      },
+      "invocation": "native /skill command through stdin",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "<PINNED_PI>/node_modules/@earendil-works/pi-coding-agent/dist/cli.js",
+        "--print",
+        "--mode",
+        "json",
+        "--no-session",
+        "--no-extensions",
+        "--no-mcp",
+        "--no-prompt-templates",
+        "--no-context-files",
+        "--approve",
+        "--model",
+        "openai-codex/gpt-6-luna",
+        "--thinking",
+        "medium"
+      ],
+      "usage": {
+        "input": 10420,
+        "output": 966,
+        "cacheRead": 28160,
+        "cacheWrite": 0,
+        "reasoning": 0,
+        "totalTokens": 39546
+      },
+      "actual_model": "gpt-6-luna",
+      "event_count": 663,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 30.496,
+      "finished_at": "2026-10-07T15:44:54.436446+00:00",
+      "review": {
+        "verdict": "fail",
+        "observations": "Finding checks, preserved disagreement and truthful CLI failures were observed, but the fallback did not include a complete ready-to-paste packet. This baseline failure is a comparison, not a candidate release failure."
+      },
+      "raw_location": ".evaluation/pi-native/results/pi/council/baseline",
+      "raw_sha256": {
+        "final.md": "5b84280516e5a86ed56bfdf13cfc52332af4a9d49b9aa4fdc241f90125fcc4c5",
+        "prompt.txt": "eb542b438918893a023275a19a0140dfe171aec25cc9db550d78114aa97810ec",
+        "run.json": "2fcba079e5abcdeedd2094d0082a51b0ae04c804c7e9fdf51128779f9eae5449",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "a2a0b77b81c7e791230e7b6c80ac4fcff477895cf22423a6e30e34f4499493b3"
+      },
+      "native_session_ids": [
+        "01a11709-962b-75c2-bfdf-465c6d512de4"
+      ],
+      "native_skill_expansion_observed": true,
+      "fixture_revision": "522358813a8fa07351457154e6503b59b0a8944b",
+      "council_inputs_preserved": true
+    },
+    {
+      "runtime": "pi",
+      "scenario": "council",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "119b848f109cd3e2c54485b608a70b6fa2fe3f99fc28d90448a5e9b33d4d0db7",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:44:54.835706+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.0.4",
+      "skill_fingerprints": {
+        "council": "8017289c1ce9d546b5083b76c93baa10fc4247b26eaf726a8626c77b648fdebf"
+      },
+      "invocation": "native /skill command through stdin",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "<PINNED_PI>/node_modules/@earendil-works/pi-coding-agent/dist/cli.js",
+        "--print",
+        "--mode",
+        "json",
+        "--no-session",
+        "--no-extensions",
+        "--no-mcp",
+        "--no-prompt-templates",
+        "--no-context-files",
+        "--approve",
+        "--model",
+        "openai-codex/gpt-6-luna",
+        "--thinking",
+        "medium"
+      ],
+      "usage": {
+        "input": 12981,
+        "output": 2056,
+        "cacheRead": 34304,
+        "cacheWrite": 0,
+        "reasoning": 81,
+        "totalTokens": 49341
+      },
+      "actual_model": "gpt-6-luna",
+      "event_count": 1777,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 58.08,
+      "finished_at": "2026-10-07T15:45:52.915589+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Preserved original synthetic reports and scoped code; reproduced the numeric dispute, rejected unsupported SQL injection, separated aggregator findings and exit-78 availability errors, and retained a complete manual fallback packet."
+      },
+      "raw_location": ".evaluation/pi-native/results/pi/council/candidate",
+      "raw_sha256": {
+        "final.md": "e072e4d2e28d4e9378aabf3884e0c737165ce185bc59d0fbe36cb403b5690a51",
+        "prompt.txt": "0fdf0b2a555e5b189fb6bb8f5aa75d1babbfe7b5f66d49379727f615e66fea80",
+        "run.json": "b79a8b8ba1824542c16ed70ef9c465ebfb1fea7fc3146c35f1030736feea840d",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "1472ae25dcdb22ac7b05d08e951af516a355d9ca045f6141707467500b71d714"
+      },
+      "native_session_ids": [
+        "01a1170a-0ecd-76fc-9efe-7299ecb187fe"
+      ],
+      "native_skill_expansion_observed": true,
+      "fixture_revision": "13fd4c52f2f39c68fe917717d1a0e8291260b089",
+      "council_inputs_preserved": true
+    },
+    {
+      "runtime": "pi",
+      "scenario": "verifier",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "119b848f109cd3e2c54485b608a70b6fa2fe3f99fc28d90448a5e9b33d4d0db7",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:45:53.293322+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.0.4",
+      "skill_fingerprints": {
+        "create-verifier": "19e7a3038944feb2e1968400ea3513d798085fc92bf2c2a3987751d840a8811f"
+      },
+      "invocation": "native /skill command through stdin",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "<PINNED_PI>/node_modules/@earendil-works/pi-coding-agent/dist/cli.js",
+        "--print",
+        "--mode",
+        "json",
+        "--no-session",
+        "--no-extensions",
+        "--no-mcp",
+        "--no-prompt-templates",
+        "--no-context-files",
+        "--approve",
+        "--model",
+        "openai-codex/gpt-6-luna",
+        "--thinking",
+        "medium"
+      ],
+      "usage": {
+        "input": 12738,
+        "output": 2026,
+        "cacheRead": 52736,
+        "cacheWrite": 0,
+        "reasoning": 0,
+        "totalTokens": 67500
+      },
+      "actual_model": "gpt-6-luna",
+      "event_count": 1865,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 58.561,
+      "finished_at": "2026-10-07T15:46:51.854087+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Created only the requested target with valid local references and all five guide sections; reused the unchanged existing harness for a real create/list/persistence feature and durable cleanup receipts."
+      },
+      "raw_location": ".evaluation/pi-native/results/pi/verifier/candidate",
+      "raw_sha256": {
+        "final.md": "22b5b58ddf8166389c80e787502aacd512b952122d9a30c87321dc3ef2aa855b",
+        "prompt.txt": "f1a223e61bbe226032ada62b003f4ce63864e2713329b95bf796444065500cba",
+        "run.json": "148f0babe2c64299e0ba43bbb13c6df4c2fea6956ea4124a209cf66d36fe1970",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "ae6bd65af80f4235847a98c8c70320a124158e73df3ec1eccf46e929bc395dbf"
+      },
+      "native_session_ids": [
+        "01a1170a-f31c-70c7-92d4-3adf88420c05"
+      ],
+      "native_skill_expansion_observed": true,
+      "fixture_revision": "82370ccfed7ea36a3aa2a6229afea9b6f5541b2a"
+    },
+    {
+      "runtime": "pi",
+      "scenario": "handoff",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "119b848f109cd3e2c54485b608a70b6fa2fe3f99fc28d90448a5e9b33d4d0db7",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:46:52.261185+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.0.4",
+      "skill_fingerprints": {
+        "verify-project": "2c3a3631ab858f1413e403ee97b3613e312b81f66e5192ca9bf845bb3cf13990"
+      },
+      "invocation": "native /skill command through stdin",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "<PINNED_PI>/node_modules/@earendil-works/pi-coding-agent/dist/cli.js",
+        "--print",
+        "--mode",
+        "json",
+        "--no-session",
+        "--no-extensions",
+        "--no-mcp",
+        "--no-prompt-templates",
+        "--no-context-files",
+        "--approve",
+        "--model",
+        "openai-codex/gpt-6-luna",
+        "--thinking",
+        "medium"
+      ],
+      "usage": {
+        "input": 10555,
+        "output": 513,
+        "cacheRead": 2560,
+        "cacheWrite": 0,
+        "reasoning": 0,
+        "totalTokens": 13628
+      },
+      "actual_model": "gpt-6-luna",
+      "event_count": 143,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 47.56,
+      "finished_at": "2026-10-07T15:47:39.821041+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "A distinct native CLI session loaded the generated guide/references, executed a fresh feature input, saved new receipts, and verified process/data cleanup plus surviving evidence."
+      },
+      "raw_location": ".evaluation/pi-native/results/pi/handoff/candidate",
+      "raw_sha256": {
+        "final.md": "b8a93a59e16ce645db89bce9926791e8e449f48cd74e13f229731833380855b0",
+        "prompt.txt": "f5b4d8f447e10beb02895b70a01dc20468cca53fc0027270ad93ebe9724f7178",
+        "run.json": "785c20e4ea1dff681e38a3c555e4a93785b4ff840e4beea2e1b5394abf5bad92",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "d08435f51b45f6a9a93bb1b44ddef5a4b7a47c84a125054063f35faee8e52415"
+      },
+      "native_session_ids": [
+        "01a1170b-d7ab-74cc-8fdc-09edcce39925"
+      ],
+      "native_skill_expansion_observed": true,
+      "fixture_revision": "82370ccfed7ea36a3aa2a6229afea9b6f5541b2a"
+    },
+    {
+      "runtime": "opencode",
+      "scenario": "small",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "9c0423a0fa0ab650bac7487aa69b003437a9aa81636b459231367c8b79814104",
+      "provider": "OpenAI ChatGPT subscription (native openai)",
+      "model": "openai/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:24:20.886793+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.18.31",
+      "skill_fingerprints": {
+        "hold-your-horses": "71c045713655b4170428f54ddfab3410b8c80724e8c2ccab39f207778401b7bb",
+        "prove-it": "e49267fc169e789f52aaa1a67653ae4a6fb31f69704c1c67e756641e0f7c533e"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node_modules/opencode-ai/bin/opencode.exe",
+        "run",
+        "Follow the attached evaluation task.",
+        "--pure",
+        "--format",
+        "json",
+        "--auto",
+        "--model",
+        "openai/gpt-6-luna",
+        "--variant",
+        "medium",
+        "--dir",
+        "<EVALUATION>\\openai-1\\workspaces\\opencode\\small\\baseline",
+        "--file",
+        "<EVALUATION>\\openai-1\\results\\opencode\\small\\baseline\\prompt.txt"
+      ],
+      "usage": {
+        "total": 104408,
+        "input": 29357,
+        "output": 1302,
+        "reasoning": 21,
+        "cache_write": 0,
+        "cache_read": 73728
+      },
+      "actual_model": null,
+      "event_count": 36,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "greeting assertion passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " greeting.py | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+      "elapsed_seconds": 62.792,
+      "finished_at": "2026-10-07T15:25:23.678987+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "The designated skills were loaded; only greeting punctuation changed. A direct greeting assertion matched the claim and the unrelated arithmetic receipt was explicitly rejected."
+      },
+      "raw_location": ".evaluation/openai-1/results/opencode/small/baseline",
+      "raw_sha256": {
+        "final.md": "424ffb5d7a022eb732b8bb73a3da743f690697fc4b1005e4298f76111bf0ea64",
+        "prompt.txt": "a4bb5565186af1c22c7eefb6e9790fb39961db70b9542c5a60c54d0fba3ad782",
+        "run.json": "d6ceaea88b8f4446cb5ee906c3f36adcd4c4dd35176feb328e807f8799471995",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "f982254bc0c8574b9688736b0066632dffa63f79fef6b2a4c26034221bfa34a5"
+      },
+      "native_session_ids": [
+        "ses_ee908c37effewgQImtgMDJPkTx"
+      ],
+      "fixture_revision": "27e3ab8331e3c6dcbb4c5e5ef11cf6609ecbbc69"
+    },
+    {
+      "runtime": "opencode",
+      "scenario": "small",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "9c0423a0fa0ab650bac7487aa69b003437a9aa81636b459231367c8b79814104",
+      "provider": "OpenAI ChatGPT subscription (native openai)",
+      "model": "openai/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:25:24.083321+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.18.31",
+      "skill_fingerprints": {
+        "hold-your-horses": "5b0fab0ea2579266199cb5c2f49130b2a3b238e1695b2349afb74ae6b2046b23",
+        "prove-it": "0c6a74eca9cbf73dcd7cca0e73cb01bf0d2b520526321463b957c2ad89b21d64"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node_modules/opencode-ai/bin/opencode.exe",
+        "run",
+        "Follow the attached evaluation task.",
+        "--pure",
+        "--format",
+        "json",
+        "--auto",
+        "--model",
+        "openai/gpt-6-luna",
+        "--variant",
+        "medium",
+        "--dir",
+        "<EVALUATION>\\openai-1\\workspaces\\opencode\\small\\candidate",
+        "--file",
+        "<EVALUATION>\\openai-1\\results\\opencode\\small\\candidate\\prompt.txt"
+      ],
+      "usage": {
+        "total": 77460,
+        "input": 14765,
+        "output": 743,
+        "reasoning": 0,
+        "cache_write": 0,
+        "cache_read": 61952
+      },
+      "actual_model": null,
+      "event_count": 27,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "greeting assertion passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " greeting.py | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+      "elapsed_seconds": 59.51,
+      "finished_at": "2026-10-07T15:26:23.592914+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "The designated skills were loaded; only greeting punctuation changed. A direct greeting assertion matched the claim and the unrelated arithmetic receipt was explicitly rejected."
+      },
+      "raw_location": ".evaluation/openai-1/results/opencode/small/candidate",
+      "raw_sha256": {
+        "final.md": "c3ec925a8871840e2a00215e64ff390b4b52667caa0e1a6a179bbfece4fc772b",
+        "prompt.txt": "10ff3c411abe1d3d7687c97314ef83c5f2cde2e59b5f7a552479edff45b48e15",
+        "run.json": "5732acdba686603ecec9bd0263d15466484da437ea622d65b5161e467807905f",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "aa9a6288c674b8ef2372743ddc5a09510133c8abd68c438f7a8e6612e836bd96"
+      },
+      "native_session_ids": [
+        "ses_ee907c966ffe7FwmVjpltaxNch"
+      ],
+      "fixture_revision": "25a29fd350a0ea0fcb517228d24673abca7f0ec2"
+    },
+    {
+      "runtime": "opencode",
+      "scenario": "api",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "ccc86fed6daed6048e120b82f8d17d77aaea61a3a2e591597ca821dd66c6e582",
+      "provider": "OpenAI ChatGPT subscription (native openai)",
+      "model": "openai/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:27:55.441507+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.18.31",
+      "skill_fingerprints": {
+        "hold-your-horses": "71c045713655b4170428f54ddfab3410b8c80724e8c2ccab39f207778401b7bb",
+        "prove-it": "e49267fc169e789f52aaa1a67653ae4a6fb31f69704c1c67e756641e0f7c533e"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node_modules/opencode-ai/bin/opencode.exe",
+        "run",
+        "Follow the attached evaluation task.",
+        "--pure",
+        "--format",
+        "json",
+        "--auto",
+        "--model",
+        "openai/gpt-6-luna",
+        "--variant",
+        "medium",
+        "--dir",
+        "<EVALUATION>\\openai-1\\workspaces\\opencode\\api\\baseline",
+        "--file",
+        "<EVALUATION>\\openai-1\\results\\opencode\\api\\baseline\\prompt.txt"
+      ],
+      "usage": {
+        "total": 127876,
+        "input": 30827,
+        "output": 1543,
+        "reasoning": 274,
+        "cache_write": 0,
+        "cache_read": 95232
+      },
+      "actual_model": null,
+      "event_count": 40,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "{\"response\": {\"invoice_id\": \"inv-7\", \"total_cents\": 1250, \"total\": 12.5}, \"consumer\": \"reporting/month_end.py\", \"consumer_total\": \"12.50\"}\nwire and consumer assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " api.py | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+      "elapsed_seconds": 85.9,
+      "finished_at": "2026-10-07T15:29:21.341238+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Found the scheduled JSON consumer outside Python callers, retained integer total_cents, added numeric total, and executed the existing real HTTP/consumer harness. Independent result oracle passed."
+      },
+      "raw_location": ".evaluation/openai-1/results/opencode/api/baseline",
+      "raw_sha256": {
+        "final.md": "91e7887dfc1b024223d3c479420495e91160b224ad14022f967562fb05404ed9",
+        "oracle-api.json": "c1e97ad0d99f4f744a24f683d9c3962f076f089998f6545c48d6086971512dc7",
+        "prompt.txt": "d5247cde211b514ddc0f52d2e15b710cc649264293dca5455e42a61d498fbb43",
+        "run.json": "8a7a967b5f782f9fd64f54549830618f03186004da644e16371df5831a69cefd",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "b5794e521a8f2a58bb9c5256b5ae9e7971f9523c746ca908a6d4997ca6b49449"
+      },
+      "native_session_ids": [
+        "ses_ee9057c50ffebJPiVQ5uCuGztm"
+      ],
+      "fixture_revision": "34d6afa471221944938f80e7c53dbc52e1a6b625"
+    },
+    {
+      "runtime": "opencode",
+      "scenario": "api",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "ccc86fed6daed6048e120b82f8d17d77aaea61a3a2e591597ca821dd66c6e582",
+      "provider": "OpenAI ChatGPT subscription (native openai)",
+      "model": "openai/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:29:21.771127+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.18.31",
+      "skill_fingerprints": {
+        "hold-your-horses": "5b0fab0ea2579266199cb5c2f49130b2a3b238e1695b2349afb74ae6b2046b23",
+        "prove-it": "0c6a74eca9cbf73dcd7cca0e73cb01bf0d2b520526321463b957c2ad89b21d64"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node_modules/opencode-ai/bin/opencode.exe",
+        "run",
+        "Follow the attached evaluation task.",
+        "--pure",
+        "--format",
+        "json",
+        "--auto",
+        "--model",
+        "openai/gpt-6-luna",
+        "--variant",
+        "medium",
+        "--dir",
+        "<EVALUATION>\\openai-1\\workspaces\\opencode\\api\\candidate",
+        "--file",
+        "<EVALUATION>\\openai-1\\results\\opencode\\api\\candidate\\prompt.txt"
+      ],
+      "usage": {
+        "total": 157147,
+        "input": 33323,
+        "output": 1456,
+        "reasoning": 0,
+        "cache_write": 0,
+        "cache_read": 122368
+      },
+      "actual_model": null,
+      "event_count": 47,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "{\"response\": {\"invoice_id\": \"inv-7\", \"total_cents\": 1250, \"total\": 12.5}, \"consumer\": \"reporting/month_end.py\", \"consumer_total\": \"12.50\"}\nwire and consumer assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " api.py | 7 ++++++-\n 1 file changed, 6 insertions(+), 1 deletion(-)\n",
+      "elapsed_seconds": 73.818,
+      "finished_at": "2026-10-07T15:30:35.588785+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Found the scheduled JSON consumer outside Python callers, retained integer total_cents, added numeric total, and executed the existing real HTTP/consumer harness. Independent result oracle passed. The agent removed its own evidence/api.json after capture; the raw transcript and separate oracle receipt survive. This is an evidence-retention limitation."
+      },
+      "raw_location": ".evaluation/openai-1/results/opencode/api/candidate",
+      "raw_sha256": {
+        "final.md": "51e6f6826ddd6534a21f2e702ac1ff4f67d5d3e560cc6bab2ea981ccb9e647b6",
+        "oracle-api.json": "c1e97ad0d99f4f744a24f683d9c3962f076f089998f6545c48d6086971512dc7",
+        "prompt.txt": "6681151bfde67682fb48204eb093e2be38f8cd03132bfcb9e45de0587f11de97",
+        "run.json": "ea11f989cd0feb5a809d39f9f085a12f1c77718e79b6c0b26c437c399b9678f7",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "bae4e100929445abdb0945ce8a01b7cb2777c99a408a80db030bcd7ace08073c"
+      },
+      "native_session_ids": [
+        "ses_ee9042b18ffe95hHPwcW91NiGc"
+      ],
+      "fixture_revision": "bcd0c8ddec85384ab3c9b728e10c6deca7a14d90"
+    },
+    {
+      "runtime": "opencode",
+      "scenario": "bug",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "ccc86fed6daed6048e120b82f8d17d77aaea61a3a2e591597ca821dd66c6e582",
+      "provider": "OpenAI ChatGPT subscription (native openai)",
+      "model": "openai/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:30:36.012834+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.18.31",
+      "skill_fingerprints": {
+        "bug-hunter": "458dcc4ecac07afe4ff973d994c4c330bb4dde43ce37f8ce60b473f0bd5ff847",
+        "prove-it": "e49267fc169e789f52aaa1a67653ae4a6fb31f69704c1c67e756641e0f7c533e"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node_modules/opencode-ai/bin/opencode.exe",
+        "run",
+        "Follow the attached evaluation task.",
+        "--pure",
+        "--format",
+        "json",
+        "--auto",
+        "--model",
+        "openai/gpt-6-luna",
+        "--variant",
+        "medium",
+        "--dir",
+        "<EVALUATION>\\openai-1\\workspaces\\opencode\\bug\\baseline",
+        "--file",
+        "<EVALUATION>\\openai-1\\results\\opencode\\bug\\baseline\\prompt.txt"
+      ],
+      "usage": {
+        "total": 142894,
+        "input": 20503,
+        "output": 2404,
+        "reasoning": 179,
+        "cache_write": 0,
+        "cache_read": 119808
+      },
+      "actual_model": null,
+      "event_count": 48,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "quote assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " quote.py | 3 +--\n 1 file changed, 1 insertion(+), 2 deletions(-)\n",
+      "elapsed_seconds": 82.745,
+      "finished_at": "2026-10-07T15:31:58.758133+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Compared cached and uncached bulk inputs before editing, retained the contradictory cache observation, isolated the quantity-minus-one calculation, and checked original inputs after the fix. Independent result oracle passed."
+      },
+      "raw_location": ".evaluation/openai-1/results/opencode/bug/baseline",
+      "raw_sha256": {
+        "final.md": "8d3f59585a84fb53cdbbfcd77c7ef239d54345a5bd56e0e711420eb98a9705f8",
+        "prompt.txt": "24a04d50d1630360a58be7fabaa1343f8897f615e1ad5018807d14e4d8831aea",
+        "run.json": "2baabf29eae4393f06f3f84b8fc35e6c70bf7d417337202ad70d1984bbcbfb73",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "e24e50d2b3168a9de61a577ce1eab565ac8c8f4052a6943c6ac944db88131bc0"
+      },
+      "native_session_ids": [
+        "ses_ee903079effehsDNG9ZWJ1SVVt"
+      ],
+      "fixture_revision": "e9b70e3bfc3d3b1b254d59ffc3a0f9ceb9712882"
+    },
+    {
+      "runtime": "opencode",
+      "scenario": "bug",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "2c7f65d243d36b8a1dbe17e041160b045a1c4ff2",
+      "runner_sha256": "ccc86fed6daed6048e120b82f8d17d77aaea61a3a2e591597ca821dd66c6e582",
+      "provider": "OpenAI ChatGPT subscription (native openai)",
+      "model": "openai/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:31:59.187380+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.18.31",
+      "skill_fingerprints": {
+        "bug-hunter": "57ba7154fc41c3a36892dd3741ff889272e0ced4a6386213e4bff08cf7f33fa1",
+        "prove-it": "0c6a74eca9cbf73dcd7cca0e73cb01bf0d2b520526321463b957c2ad89b21d64"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node_modules/opencode-ai/bin/opencode.exe",
+        "run",
+        "Follow the attached evaluation task.",
+        "--pure",
+        "--format",
+        "json",
+        "--auto",
+        "--model",
+        "openai/gpt-6-luna",
+        "--variant",
+        "medium",
+        "--dir",
+        "<EVALUATION>\\openai-1\\workspaces\\opencode\\bug\\candidate",
+        "--file",
+        "<EVALUATION>\\openai-1\\results\\opencode\\bug\\candidate\\prompt.txt"
+      ],
+      "usage": {
+        "total": 180032,
+        "input": 31745,
+        "output": 2539,
+        "reasoning": 340,
+        "cache_write": 0,
+        "cache_read": 145408
+      },
+      "actual_model": null,
+      "event_count": 54,
+      "exit_code": 0,
+      "oracle": {
+        "status": "passed",
+        "exit_code": 0,
+        "stdout": "quote assertions passed\n",
+        "stderr": ""
+      },
+      "working_tree_diff": " quote.py | 3 +--\n 1 file changed, 1 insertion(+), 2 deletions(-)\n",
+      "elapsed_seconds": 127.871,
+      "finished_at": "2026-10-07T15:34:07.058757+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Compared cached and uncached bulk inputs before editing, retained the contradictory cache observation, isolated the quantity-minus-one calculation, and checked original inputs after the fix. Independent result oracle passed."
+      },
+      "raw_location": ".evaluation/openai-1/results/opencode/bug/candidate",
+      "raw_sha256": {
+        "final.md": "0227099fd9e57d15bd40c49740ad7bb312238f34a2eeb551090ca09012fabb3c",
+        "prompt.txt": "e8fb6640c2a0ecfc563b00a2efc9a26bd4b6cb3acfd0737e4582b1e1b4361828",
+        "run.json": "d9fd6cc5a72d9575be0a762751789c4e5c149581de01f537ebaa0e3bdd6b258b",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "f25fdb75f87fbe441ef505ad16f606543a4d0280b2c02ef848452fe3f7f73847"
+      },
+      "native_session_ids": [
+        "ses_ee901c2cfffe6R1z4J690zgqg1"
+      ],
+      "fixture_revision": "4375b08e9bd11b8259ae8e50038fecfa26493a79"
+    },
+    {
+      "runtime": "opencode",
+      "scenario": "council",
+      "variant": "baseline",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "e992ae750e29c48dbf44ae6fbf8a553ce3a4af47",
+      "runner_sha256": "ccc86fed6daed6048e120b82f8d17d77aaea61a3a2e591597ca821dd66c6e582",
+      "provider": "OpenAI ChatGPT subscription (native openai)",
+      "model": "openai/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:34:07.513459+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.18.31",
+      "skill_fingerprints": {
+        "council": "436ae5e6a36735368f7236e4dc73bfbbf156b597081189bf2f02a12ff255f6b0"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node_modules/opencode-ai/bin/opencode.exe",
+        "run",
+        "Follow the attached evaluation task.",
+        "--pure",
+        "--format",
+        "json",
+        "--auto",
+        "--model",
+        "openai/gpt-6-luna",
+        "--variant",
+        "medium",
+        "--dir",
+        "<EVALUATION>\\openai-1\\workspaces\\opencode\\council\\baseline",
+        "--file",
+        "<EVALUATION>\\openai-1\\results\\opencode\\council\\baseline\\prompt.txt"
+      ],
+      "usage": {
+        "total": 81300,
+        "input": 19594,
+        "output": 1621,
+        "reasoning": 181,
+        "cache_write": 0,
+        "cache_read": 59904
+      },
+      "actual_model": null,
+      "event_count": 32,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 59.582,
+      "finished_at": "2026-10-07T15:35:07.095552+00:00",
+      "review": {
+        "verdict": "fail",
+        "observations": "Finding checks, preserved disagreement and truthful CLI failures were observed, but the fallback did not include a complete ready-to-paste packet. This baseline failure is a comparison, not a candidate release failure."
+      },
+      "raw_location": ".evaluation/openai-1/results/opencode/council/baseline",
+      "raw_sha256": {
+        "final.md": "c0a1423b8ec0222894b7c420716a96cce463b12a72391cb412967c4058d40568",
+        "prompt.txt": "e02446934a03a15512f527bbc9346d75f08a401f601638db9ea483b4edc8415d",
+        "run.json": "ceeaeef12e3eb6094ebe0b48e28d89c5dc51bb25aeee2e15c89f342ea9fbcd3a",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "d4f23f419649502d13ed36bb232dd87f6b4d032307809faf34504fbdb84413e8"
+      },
+      "native_session_ids": [
+        "ses_ee8ffcfd7ffeUgWXFnhcFz3S8e"
+      ],
+      "fixture_revision": "0090ffe5fbbdd9ffbde3d0ab0b0d6b447a015cf9",
+      "council_inputs_preserved": true
+    },
+    {
+      "runtime": "opencode",
+      "scenario": "council",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "ccc86fed6daed6048e120b82f8d17d77aaea61a3a2e591597ca821dd66c6e582",
+      "provider": "OpenAI ChatGPT subscription (native openai)",
+      "model": "openai/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:36:16.229521+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.18.31",
+      "skill_fingerprints": {
+        "council": "8017289c1ce9d546b5083b76c93baa10fc4247b26eaf726a8626c77b648fdebf"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node_modules/opencode-ai/bin/opencode.exe",
+        "run",
+        "Follow the attached evaluation task.",
+        "--pure",
+        "--format",
+        "json",
+        "--auto",
+        "--model",
+        "openai/gpt-6-luna",
+        "--variant",
+        "medium",
+        "--dir",
+        "<EVALUATION>\\council-final\\workspaces\\opencode\\council\\candidate",
+        "--file",
+        "<EVALUATION>\\council-final\\results\\opencode\\council\\candidate\\prompt.txt"
+      ],
+      "usage": {
+        "total": 110725,
+        "input": 13974,
+        "output": 2817,
+        "reasoning": 238,
+        "cache_write": 0,
+        "cache_read": 93696
+      },
+      "actual_model": null,
+      "event_count": 39,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 96.483,
+      "finished_at": "2026-10-07T15:37:52.712068+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Preserved original synthetic reports and scoped code; reproduced the numeric dispute, rejected unsupported SQL injection, separated aggregator findings and exit-78 availability errors, and retained a complete manual fallback packet."
+      },
+      "raw_location": ".evaluation/council-final/results/opencode/council/candidate",
+      "raw_sha256": {
+        "final.md": "611910c6c6363d33dfcadaf725008082cfe5b3c033e872e1a463f0a27dd5e1ce",
+        "prompt.txt": "fa845a03221c289f6cdc79ee2f4db943fefec686fec79a2361aa4efe8d6500aa",
+        "run.json": "cdbd31d0b36b478316d5bcfed31a620e1e0bb98dd939c5ad739ba7ebcf9cc6f2",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "756008c2c79229d765b9aaa3da7acc09a1e1a1dea50cc45679f84fc1b124b4c3"
+      },
+      "native_session_ids": [
+        "ses_ee8fdd314ffemSnvVrbX3psfHR"
+      ],
+      "fixture_revision": "e154c8a68d94814c635f9e00f01917d1517d723b",
+      "council_inputs_preserved": true
+    },
+    {
+      "runtime": "opencode",
+      "scenario": "verifier",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "ccc86fed6daed6048e120b82f8d17d77aaea61a3a2e591597ca821dd66c6e582",
+      "provider": "OpenAI ChatGPT subscription (native openai)",
+      "model": "openai/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:36:11.052842+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.18.31",
+      "skill_fingerprints": {
+        "create-verifier": "19e7a3038944feb2e1968400ea3513d798085fc92bf2c2a3987751d840a8811f"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node_modules/opencode-ai/bin/opencode.exe",
+        "run",
+        "Follow the attached evaluation task.",
+        "--pure",
+        "--format",
+        "json",
+        "--auto",
+        "--model",
+        "openai/gpt-6-luna",
+        "--variant",
+        "medium",
+        "--dir",
+        "<EVALUATION>\\openai-1\\workspaces\\opencode\\verifier\\candidate",
+        "--file",
+        "<EVALUATION>\\openai-1\\results\\opencode\\verifier\\candidate\\prompt.txt"
+      ],
+      "usage": {
+        "total": 120155,
+        "input": 35929,
+        "output": 2704,
+        "reasoning": 114,
+        "cache_write": 0,
+        "cache_read": 81408
+      },
+      "actual_model": null,
+      "event_count": 40,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 100.762,
+      "finished_at": "2026-10-07T15:37:51.814574+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "Created only the requested target with valid local references and all five guide sections; reused the unchanged existing harness for a real create/list/persistence feature and durable cleanup receipts."
+      },
+      "raw_location": ".evaluation/openai-1/results/opencode/verifier/candidate",
+      "raw_sha256": {
+        "final.md": "a86cc0bd1d9bc21d96bee688a89b43ea470c96cf3cec0213d3377b529d43c825",
+        "prompt.txt": "3c3949508acccdda0eb52d0debf1541770a16e95745f7d9b25689bbca574f4f6",
+        "run.json": "13763b2038a30115e07ebefda04c63464eced449dc67610718b1e5214ad969a1",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "56fd95a6391ee9e642ed86fc5defbc8eed5acb097642393293ad82c9d0f32344"
+      },
+      "native_session_ids": [
+        "ses_ee8fdeaadffeLRiD1PnVDHEKur"
+      ],
+      "fixture_revision": "77873d2d8d20e8c8815400758b398a08ae8bf249"
+    },
+    {
+      "runtime": "opencode",
+      "scenario": "handoff",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "41514686819ccea65d39c0a1585fb155fbe2a478",
+      "runner_sha256": "ccc86fed6daed6048e120b82f8d17d77aaea61a3a2e591597ca821dd66c6e582",
+      "provider": "OpenAI ChatGPT subscription (native openai)",
+      "model": "openai/gpt-6-luna",
+      "effort": "medium",
+      "started_at": "2026-10-07T15:37:52.231746+00:00",
+      "status": "completed_needs_review",
+      "auth_method": "existing Codex ChatGPT access token; native provider; child environment only; no refresh",
+      "version": "1.18.31",
+      "skill_fingerprints": {
+        "verify-project": "4f71b908924e99f937227de5be5ea7015f4b4072d4bcb413622e0bb48a2d5d9d"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node_modules/opencode-ai/bin/opencode.exe",
+        "run",
+        "Follow the attached evaluation task.",
+        "--pure",
+        "--format",
+        "json",
+        "--auto",
+        "--model",
+        "openai/gpt-6-luna",
+        "--variant",
+        "medium",
+        "--dir",
+        "<EVALUATION>\\openai-1\\workspaces\\opencode\\verifier\\candidate",
+        "--file",
+        "<EVALUATION>\\openai-1\\results\\opencode\\handoff\\candidate\\prompt.txt"
+      ],
+      "usage": {
+        "total": 34863,
+        "input": 10193,
+        "output": 547,
+        "reasoning": 59,
+        "cache_write": 0,
+        "cache_read": 24064
+      },
+      "actual_model": null,
+      "event_count": 17,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 40.622,
+      "finished_at": "2026-10-07T15:38:32.853993+00:00",
+      "review": {
+        "verdict": "pass",
+        "observations": "A distinct native CLI session loaded the generated guide/references, executed a fresh feature input, saved new receipts, and verified process/data cleanup plus surviving evidence."
+      },
+      "raw_location": ".evaluation/openai-1/results/opencode/handoff/candidate",
+      "raw_sha256": {
+        "final.md": "dab3554f33e1d6056f1196551efef3c48c354aa4d5d65140dd8829a846d0bc2d",
+        "prompt.txt": "082eb336e7f2ca36ace8c6aa99c7ded018a6123940151bc8dffd86b834b39b94",
+        "run.json": "8e75e7518e8dffa52a04d382bdb39d3a725ed175d3b1660289ca83c54aa3d610",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout.jsonl": "99b24904addaf42a4a8a3b285a146a7fa768f17c6b6c276828cf1084632dc1d1"
+      },
+      "native_session_ids": [
+        "ses_ee8fc638effenbt8bcUkT8SIOF"
+      ],
+      "fixture_revision": "77873d2d8d20e8c8815400758b398a08ae8bf249"
+    }
+  ],
+  "excluded_or_superseded": [
+    {
+      "raw_location": ".evaluation/codex-verifier-scoped/results/codex/handoff/candidate",
+      "runtime": "codex",
+      "scenario": "handoff",
+      "variant": "candidate",
+      "status": "blocked",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "elapsed_seconds": 0.0,
+      "reason": "Environment retry blocked: native elevated Windows sandbox rejects writable descendants under read-only carveouts before shell starts. The --add-dir attempt is not a runner default.",
+      "run_sha256": "1cf228e592e97be1763bfdbe47ab1aa8dc3753f6cb720277601e0c54970a73af"
+    },
+    {
+      "raw_location": ".evaluation/codex-verifier-scoped/results/codex/verifier/candidate",
+      "runtime": "codex",
+      "scenario": "verifier",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "elapsed_seconds": 52.167,
+      "reason": "Environment retry blocked: native elevated Windows sandbox rejects writable descendants under read-only carveouts before shell starts. The --add-dir attempt is not a runner default.",
+      "run_sha256": "cbe52833b08f3b52825dd63053090f171057f5026aa07b498d67f5d8f374ac5b"
+    },
+    {
+      "raw_location": ".evaluation/council-final/results/codex/council/candidate",
+      "runtime": "codex",
+      "scenario": "council",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "elapsed_seconds": 272.283,
+      "reason": "Protocol deviation: native sandbox reconstructed PATH and reached a global reviewer. Raw actual live result/error retained; explicit controlled-wrapper pair supersedes it.",
+      "run_sha256": "c9b8b80071e01c05a7445a0ee367df5fe9f06ca472272d8aa2d62198e0283553"
+    },
+    {
+      "raw_location": ".evaluation/council-final/results/pi/council/candidate",
+      "runtime": "pi",
+      "scenario": "council",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "elapsed_seconds": 39.21,
+      "reason": "Superseded: attachment/path invocation left an incomplete fallback or an unexecuted numeric dispute; final lane uses verified native /skill expansion.",
+      "run_sha256": "258ec7d8b08d9f291d85d09e3ea733900abdffa2e66dfc282e58b6bc710e3bd6"
+    },
+    {
+      "raw_location": ".evaluation/live-1/results/claude/council/candidate",
+      "runtime": "claude",
+      "scenario": "council",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "claude.ai firstParty",
+      "model": "claude-sonnet-5-5",
+      "elapsed_seconds": 25.512,
+      "reason": "Superseded after a focused instruction, invocation, or controlled CLI-boundary correction.",
+      "run_sha256": "87c8b55e9f5fdeaf1c9fe5a6fc31cb8c66d01506dddbba6ab8d6bdc897f5b9a0"
+    },
+    {
+      "raw_location": ".evaluation/live-1/results/codex/small/baseline",
+      "runtime": "codex",
+      "scenario": "small",
+      "variant": "baseline",
+      "status": "blocked",
+      "provider": "ChatGPT account",
+      "model": "gpt-6.1-sol",
+      "elapsed_seconds": 20.946,
+      "reason": "Setup blocked: selected model unsupported by this native ChatGPT CLI account; no skill result.",
+      "run_sha256": "75ac35d8acff10eddaf87b3154863ace3c2fb3a2cd4fb8986693533f77c66f39"
+    },
+    {
+      "raw_location": ".evaluation/live-1/results/opencode/small/baseline",
+      "runtime": "opencode",
+      "scenario": "small",
+      "variant": "baseline",
+      "status": "blocked",
+      "provider": "opencode-go",
+      "model": "opencode-go/gpt-6-luna",
+      "elapsed_seconds": 3.857,
+      "reason": "Excluded: user specified OpenAI for Pi/OpenCode. Active Go trials were stopped and partial output retained.",
+      "run_sha256": "affb6cc9823c8b6f7d538e5a1113145313a9c58c0b44430848c706bbe90d78b0"
+    },
+    {
+      "raw_location": ".evaluation/live-1/results/pi/api/baseline",
+      "runtime": "pi",
+      "scenario": "api",
+      "variant": "baseline",
+      "status": "completed_needs_review",
+      "provider": "opencode-go",
+      "model": "opencode-go/gpt-6-luna",
+      "elapsed_seconds": 39.559,
+      "reason": "Excluded: user specified OpenAI for Pi/OpenCode. Active Go trials were stopped and partial output retained.",
+      "run_sha256": "c2a748087e6ed84b98adf8cb422a1274de9b07ef6c05ea47bf28e15989d2b80f"
+    },
+    {
+      "raw_location": ".evaluation/live-1/results/pi/api/candidate",
+      "runtime": "pi",
+      "scenario": "api",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "opencode-go",
+      "model": "opencode-go/gpt-6-luna",
+      "elapsed_seconds": 47.767,
+      "reason": "Excluded: user specified OpenAI for Pi/OpenCode. Active Go trials were stopped and partial output retained.",
+      "run_sha256": "3cd6b9a26625c08b8d8f2d33f9a629b317a6b41583ee6e3d08f2ec9d7ecda98a"
+    },
+    {
+      "raw_location": ".evaluation/live-1/results/pi/bug/baseline",
+      "runtime": "pi",
+      "scenario": "bug",
+      "variant": "baseline",
+      "status": "completed_needs_review",
+      "provider": "opencode-go",
+      "model": "opencode-go/gpt-6-luna",
+      "elapsed_seconds": 48.19,
+      "reason": "Excluded: user specified OpenAI for Pi/OpenCode. Active Go trials were stopped and partial output retained.",
+      "run_sha256": "933ab8d1c6f62b38c59392c29f6234206d9373ed21e3bfc3d14339446e505e56"
+    },
+    {
+      "raw_location": ".evaluation/live-1/results/pi/bug/candidate",
+      "runtime": "pi",
+      "scenario": "bug",
+      "variant": "candidate",
+      "status": "blocked",
+      "provider": "opencode-go",
+      "model": "opencode-go/gpt-6-luna",
+      "elapsed_seconds": 11.321,
+      "reason": "Excluded: user specified OpenAI for Pi/OpenCode. Active Go trials were stopped and partial output retained.",
+      "run_sha256": "cdc34c6ab2e0195ac5b1d494cd22a24fcdd0fcda27067390e15595a4803063a7"
+    },
+    {
+      "raw_location": ".evaluation/live-1/results/pi/small/baseline",
+      "runtime": "pi",
+      "scenario": "small",
+      "variant": "baseline",
+      "status": "completed_needs_review",
+      "provider": "opencode-go",
+      "model": "opencode-go/gpt-6-luna",
+      "elapsed_seconds": 24.153,
+      "reason": "Excluded: user specified OpenAI for Pi/OpenCode. Active Go trials were stopped and partial output retained.",
+      "run_sha256": "a97acb836d0d83fc3ba8574c2e36c7d1b8aa108f851ab5edcdc7ac30fbfb936c"
+    },
+    {
+      "raw_location": ".evaluation/live-1/results/pi/small/candidate",
+      "runtime": "pi",
+      "scenario": "small",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "opencode-go",
+      "model": "opencode-go/gpt-6-luna",
+      "elapsed_seconds": 23.761,
+      "reason": "Excluded: user specified OpenAI for Pi/OpenCode. Active Go trials were stopped and partial output retained.",
+      "run_sha256": "13182f7da4aa2cda50d6080c16af8016d5cb56ee92a0f498c6e9495d5cfb6c89"
+    },
+    {
+      "raw_location": ".evaluation/live-2/results/codex/api/baseline",
+      "runtime": "codex",
+      "scenario": "api",
+      "variant": "baseline",
+      "status": "completed_needs_review",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "elapsed_seconds": 67.927,
+      "reason": "Setup blocked: isolated Windows profile caused shell policy rejection; no valid skill evaluation.",
+      "run_sha256": "c9c888e8fdfdf0716adea2c92679c4192aa691f79f37cf56128e3eca7b1c20b0"
+    },
+    {
+      "raw_location": ".evaluation/live-2/results/codex/api/candidate",
+      "runtime": "codex",
+      "scenario": "api",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "elapsed_seconds": 29.513,
+      "reason": "Setup blocked: isolated Windows profile caused shell policy rejection; no valid skill evaluation.",
+      "run_sha256": "07533f3c73f5f499d318f5d0d8ee8c368827e9830ad2f21e3e5671d585a53c9b"
+    },
+    {
+      "raw_location": ".evaluation/live-2/results/codex/small/baseline",
+      "runtime": "codex",
+      "scenario": "small",
+      "variant": "baseline",
+      "status": "completed_needs_review",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "elapsed_seconds": 33.459,
+      "reason": "Setup blocked: isolated Windows profile caused shell policy rejection; no valid skill evaluation.",
+      "run_sha256": "ec55b3eed262dfc56851bc585f2f4a80d692db6b565692fd1a323e8a9cd8415b"
+    },
+    {
+      "raw_location": ".evaluation/live-2/results/codex/small/candidate",
+      "runtime": "codex",
+      "scenario": "small",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "elapsed_seconds": 47.153,
+      "reason": "Setup blocked: isolated Windows profile caused shell policy rejection; no valid skill evaluation.",
+      "run_sha256": "1712927d711ce6931427aa08728925dd9829f5694a0fa19b12fe9eb3983dd033"
+    },
+    {
+      "raw_location": ".evaluation/live-2/results/opencode/api/baseline",
+      "runtime": "opencode",
+      "scenario": "api",
+      "variant": "baseline",
+      "status": "completed_needs_review",
+      "provider": "opencode-go",
+      "model": "opencode-go/gpt-6-luna",
+      "elapsed_seconds": 86.606,
+      "reason": "Excluded: user specified OpenAI for Pi/OpenCode. Active Go trials were stopped and partial output retained.",
+      "run_sha256": "a317c87d3d93f5ad2b6d789c406ef00d2102c47e30449643001abe81aee064e8"
+    },
+    {
+      "raw_location": ".evaluation/live-2/results/opencode/api/candidate",
+      "runtime": "opencode",
+      "scenario": "api",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "opencode-go",
+      "model": "opencode-go/gpt-6-luna",
+      "elapsed_seconds": 109.467,
+      "reason": "Excluded: user specified OpenAI for Pi/OpenCode. Active Go trials were stopped and partial output retained.",
+      "run_sha256": "7ca1b9e581af7d8291f95deeb44c2c4a23fa2a2bbc4df5e184e66de47cad957c"
+    },
+    {
+      "raw_location": ".evaluation/live-2/results/opencode/bug/baseline",
+      "runtime": "opencode",
+      "scenario": "bug",
+      "variant": "baseline",
+      "status": "blocked",
+      "provider": "opencode-go",
+      "model": "opencode-go/gpt-6-luna",
+      "elapsed_seconds": 61.679,
+      "reason": "Excluded: user specified OpenAI for Pi/OpenCode. Active Go trials were stopped and partial output retained.",
+      "run_sha256": "34b5624bb04a629ad8f3fb552580237cccb8ac24641eb281842e34638a270c34"
+    },
+    {
+      "raw_location": ".evaluation/live-2/results/opencode/small/baseline",
+      "runtime": "opencode",
+      "scenario": "small",
+      "variant": "baseline",
+      "status": "completed_needs_review",
+      "provider": "opencode-go",
+      "model": "opencode-go/gpt-6-luna",
+      "elapsed_seconds": 58.232,
+      "reason": "Excluded: user specified OpenAI for Pi/OpenCode. Active Go trials were stopped and partial output retained.",
+      "run_sha256": "239246b126751e435bc99249604dce4b07b42c58e051ffa585450b884c0eb88d"
+    },
+    {
+      "raw_location": ".evaluation/live-2/results/opencode/small/candidate",
+      "runtime": "opencode",
+      "scenario": "small",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "opencode-go",
+      "model": "opencode-go/gpt-6-luna",
+      "elapsed_seconds": 75.283,
+      "reason": "Excluded: user specified OpenAI for Pi/OpenCode. Active Go trials were stopped and partial output retained.",
+      "run_sha256": "1e726dc5cd06a79dc02063135e28d78f0e923014f89616e7e0a6b90847801a16"
+    },
+    {
+      "raw_location": ".evaluation/live-3/results/codex/council/baseline",
+      "runtime": "codex",
+      "scenario": "council",
+      "variant": "baseline",
+      "status": "completed_needs_review",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "elapsed_seconds": 94.68,
+      "reason": "Protocol deviation: native sandbox reconstructed PATH and reached a global reviewer. Raw actual live result/error retained; explicit controlled-wrapper pair supersedes it.",
+      "run_sha256": "d389e09d4a377d3fe3084dfa0e687bfb5f2b9912c6ea2ddcb6c9c90c28d617af"
+    },
+    {
+      "raw_location": ".evaluation/live-3/results/codex/council/candidate",
+      "runtime": "codex",
+      "scenario": "council",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "elapsed_seconds": 124.572,
+      "reason": "Protocol deviation: native sandbox reconstructed PATH and reached a global reviewer. Raw actual live result/error retained; explicit controlled-wrapper pair supersedes it.",
+      "run_sha256": "23a1df912d71bdb5b734489c369d5a43593a5fc1f52b726c65ce04b81caddf2f"
+    },
+    {
+      "raw_location": ".evaluation/live-council-2/results/claude/council/candidate",
+      "runtime": "claude",
+      "scenario": "council",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "claude.ai firstParty",
+      "model": "claude-sonnet-5-5",
+      "elapsed_seconds": 25.033,
+      "reason": "Superseded after a focused instruction, invocation, or controlled CLI-boundary correction.",
+      "run_sha256": "5005476369713852d0a4bd300a35faedfbd4826e6262b8f22747de9e33102867"
+    },
+    {
+      "raw_location": ".evaluation/openai-1/results/opencode/council/candidate",
+      "runtime": "opencode",
+      "scenario": "council",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "OpenAI ChatGPT subscription (native openai)",
+      "model": "openai/gpt-6-luna",
+      "elapsed_seconds": 63.128,
+      "reason": "Superseded after a focused instruction, invocation, or controlled CLI-boundary correction.",
+      "run_sha256": "279eb03a01c8dcb40b3e062b5b677948b04762005b2e9f4403696e403b8d80f5"
+    },
+    {
+      "raw_location": ".evaluation/openai-1/results/pi/small/baseline",
+      "runtime": "pi",
+      "scenario": "small",
+      "variant": "baseline",
+      "status": "blocked",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "elapsed_seconds": 3.124,
+      "reason": "Superseded: fresh final paired lane uses native /skill invocation through stdin, rather than an @file attachment.",
+      "run_sha256": "811e1402565240cc8f5c6e89d95a851288ebf5a05dd42f32dc5e1045758943ea"
+    },
+    {
+      "raw_location": ".evaluation/openai-2/results/pi/api/baseline",
+      "runtime": "pi",
+      "scenario": "api",
+      "variant": "baseline",
+      "status": "completed_needs_review",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "elapsed_seconds": 29.249,
+      "reason": "Superseded: fresh final paired lane uses native /skill invocation through stdin, rather than an @file attachment.",
+      "run_sha256": "37a2c077143f01c3916f4de494157fec15661afb8c22cd1d7b1f7c1ea1e05b9d"
+    },
+    {
+      "raw_location": ".evaluation/openai-2/results/pi/api/candidate",
+      "runtime": "pi",
+      "scenario": "api",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "elapsed_seconds": 31.087,
+      "reason": "Superseded: fresh final paired lane uses native /skill invocation through stdin, rather than an @file attachment.",
+      "run_sha256": "328f012af715d634d78e46a48e48432a0bd538cac2f6c98db8069e63186bcd75"
+    },
+    {
+      "raw_location": ".evaluation/openai-2/results/pi/bug/baseline",
+      "runtime": "pi",
+      "scenario": "bug",
+      "variant": "baseline",
+      "status": "completed_needs_review",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "elapsed_seconds": 60.08,
+      "reason": "Superseded: fresh final paired lane uses native /skill invocation through stdin, rather than an @file attachment.",
+      "run_sha256": "b13703222724b8c9bf027e80514ae933b94a4daee91725a551dad013699d403c"
+    },
+    {
+      "raw_location": ".evaluation/openai-2/results/pi/bug/candidate",
+      "runtime": "pi",
+      "scenario": "bug",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "elapsed_seconds": 41.387,
+      "reason": "Superseded: fresh final paired lane uses native /skill invocation through stdin, rather than an @file attachment.",
+      "run_sha256": "56e6196a3032fbb890cbcfbdb45d11f14bde694a16a4dd78ebb279b760055708"
+    },
+    {
+      "raw_location": ".evaluation/openai-2/results/pi/council/baseline",
+      "runtime": "pi",
+      "scenario": "council",
+      "variant": "baseline",
+      "status": "completed_needs_review",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "elapsed_seconds": 35.779,
+      "reason": "Superseded: attachment/path invocation left an incomplete fallback or an unexecuted numeric dispute; final lane uses verified native /skill expansion.",
+      "run_sha256": "b03dadf0e8f2d3e4f7331853b6426b8ba667c380a173aa27e97e4afcb029b63d"
+    },
+    {
+      "raw_location": ".evaluation/openai-2/results/pi/council/candidate",
+      "runtime": "pi",
+      "scenario": "council",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "elapsed_seconds": 45.662,
+      "reason": "Superseded: attachment/path invocation left an incomplete fallback or an unexecuted numeric dispute; final lane uses verified native /skill expansion.",
+      "run_sha256": "a0de2995d86932a47bb8038a5a62bcf2e3e7d416ee63e5f703b3e7f84f2688ed"
+    },
+    {
+      "raw_location": ".evaluation/openai-2/results/pi/handoff/candidate",
+      "runtime": "pi",
+      "scenario": "handoff",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "elapsed_seconds": 33.339,
+      "reason": "Superseded: fresh final paired lane uses native /skill invocation through stdin, rather than an @file attachment.",
+      "run_sha256": "65ef701028cb3c37083a3cdf75b71ecee1d3428e30fb3fede51d5fbdaac069db"
+    },
+    {
+      "raw_location": ".evaluation/openai-2/results/pi/small/baseline",
+      "runtime": "pi",
+      "scenario": "small",
+      "variant": "baseline",
+      "status": "completed_needs_review",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "elapsed_seconds": 22.221,
+      "reason": "Superseded: fresh final paired lane uses native /skill invocation through stdin, rather than an @file attachment.",
+      "run_sha256": "8b2c7fcd8082b8c5dc4a98f47806ecad24410dc3814c9bcb40635a2d1a26b128"
+    },
+    {
+      "raw_location": ".evaluation/openai-2/results/pi/small/candidate",
+      "runtime": "pi",
+      "scenario": "small",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "elapsed_seconds": 30.735,
+      "reason": "Superseded: fresh final paired lane uses native /skill invocation through stdin, rather than an @file attachment.",
+      "run_sha256": "b38cce5f02929f420ac3f996f684d2393f1ef272ad32f13aac2da23d9fc24193"
+    },
+    {
+      "raw_location": ".evaluation/openai-2/results/pi/verifier/candidate",
+      "runtime": "pi",
+      "scenario": "verifier",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "elapsed_seconds": 44.003,
+      "reason": "Superseded: fresh final paired lane uses native /skill invocation through stdin, rather than an @file attachment.",
+      "run_sha256": "d9a18a2289fcd239d345061c736ca7919f72831a6be6c11c65ce9151c983b0f7"
+    },
+    {
+      "raw_location": ".evaluation/openai-council-2/results/pi/council/candidate",
+      "runtime": "pi",
+      "scenario": "council",
+      "variant": "candidate",
+      "status": "completed_needs_review",
+      "provider": "OpenAI ChatGPT subscription (native openai-codex)",
+      "model": "openai-codex/gpt-6-luna",
+      "elapsed_seconds": 44.17,
+      "reason": "Superseded: attachment/path invocation left an incomplete fallback or an unexecuted numeric dispute; final lane uses verified native /skill expansion.",
+      "run_sha256": "6883790b9e800062540d56d406acaaf5add637b0db303df12f1fca0d5bb6f462"
+    }
+  ]
+}
