@@ -161,6 +161,11 @@ The packet must contain:
 5. Ready-to-paste prompts for each unavailable reviewer.
 6. The exact CLI error that triggered the fallback.
 
+Before calling the packet prepared, check that the full stance and complete
+ready-to-paste prompts are actually present. An ellipsis, `<stance>`, or "use the
+stance from SKILL.md" is not a finished prompt. If the completion report needs
+to stay short, put the complete packet in a retained artifact and link it.
+
 Label it clearly:
 
 ```text
