@@ -70,6 +70,13 @@ and loading the skill. This Windows qualification also tried a narrowly scoped
 `--add-dir`; the native elevated sandbox rejected writable descendants under
 read-only carveouts before shell startup, so that failed option is not a default.
 
+For an explicitly authorized full-access session and a trusted isolated fixture,
+`--codex-sandbox danger-full-access` selects the native CLI policy for that one
+trial. The runner default stays `workspace-write`; the chosen policy is recorded
+in `run.json` and the actual command. This does not qualify protected-path writes
+under the default sandbox. Use a fresh output root, then run generator and handoff
+with the same explicit policy; retain earlier blocked results.
+
 This round uses the existing Claude subscription and OpenAI for Pi/OpenCode.
 `--openai-subscription-auth` reads an already valid Codex ChatGPT access token
 in place and passes it only through the child environment. Pi 1.0.4 uses its

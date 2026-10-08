@@ -77,6 +77,17 @@ class EvaluationSetupTests(unittest.TestCase):
         usage = RUNNER.parse_metrics("opencode", "\n".join(events))["usage"]
         self.assertEqual(usage, {"input": 20, "output": 8, "reasoning": 4, "cache_read": 14, "cache_write": 6})
 
+    def test_codex_full_access_requires_explicit_selection(self):
+        config = {"command": ["codex"], "model": "fixture-model", "effort": "medium"}
+        default = RUNNER.command("codex", config, self.root, self.root / "prompt.txt")
+        self.assertEqual(default[default.index("--sandbox") + 1], "workspace-write")
+        explicit = RUNNER.command("codex", config, self.root, self.root / "prompt.txt", "danger-full-access")
+        self.assertEqual(explicit[explicit.index("--sandbox") + 1], "danger-full-access")
+        self.assertNotIn('windows.sandbox="elevated"', explicit)
+        self.assertNotIn("--dangerously-bypass-approvals-and-sandbox", explicit)
+        with self.assertRaisesRegex(ValueError, "unsupported Codex"):
+            RUNNER.command("codex", config, self.root, self.root / "prompt.txt", "unknown")
+
 
 if __name__ == "__main__":
     unittest.main()

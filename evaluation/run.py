@@ -135,14 +135,16 @@ def environment(runtime, home, original_home, openai_subscription=False, timeout
     return env, secrets
 
 
-def command(runtime, config, workspace, prompt_file):
+def command(runtime, config, workspace, prompt_file, codex_sandbox="workspace-write"):
     base, model, effort = config["command"], config["model"], config["effort"]
     if runtime == "codex":
+        if codex_sandbox not in ("workspace-write", "danger-full-access"):
+            raise ValueError("unsupported Codex evaluation sandbox")
         return base + ["exec", "--ignore-user-config", "--ignore-rules", "--ephemeral", "--json",
                        "--disable", "plugins", "--disable", "apps", "--disable", "memories", "--disable", "hooks", "--disable", "multi_agent",
                        "--enable", "skip_host_skill_discovery",
-                       *( ["-c", 'windows.sandbox="elevated"'] if os.name == "nt" else [] ),
-                       "--sandbox", "workspace-write", "-c", 'approval_policy="never"',
+                       *( ["-c", 'windows.sandbox="elevated"'] if os.name == "nt" and codex_sandbox == "workspace-write" else [] ),
+                       "--sandbox", codex_sandbox, "-c", 'approval_policy="never"',
                        "-c", f'model_reasoning_effort="{effort}"', "--model", model, "--cd", str(workspace), "-"]
     if runtime == "claude":
         return base + ["-p", "--output-format", "stream-json", "--verbose", "--no-session-persistence",
@@ -245,7 +247,7 @@ def call_session(cmd, workspace, env, prompt, timeout):
 
 
 def oracle(scenario, workspace, result_dir):
-    """Independent mechanical checks. Human review of behavior is still required."""
+    """Independent mechanical checks. Transcript review is still required."""
     if scenario == "small":
         code = 'from greeting import greet; assert greet("Ada") == "Hello, Ada!"; print("greeting assertion passed")'
     elif scenario == "api":
@@ -276,6 +278,10 @@ def run(args):
               "started_at": datetime.now(timezone.utc).isoformat(), "status": "blocked"}
     start = time.monotonic()
     try:
+        if args.codex_sandbox != "workspace-write" and args.runtime != "codex":
+            raise RuntimeError("--codex-sandbox applies only to Codex")
+        if args.runtime == "codex":
+            record["sandbox"] = args.codex_sandbox
         if args.openai_subscription_auth:
             expected = {"pi": "openai-codex/", "opencode": "openai/"}.get(args.runtime)
             if not expected or not config["model"].startswith(expected):
@@ -313,7 +319,7 @@ def run(args):
             record["reviewer_boundary"] = "explicit controlled CLI wrappers (native sandbox may reconstruct PATH)"
         prompt_file = result_dir / "prompt.txt"
         prompt_file.write_text(prompt, encoding="utf-8")
-        cmd = command(args.runtime, config, workspace, prompt_file)
+        cmd = command(args.runtime, config, workspace, prompt_file, args.codex_sandbox)
         record["command"] = cmd
         if args.scenario == "council":
             review_unavailable_path(home, env)
@@ -349,5 +355,7 @@ if __name__ == "__main__":
     parser.add_argument("--config", required=True, help="JSON with command/provider/model/effort per runtime; no credentials")
     parser.add_argument("--output", default=str(REPO / ".evaluation"))
     parser.add_argument("--timeout", type=int, default=360)
+    parser.add_argument("--codex-sandbox", choices=("workspace-write", "danger-full-access"), default="workspace-write",
+                        help="explicit Codex policy for authorized isolated-fixture trials; default remains workspace-write")
     parser.add_argument("--openai-subscription-auth", action="store_true", help="reuse configured Codex ChatGPT access in Pi/OpenCode native OpenAI providers, child env only")
     raise SystemExit(run(parser.parse_args()))
