@@ -34,6 +34,11 @@ State one exact claim at a time. Examples:
 
 If the claim is vague, narrow it before evaluating evidence.
 
+For each important claim, name the fact that must be true and a check that can
+make it false. "Compatible API" may require an existing consumer to parse the
+response, while a passing server unit test establishes a different fact. Keep
+this mapping brief; a small edit does not need a separate evidence framework.
+
 Separate symptom resolution, root-cause confirmation, and release readiness.
 Evidence for one does not establish the others.
 
@@ -51,6 +56,12 @@ Pick the strongest matching evidence:
 | Ready for stated release scope | Evidence covers the target revision and relevant release requirements; unresolved gaps limit the verdict. |
 
 Prefer proof that reaches real behavior: repro, workflow, API call, job, targeted test, affected build/check, or manual check with exact input, environment, and observed output. If proof is missing, say so; do not use confidence language.
+
+When an existing `verify-project` skill covers the claim, read its relevant route
+and reference, then use that recipe or its applicable recorded evidence. Check
+the actual assertions: the presence of a verifier, a successful launch, or a
+passing unrelated route is not proof of the changed behavior. If no verifier
+exists, use the project's current harness; creating one is not a prerequisite.
 
 ## 3. Break the proof
 

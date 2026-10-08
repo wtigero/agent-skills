@@ -1,0 +1,2 @@
+2026-10-08T06:44:10.458019Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell
+2026-10-08T06:44:10.478470Z  WARN codex_skills_extension::loader::metadata: ignoring file:///<USER_HOME>/.codex/skills/design-taste-frontend/agents/openai.yaml: invalid openai.yaml: deserializing from YAML containing more than one document is not supported

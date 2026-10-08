@@ -1,0 +1,6 @@
+interface:
+  display_name: "Create Verifier"
+  short_description: "Build a repeatable project verification guide"
+  default_prompt: "Use $create-verifier to build and exercise a verify-project skill for this repository and the requested agent target."
+policy:
+  allow_implicit_invocation: true

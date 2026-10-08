@@ -1,6 +1,6 @@
 interface:
   display_name: "Hold Your Horses"
-  short_description: "Clarify flow before changing code"
+  short_description: "Trace flow, hidden consumers and safety facts"
   default_prompt: "Use $hold-your-horses to clarify the flow before implementing this change."
 
 policy:

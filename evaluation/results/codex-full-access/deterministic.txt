@@ -1,0 +1,13 @@
+Windows Python 3.13.13: 5 evaluation setup tests passed in 0.031s (recorded tool output).
+
+Linux Ubuntu/WSL Python 3.12.3:
+test_codex_full_access_requires_explicit_selection (test_evaluation.EvaluationSetupTests.test_codex_full_access_requires_explicit_selection) ... ok
+test_expired_or_near_expiry_blocks_before_creating_auth_config (test_evaluation.EvaluationSetupTests.test_expired_or_near_expiry_blocks_before_creating_auth_config) ... ok
+test_native_providers_reuse_access_without_persisting_credentials (test_evaluation.EvaluationSetupTests.test_native_providers_reuse_access_without_persisting_credentials) ... ok
+test_opencode_usage_retains_cache_and_reasoning_counters (test_evaluation.EvaluationSetupTests.test_opencode_usage_retains_cache_and_reasoning_counters) ... ok
+test_unrelated_runtime_cannot_receive_subscription_access (test_evaluation.EvaluationSetupTests.test_unrelated_runtime_cannot_receive_subscription_access) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.007s
+
+OK

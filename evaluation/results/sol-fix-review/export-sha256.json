@@ -1,0 +1,16 @@
+{
+  "normalization": "UTF-8 text with LF line endings",
+  "files": {
+    "attempts.json": "0593b85e662cbb5be0f3213b36469395cedb59bbad45ed0fb7206e559d655b88",
+    "descendant-after.json": "fa3a8940a9ae56c9b93f033fc7630f0dda5b52c475698ce35c47237f707734aa",
+    "descendant-before.json": "aa2a777abd330dbccbc29aab28edbcaa7cce2022798e2bb00404a962c8a096a4",
+    "final-final.md": "f1ca882350e6d4c68a4321c93580c3fff86a60572a0e1b346dd0505dcd3f3438",
+    "final-stderr.txt": "b4930e2960f5bb641eddd2ddbf270cd0f80f84f406aa409609c4505b1de09d4e",
+    "follow-up-final.md": "504618842eb8020a0630ecd15de7964b2a905f70939bc3b6f2bb601fc00397be",
+    "follow-up-stderr.txt": "6b7847bb2f9317b1e985857f9193a891756796853e38190c16821fdb8c37ad91",
+    "linux-tests.txt": "1cba3084c64dd8f5032b6b4001b17b80a63a4b1f86b18fb777539584ea1542e2",
+    "windows-tests.txt": "8587c72c96083012c732a9ad7f6df7a62d974c774c5c02ad46a36c2c84f24f02",
+    "yaml-colon-after.json": "412901919219624106d6ede49c3b165223e4a4c01bbb1876b01486ceaf968f1c",
+    "yaml-colon-before.json": "a1eef2506c9e6aef5eb95e231873d1da13a2130c171c7efcd45c1fea5dcf1730"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "runtime": "Pi 1.0.4 native loader",
+  "declaration": "name : prove-it # local copy",
+  "native_names": [
+    "prove-it"
+  ],
+  "installer_name": "alias",
+  "installer_exit": 0
+}

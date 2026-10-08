@@ -1,0 +1,1 @@
+{"scenario": "owned child ignores SIGTERM", "timeout_seconds": 1, "exception": "TimeoutExpired after TERM cleanup grace", "partial_output_available": true, "owned_child_still_running": true, "probe_cleanup_stopped_owned_child": true, "elapsed_seconds": 16.014}

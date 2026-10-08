@@ -2,9 +2,5 @@
 set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
-SCRIPT_DIR="$REPO/scripts"
-
-cd "$REPO"
-"$SCRIPT_DIR/published-skill-dirs.sh" |
-  sed "s|^$REPO/||; s|$|/SKILL.md|" |
-  sort
+source "$REPO/scripts/python.sh"
+exec "$PYTHON" "$REPO/scripts/skills.py" list --repo "$REPO"
