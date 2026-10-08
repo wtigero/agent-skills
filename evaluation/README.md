@@ -97,7 +97,10 @@ Each result retains prompt, actual command, raw stdout/stderr, final report,
 revision, skill fingerprints, CLI version, provider, requested/observed model,
 effort, timestamps, elapsed time and available token usage. Null metrics mean
 unavailable. A timeout stops only the owned CLI process tree and keeps partial
-output. Existing result/workspace paths cannot be overwritten; use a fresh
+output. Windows uses PID-scoped tree termination; POSIX gives the owned process
+group five seconds after SIGTERM, then forces SIGKILL if needed. Invalid config
+or revision setup leaves a blocked `run.json` with the requested baseline ref.
+Existing result/workspace paths cannot be overwritten; use a fresh
 `--output .evaluation/rerun-<reason>` only after a fix or an ambiguous result.
 
 ## Review and gate

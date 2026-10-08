@@ -228,7 +228,7 @@ def parse_metrics(runtime, output):
     return {"usage": usage, "actual_model": actual_model, "final_text": "\n\n".join(final), "event_count": len(events)}
 
 
-def call_session(cmd, workspace, env, prompt, timeout):
+def call_session(cmd, workspace, env, prompt, timeout, terminate_grace=5):
     options = {"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP} if os.name == "nt" else {"start_new_session": True}
     process = subprocess.Popen(cmd, cwd=workspace, env=env, stdin=subprocess.PIPE,
                                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -241,7 +241,19 @@ def call_session(cmd, workspace, env, prompt, timeout):
         if os.name == "nt":
             subprocess.run(["taskkill.exe", "/PID", str(process.pid), "/T", "/F"], capture_output=True, timeout=15)
         else:
-            os.killpg(process.pid, signal.SIGTERM)
+            try:
+                os.killpg(process.pid, signal.SIGTERM)
+            except ProcessLookupError:
+                pass  # The owned group may have exited at the timeout boundary.
+            try:
+                stdout, stderr = process.communicate(timeout=terminate_grace)
+            except subprocess.TimeoutExpired:
+                try:
+                    os.killpg(process.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+            else:
+                return stdout, stderr + f"\nEvaluation timeout after {timeout}s; owned process tree stopped; partial output retained.", None
         stdout, stderr = process.communicate(timeout=15)
         return stdout, stderr + f"\nEvaluation timeout after {timeout}s; owned process tree stopped; partial output retained.", None
 
@@ -264,20 +276,27 @@ def oracle(scenario, workspace, result_dir):
 
 def run(args):
     root = Path(args.output).resolve()
-    config = json.loads(Path(args.config).read_text(encoding="utf-8"))[args.runtime]
     result_dir = root / "results" / args.runtime / args.scenario / args.variant
     if result_dir.exists():
         raise RuntimeError("result already exists; preserve it and select a new output root for a justified rerun")
     result_dir.mkdir(parents=True)
     original_home = Path.home()
     record = {"runtime": args.runtime, "scenario": args.scenario, "variant": args.variant,
-              "baseline_revision": git("rev-parse", args.baseline).decode().strip(),
-              "candidate_revision": git("rev-parse", "HEAD").decode().strip(),
+              "baseline_ref": args.baseline, "baseline_revision": None, "candidate_revision": None,
               "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-              "provider": config["provider"], "model": config["model"], "effort": config["effort"],
               "started_at": datetime.now(timezone.utc).isoformat(), "status": "blocked"}
     start = time.monotonic()
     try:
+        config = json.loads(Path(args.config).read_text(encoding="utf-8"))[args.runtime]
+        if not isinstance(config, dict) or any(not isinstance(config.get(key), str) or not config[key]
+                                               for key in ("provider", "model", "effort")):
+            raise ValueError("runtime config requires nonempty provider/model/effort strings")
+        argv = config.get("command")
+        if not isinstance(argv, list) or not argv or any(not isinstance(arg, str) or not arg for arg in argv):
+            raise ValueError("runtime config command must be a nonempty list of nonempty strings")
+        record.update({key: config[key] for key in ("provider", "model", "effort")})
+        record["baseline_revision"] = git("rev-parse", "--verify", args.baseline + "^{commit}").decode().strip()
+        record["candidate_revision"] = git("rev-parse", "HEAD").decode().strip()
         if args.codex_sandbox != "workspace-write" and args.runtime != "codex":
             raise RuntimeError("--codex-sandbox applies only to Codex")
         if args.runtime == "codex":
@@ -337,7 +356,7 @@ def run(args):
         record["status"] = "completed_needs_review" if exit_code == 0 and final else "blocked"
         record["oracle"] = oracle(args.scenario, workspace, result_dir) if record["status"] != "blocked" else {"status": "not_run"}
         record["working_tree_diff"] = git("diff", "--stat", cwd=workspace).decode("utf-8", "replace")
-    except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as exc:
+    except (OSError, ValueError, KeyError, TypeError, RuntimeError, subprocess.SubprocessError) as exc:
         record["blocker"] = str(exc)
     record["elapsed_seconds"] = round(time.monotonic() - start, 3)
     record["finished_at"] = datetime.now(timezone.utc).isoformat()

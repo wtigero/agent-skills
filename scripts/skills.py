@@ -124,7 +124,7 @@ def project_parents(project):
 
 
 def discovery_roots(runtime, home, codex_home, project, config_home, pi_home):
-    # Shared installation serves the union of Codex, Pi and OpenCode discovery.
+    # Check all consumers of the destination, including OpenCode's Claude root.
     global_roots = {
         "codex": [home / ".agents/skills", codex_home / "skills"],
         "claude": [home / ".claude/skills"],
@@ -139,7 +139,8 @@ def discovery_roots(runtime, home, codex_home, project, config_home, pi_home):
         "opencode": [".agents/skills", ".claude/skills", ".opencode/skills"],
         "kiro": [".kiro/skills"],
     }
-    runtimes = ["codex", "pi", "opencode"] if runtime == "shared" else [runtime]
+    runtimes = {"shared": ["codex", "pi", "opencode"],
+                "claude": ["claude", "opencode"]}.get(runtime, [runtime])
     roots = set()
     for tool in runtimes:
         roots.update(global_roots[tool])
@@ -149,13 +150,39 @@ def discovery_roots(runtime, home, codex_home, project, config_home, pi_home):
 
 
 def declared_name(skill_md):
-    # Portable names are single-line scalars; this is not a general YAML parser.
+    # Read single-line YAML string scalars without a third-party dependency.
+    # Ambiguous YAML must stop preflight rather than hide a possible duplicate.
     content = skill_md.read_text(encoding="utf-8-sig")
     if not content.startswith("---\n"):
         return skill_md.parent.name
-    header = content.split("---", 2)[1]
-    match = re.search(r"^name:\s*([^\n]+)", header, re.MULTILINE)
-    return match.group(1).strip().strip("\"'") if match else skill_md.parent.name
+    closing = re.search(r"^---\s*$", content[4:], re.MULTILINE)
+    if not closing:
+        raise SkillError(f"unclosed skill frontmatter: {skill_md}")
+    header = content[4:4 + closing.start()]
+    matches = re.findall(r"^(?:name|\"name\"|'name'):[ \t]*(.*)$", header, re.MULTILINE)
+    if not matches:
+        return skill_md.parent.name
+    if len(matches) != 1:
+        raise SkillError(f"duplicate name fields: {skill_md}")
+    value = matches[0].strip()
+    if value.startswith("'"):
+        match = re.fullmatch(r"'((?:[^']|'')*)'(?:[ \t]+#.*)?", value)
+        if match:
+            return match[1].replace("''", "'") or skill_md.parent.name
+    elif value.startswith('"'):
+        match = re.fullmatch(r'("(?:[^"\\]|\\.)*")(?:[ \t]+#.*)?', value)
+        if match:
+            try:
+                return json.loads(match[1]) or skill_md.parent.name
+            except ValueError:
+                pass
+    else:
+        value = re.split(r"[ \t]+#", value, maxsplit=1)[0].strip()
+        if not value or value.startswith("#") or value in ("null", "Null", "NULL", "~", "true", "false", "True", "False", "TRUE", "FALSE"):
+            return skill_md.parent.name
+        if value[0] not in "&*!|>{[" and not re.search(r":[ \t]", value):
+            return value
+    raise SkillError(f"cannot safely inspect YAML skill name; use a single-line string scalar: {skill_md}")
 
 
 def discovered_skills(root):

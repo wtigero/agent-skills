@@ -136,6 +136,48 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(before, {p: p.lstat().st_mtime_ns for p in dest.iterdir()})
 
+    def test_shared_claude_overlap_conflicts_in_both_orders(self):
+        for first, second in (("agent", "claude"), ("claude", "agent")):
+            with self.subTest(first=first):
+                self.home = self.base / (first + " first")
+                self.home.mkdir()
+                self.env["HOME"] = self.home.as_posix()
+                result = self.run_install(first, "--copy")
+                self.assertEqual(result.returncode, 0, result.stderr)
+                before = {p: (p.stat().st_mtime_ns, p.read_bytes())
+                          for p in self.destination(first).rglob("*") if p.is_file()}
+                result = self.run_install(second, "--copy", "--replace", "prove-it")
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("duplicate prove-it", result.stderr)
+                self.assertFalse(self.destination(second).exists())
+                self.assertEqual(before, {p: (p.stat().st_mtime_ns, p.read_bytes()) for p in before})
+                result = self.run_install(first, "--copy")
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(result.stdout.count("unchanged "), 6)
+
+    def test_commented_yaml_names_cannot_hide_alias_conflicts(self):
+        old = self.home / ".pi/agent/skills/alias"
+        self.old_skill(old, "prove-it")
+        for scalar in ("prove-it # local copy", "'prove-it' # local copy", '"prove-it" # local copy'):
+            with self.subTest(scalar=scalar):
+                content = f'---\ndescription: "uses --- in prose"\nname: {scalar}\n---\nKeep original.\n'
+                (old / "SKILL.md").write_text(content, encoding="utf-8")
+                result = self.run_install("agent", "--copy")
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("duplicate prove-it", result.stderr)
+                self.assertFalse(self.destination().exists())
+                self.assertEqual((old / "SKILL.md").read_text(encoding="utf-8"), content)
+                self.assertEqual((old / "keep.txt").read_bytes(), b"do not lose this\x00\xff")
+
+    def test_ambiguous_yaml_name_blocks_before_install(self):
+        old = self.home / ".pi/agent/skills/alias"
+        self.old_skill(old, "&alias prove-it")
+        result = self.run_install("agent", "--copy")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("cannot safely inspect YAML skill name", result.stderr)
+        self.assertFalse(self.destination().exists())
+        self.assertEqual((old / "keep.txt").read_bytes(), b"do not lose this\x00\xff")
+
     def test_conflict_preserves_directory_and_installs_nothing(self):
         old = self.destination() / "hold-your-horses"
         self.old_skill(old)

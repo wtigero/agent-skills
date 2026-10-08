@@ -219,6 +219,11 @@ yourself; `--replace` never removes other locations. Linked discovery/backup
 directories are refused to prevent writes reaching the source checkout.
 `CODEX_HOME`, `XDG_CONFIG_HOME` and `PI_CODING_AGENT_DIR` overrides are respected.
 
+Shared and Claude installations check their overlapping OpenCode discovery
+roots in either installation order. Existing skill names may use plain or
+quoted single-line YAML strings with comments. Ambiguous name declarations
+stop preflight for inspection before any installation writes.
+
 ## Use
 
 Start a fresh session after installing. Existing sessions may need a skill reload.

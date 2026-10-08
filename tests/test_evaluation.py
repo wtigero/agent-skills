@@ -4,11 +4,15 @@ import base64
 import importlib.util
 import json
 import os
+import signal
+import subprocess
+import sys
 from pathlib import Path
 import tempfile
 import time
 import unittest
 from unittest.mock import patch
+from types import SimpleNamespace
 
 SPEC = importlib.util.spec_from_file_location("evaluation_runner", Path(__file__).resolve().parents[1] / "evaluation/run.py")
 RUNNER = importlib.util.module_from_spec(SPEC)
@@ -87,6 +91,73 @@ class EvaluationSetupTests(unittest.TestCase):
         self.assertNotIn("--dangerously-bypass-approvals-and-sandbox", explicit)
         with self.assertRaisesRegex(ValueError, "unsupported Codex"):
             RUNNER.command("codex", config, self.root, self.root / "prompt.txt", "unknown")
+
+    def test_invalid_baseline_leaves_blocked_record_and_preserves_attempt(self):
+        config = self.root / "config.json"
+        config.write_text(json.dumps({"codex": {"command": ["never-execute-provider"],
+                         "provider": "fixture", "model": "fixture", "effort": "medium"}}))
+        args = SimpleNamespace(output=str(self.root / "output"), config=str(config), runtime="codex",
+                               scenario="small", variant="baseline", baseline="missing-fixture-ref")
+        with patch.object(RUNNER, "git", side_effect=subprocess.CalledProcessError(128, "git")), \
+                patch.object(RUNNER, "call_session") as session:
+            self.assertEqual(RUNNER.run(args), 1)
+            session.assert_not_called()
+        record_path = Path(args.output) / "results/codex/small/baseline/run.json"
+        original = record_path.read_bytes()
+        record = json.loads(original)
+        self.assertEqual(record["status"], "blocked")
+        self.assertEqual(record["baseline_ref"], args.baseline)
+        self.assertIsNone(record["baseline_revision"])
+        self.assertIn("128", record["blocker"])
+        with self.assertRaisesRegex(RuntimeError, "preserve it"):
+            RUNNER.run(args)
+        self.assertEqual(record_path.read_bytes(), original)
+
+    def test_invalid_config_leaves_blocked_record(self):
+        config = self.root / "config.json"
+        args = SimpleNamespace(output=str(self.root / "output"), config=str(config), runtime="codex",
+                               scenario="small", variant="candidate", baseline="HEAD")
+        config.write_text('{}')
+        with patch.object(RUNNER, "call_session") as session:
+            self.assertEqual(RUNNER.run(args), 1)
+            session.assert_not_called()
+        record = json.loads((Path(args.output) / "results/codex/small/candidate/run.json").read_text())
+        self.assertEqual(record["status"], "blocked")
+        self.assertIn("codex", record["blocker"])
+
+    @unittest.skipIf(os.name == "nt", "POSIX process-group termination")
+    def test_timeout_forces_owned_group_and_retains_partial_output(self):
+        real_popen = subprocess.Popen
+        owned = []
+        ready = self.root / "child-ready"
+        def start(*args, **kwargs):
+            process = real_popen(*args, **kwargs)
+            owned.append(process)
+            deadline = time.monotonic() + 5
+            while not ready.exists() and process.poll() is None and time.monotonic() < deadline:
+                time.sleep(.01)
+            return process
+        code = ('import os,signal,time; from pathlib import Path; '
+                'signal.signal(signal.SIGTERM, signal.SIG_IGN); '
+                'print("ready-output",flush=True); '
+                f'Path({str(ready)!r}).write_text("ready"); time.sleep(60)')
+        try:
+            with patch.object(RUNNER.subprocess, "Popen", side_effect=start):
+                stdout, stderr, exit_code = RUNNER.call_session(
+                    [sys.executable, "-c", code], self.root, os.environ.copy(), None, .1, terminate_grace=.1)
+            self.assertIsNone(exit_code)
+            self.assertIn("ready-output", stdout)
+            self.assertIn("partial output retained", stderr)
+            self.assertIsNotNone(owned[0].poll())
+            self.assertEqual(owned[0].returncode, -signal.SIGKILL)
+        finally:
+            for process in owned:
+                if process.poll() is None:
+                    if os.getpgid(process.pid) == process.pid:
+                        os.killpg(process.pid, signal.SIGKILL)
+                    else:
+                        process.kill()
+                process.communicate(timeout=5)
 
 
 if __name__ == "__main__":
