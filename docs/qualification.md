@@ -9,8 +9,10 @@ the follow-up does not qualify that configuration.
 
 An [independent Sol static review and executed follow-up](sol-review.md) found
 four reproducible defects in installer discovery and evaluation failure paths.
-They are fixed in `b522a88`; the complete offline suite now passes on Linux and
-Windows/Git Bash. The independent reviewer has not reviewed that fix commit.
+The initial corrections are in `b522a88`. A focused follow-up found two remaining
+cases, fixed in `711ffcc`; the final review found no actionable findings in that
+latest diff. The complete offline suite passes on Linux and Windows/Git Bash.
+All independent reviews are static packet audits; see the report for scope limits.
 
 ## Revision and evidence
 
@@ -80,6 +82,12 @@ Bash 25 passed/5 skipped in 50.224 s, with no failures. The new regression check
 cover both shared/Claude installation orders, commented and ambiguous YAML names,
 durable setup failures and forced POSIX cleanup. See the linked review report
 for logs, skips and the distinction between independent review and fix validation.
+
+The later focused-review corrections add one descendant lifecycle test and three
+YAML formatting subcases. The latest complete suite has 31 tests: Linux 30 passed/
+1 skipped in 8.628 s; Windows/Git Bash 25 passed/6 skipped in 52.550 s, with no
+failures. Both raw outputs and the two fresh reviewer responses are linked in the
+review report. Public skill bytes and behavioral cohorts remain unchanged.
 
 ## Runtime configuration
 

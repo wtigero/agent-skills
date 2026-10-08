@@ -1,0 +1,1 @@
+{"scenario": "parent stops on TERM; descendant ignores TERM and redirects pipes", "returned_exit_code": null, "partial_stdout": "ready\n", "descendant_active_after_return": true, "probe_cleanup_descendant_inactive": true}

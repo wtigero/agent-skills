@@ -4,8 +4,9 @@ The independent Sol static audit of `e5d1d235128582e155394f143cb18003ef465ecb`
 identified three actionable findings and one runtime-dependent concern. The
 implementing agent reproduced all four and fixed them in
 `b522a881831dec3fe5a04d23a918dd6f52fd974a`. The fixes passed the complete offline
-suite on Linux and Windows/Git Bash. Sol has not reviewed the fix commit; this
-report does not grant publication approval.
+suite on Linux and Windows/Git Bash. A subsequent focused review and final
+recheck are recorded below. The latest two corrections have no actionable
+findings in Sol's supplied scope; this report does not grant publication approval.
 
 ## Reviewer record
 
@@ -74,7 +75,7 @@ Executed evidence:
 - [Regression tests](../tests/test_evaluation.py) and
   [installer checks](../tests/test_bundle.py) provide repeatable offline checks.
 
-## Fix validation and remaining limits
+## Initial fix validation and remaining limits
 
 Both complete runs used `python -m unittest discover -s tests -v` on the fix
 source, with temporary HOME and paths containing spaces. CI discovers these tests
@@ -100,3 +101,79 @@ not new behavioral success on the four model runtimes. The existing Codex defaul
 Windows sandbox block and other qualification limits remain as recorded in
 [the qualification report](qualification.md). No push, PR, merge or publication
 was performed. No unresolved disagreement requires Astra escalation at this point.
+
+## Focused follow-up and final recheck
+
+Sol reviewed the four corrections at `279be86` in a fresh read-only session and
+found two remaining cases. Both were reproduced, fixed in
+`711ffcc7aec682f2751d0b652afcf8af8f94f3f5`, and sent for a narrower final review.
+The final reviewer reported **no actionable findings in the latest diff**.
+The complete [follow-up response](../evaluation/results/sol-fix-review/follow-up-final.md)
+and [final response](../evaluation/results/sol-fix-review/final-final.md) preserve
+the original reviewer text and its source-only limits.
+
+Both used Codex CLI 0.161.0, requested `gpt-6.1-sol`, effort `high`, configured
+ChatGPT subscription, fresh ephemeral `read-only` sessions and stdin source
+packets. Zero command-execution events were recorded. Observed model remains
+null because native events did not expose it. No Astra was used.
+
+| Review | Seconds | Native usage: input / cached input / output / reasoning output |
+| --- | --- | --- |
+| Four initial corrections at `279be86` | 127.330 | 41134 / 0 / 3942 / 2779 |
+| Latest two corrections at `711ffcc` | 57.346 | 24015 / 0 / 1552 / 869 |
+
+[Attempt metadata](../evaluation/results/sol-fix-review/attempts.json) retains
+commands, revisions, timing, usage and hashes of all raw prompts/streams. Raw
+packets remain at the recorded ignored `.evaluation/` locations. Native usage
+counters are not additive billing totals. Stderr is preserved for both
+[follow-up](../evaluation/results/sol-fix-review/follow-up-stderr.txt) and
+[final](../evaluation/results/sol-fix-review/final-stderr.txt) sessions.
+
+### Aggregator assessment of the follow-up
+
+These executed checks and conclusions are the implementing agent's assessment,
+separate from the independent reviewers' static findings.
+
+| Finding | Discriminating check | Assessment and correction |
+| --- | --- | --- |
+| F1: blocking, descendant can survive after parent closes pipes (`evaluation/run.py:249-256` at `279be86`) | Linux parent stopped on TERM; its descendant ignored TERM and redirected streams. Before fix the descendant was active after return; after fix it was inactive. Partial `ready` output was retained in both. | Supported. Keep the owned leader unreaped through the grace period, then signal the group with KILL before collecting output. Pipe EOF can no longer bypass group termination. This deliberately waits the grace period even when the leader exits early. |
+| F2: consider, pre-existing space before YAML key colon bypasses detection (`scripts/skills.py:162-164` at `279be86`) | Pi 1.0.4's native loader read `name : prove-it # local copy` as `prove-it`; installer returned the alias folder name. After fix the installer returns `prove-it` and the install regression rejects the duplicate before writes. | Supported for Pi. Accept spaces/tabs before the colon for plain and quoted `name` keys. No new dependency or change to the comment parser. |
+
+Evidence: descendant [before](../evaluation/results/sol-fix-review/descendant-before.json)
+and [after](../evaluation/results/sol-fix-review/descendant-after.json), YAML colon
+[before/native Pi](../evaluation/results/sol-fix-review/yaml-colon-before.json)
+and [after](../evaluation/results/sol-fix-review/yaml-colon-after.json).
+Owned-process probes cleaned up their own fixtures; no process was killed by
+name. The descendant regression checks active execution through Linux `/proc`;
+an inactive orphan zombie awaiting the system reaper is not classified as a
+running descendant. The parser proof invoked no model/provider.
+
+The final static recheck supports the descendant and parser corrections. It
+marks the shared/Claude overlap and failed-setup cases unverified **in its smaller
+packet** because their unchanged implementation was omitted. The preceding
+four-case review supported both statically, and the latest full suite exercises
+both. This packet limit does not replace the earlier assessment or executed
+evidence. No unresolved finding or disagreement remains in the reviewed scope.
+
+### Latest complete offline suite
+
+`python -m unittest discover -s tests -v` ran on the source committed as `711ffcc`:
+
+| Environment | Result | Seconds | Limits |
+| --- | --- | --- | --- |
+| Ubuntu/WSL, Python 3.12.3 | 30 passed, 1 skipped, 0 failed | 8.628 | Windows junction case skipped; both owned-process lifecycle tests passed. |
+| Windows, Python 3.13.13, Git Bash | 25 passed, 6 skipped, 0 failed | 52.550 | Four native symlink privilege cases, one POSIX lifecycle case and one Linux `/proc` case skipped; copy/junction checks passed. |
+
+Complete [Linux log](../evaluation/results/sol-fix-review/linux-tests.txt) and
+[Windows/Git Bash log](../evaluation/results/sol-fix-review/windows-tests.txt),
+with [canonical-LF export hashes](../evaluation/results/sol-fix-review/export-sha256.json).
+The commented-name test now covers six declarations, including all three key
+quoting forms with whitespace before the colon.
+
+The successful four-runtime behavioral evidence is unchanged: no public skill,
+reference, metadata or manifest bytes changed. No model trials were repeated.
+The independent reviews remain static packet audits, not complete repository
+coverage or independent execution of our tests. The default native Windows
+Codex sandbox limitation remains. Remote CI has not run; no push, PR, merge or
+publication was performed. A local PR description is prepared for the next
+authorized remote delivery step.
