@@ -14,6 +14,21 @@ cases, fixed in `711ffcc`; the final review found no actionable findings in that
 latest diff. The complete offline suite passes on Linux and Windows/Git Bash.
 All independent reviews are static packet audits; see the report for scope limits.
 
+## GitHub delivery checks
+
+The sections below retain the pre-delivery qualification evidence. Remote CI is
+now running in [PR #1](https://github.com/wtigero/agent-skills/pull/1). Its initial
+[push run](https://github.com/wtigero/agent-skills/actions/runs/37761373785) and
+[PR run](https://github.com/wtigero/agent-skills/actions/runs/37761379818) passed
+Ubuntu but failed one Windows assertion when native symlink privileges were
+available. Python returned the link target with the Windows `\\?\` prefix;
+the assertion expected an unprefixed path. The installer had preserved the link.
+The test now records `os.readlink(target)` before replacement and compares the
+backup against that exact original value, preserving a stricter link-identity
+check across platforms. No installer or public skill code changed. See the PR
+for the current CI revision and final delivery status; these failed runs remain
+part of the delivery history.
+
 ## Revision and evidence
 
 Branch: `improve-portable-verification`.

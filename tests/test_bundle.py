@@ -210,6 +210,7 @@ class InstallerTests(unittest.TestCase):
         self.old_skill(foreign)
         target = self.destination() / "hold-your-horses"
         self.make_link(target, foreign)
+        original_link_target = os.readlink(target)
         result = self.run_install("agent", "--copy")
         self.assertNotEqual(result.returncode, 0)
         self.assertEqual(target.resolve(), foreign)
@@ -220,7 +221,7 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         backup = next((self.home / ".agents/agent-skills-backups").rglob("hold-your-horses"))
         self.assertTrue(backup.is_symlink())
-        self.assertEqual(os.readlink(backup), str(foreign))
+        self.assertEqual(os.readlink(backup), original_link_target)
 
     def test_duplicate_names_in_user_and_project_roots_are_preserved(self):
         roots = [self.home / ".claude/skills", self.home / ".codex/skills",
