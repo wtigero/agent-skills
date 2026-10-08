@@ -1,0 +1,16 @@
+{
+  "shared_then_claude": {
+    "shared_exit": 0,
+    "claude_exit": 0,
+    "repeat_shared_exit": 1,
+    "repeat_reports_duplicate": true
+  },
+  "invalid_baseline": {
+    "directory_exists": true,
+    "run_record_exists": false
+  },
+  "commented_name": {
+    "installer_name": "prove-it # local copy",
+    "install_exit": 0
+  }
+}

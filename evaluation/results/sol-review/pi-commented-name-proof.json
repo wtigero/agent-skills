@@ -1,0 +1,7 @@
+{
+  "runtime": "Pi 1.0.4 native loader",
+  "declared": "prove-it # local copy",
+  "loaded_names": [
+    "prove-it"
+  ]
+}

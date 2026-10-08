@@ -7,6 +7,11 @@ an explicitly authorized full-access follow-up. Writes to the protected project
 skill target under the default native Windows workspace sandbox remain blocked;
 the follow-up does not qualify that configuration.
 
+An [independent Sol static review and executed follow-up](sol-review.md) found
+four reproducible defects in installer discovery and evaluation failure paths.
+They are fixed in `b522a88`; the complete offline suite now passes on Linux and
+Windows/Git Bash. The independent reviewer has not reviewed that fix commit.
+
 ## Revision and evidence
 
 Branch: `improve-portable-verification`.
@@ -68,9 +73,13 @@ pull request, merge or publication was performed.
 
 After adding the sandbox option, all five offline evaluation-setup tests passed
 on Windows (0.031 s) and Ubuntu/WSL (0.007 s), including the new guard that full
-access requires explicit selection. The current CI suite contains 24 tests; a
-new complete 24-test matrix run is not claimed. Installer/public skill code did
-not change, so its prior full-suite evidence remains applicable.
+access requires explicit selection. That revision contained 24 tests; a full
+24-test matrix was not run at that stage. After the independent review fixes,
+the complete 30-test suite ran: Linux 29 passed/1 skipped in 8.297 s, Windows/Git
+Bash 25 passed/5 skipped in 50.224 s, with no failures. The new regression checks
+cover both shared/Claude installation orders, commented and ambiguous YAML names,
+durable setup failures and forced POSIX cleanup. See the linked review report
+for logs, skips and the distinction between independent review and fix validation.
 
 ## Runtime configuration
 

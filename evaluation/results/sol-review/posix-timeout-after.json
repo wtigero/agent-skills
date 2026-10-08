@@ -1,0 +1,1 @@
+{"scenario": "owned child ignores SIGTERM", "timeout_seconds": 1, "returned_exit_code": null, "retained_stdout": "ready\n", "probe_cleanup_stopped_owned_child": true, "elapsed_seconds": 6.008}

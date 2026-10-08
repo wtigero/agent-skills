@@ -1,0 +1,146 @@
+Act as an unbiased outside auditor. Do not assume the author's intent was
+correct and do not rubber-stamp. Ground every finding in the actual code --
+cite `file:line` or the exact snippet. No invented, generic, or speculative
+findings; mark anything you cannot verify as `unverified`. You may search the
+web to confirm API/library behavior, current best practices, deprecations, or
+security advisories, and cite the source. Frame findings as recommendations
+with rationale and trade-offs (for example, "X is usually better than Y
+because ..."), tagged by severity: `blocking`, `consider`, or `nit`. Separate
+correctness and security issues from style preferences. The author decides --
+do not demand changes. Review only; do not edit anything.
+
+Finding rubric:
+# Finding rubric
+
+Apply these dimensions independently. Confidence does not determine severity.
+
+| Dimension | Required evidence |
+| --- | --- |
+| Evidence | An accessible `file:line`, exact snippet, reproducible result, or version-matched primary source. State the trigger, affected path, and observed or source-derived consequence. Mark unchecked external facts `unverified`. |
+| Severity | `blocking`: a demonstrated correctness/security/contract failure that prevents the stated outcome. `consider`: a relevant risk or improvement with an explicit condition and tradeoff. `nit`: a style or clarity preference with no claimed behavior failure. Explain the impact rather than escalating by tone. |
+| Relevance | Connect the finding to the requested files, change, or acceptance criteria. Distinguish a regression, a pre-existing issue that affects this task, and unrelated work. Do not broaden the scope to justify a finding. |
+
+The aggregator checks every finding against the actual scoped revision, retaining
+the original output even when it is wrong. Use `supported`, `unverified`, or `not
+supported`, with evidence and any remaining uncertainty. If reviewers reach
+different conclusions, show the disputed fact and the check needed to resolve
+it. A vote is not proof. A failed reviewer run is an availability result, not an
+approval or rejection of the code.
+
+When the disputed behavior is runnable in this checkout, execute the smallest
+check that distinguishes the claims and retain its actual output. Repeating a
+reviewer's explanation does not resolve the dispute. If the check cannot run,
+keep that fact `unverified` and state the missing check.
+
+
+Authorized review: Codex/Sol only, independent fresh session, no prior conversation.
+Review the complete committed branch diff from e003656917fbe06d00e23c82a2de3955f7aa66b6
+to e5d1d235128582e155394f143cb18003ef465ecb (improve-portable-verification).
+The working tree is clean; a clean uncommitted diff does not mean there is nothing to review.
+Read CLAUDE.md and applicable project instructions. Review only; do not edit,
+patch, stage, commit, install, push, deploy, or spawn other agents. Do not read
+credentials, global user config, other tasks or ignored .evaluation raw data.
+The committed evaluation/results exports are available for evidence.
+
+Priorities:
+1. scripts/skills.py and Bash entrypoints: manifest validation, duplicate runtime
+   discovery, idempotence, link authenticity, conflict preservation, backup scope,
+   replacements/rollback and Windows/Git Bash paths.
+2. evaluation/run.py: configured-account reuse, child-environment credential
+   handling, secret persistence/redaction, failure paths, process ownership,
+   model/provider selection and sandbox defaults/explicit options.
+3. docs/qualification.md and evaluation/results: claims versus actually recorded
+   evidence, baseline/candidate fairness, manual verdicts versus runner statuses,
+   changed versions/permissions, cleanup/evidence retention, untested coverage.
+Also check public skill instructions, metadata and tests for concrete regressions
+relevant to these priorities. Avoid dumping the entire large evidence JSON:
+read relevant fields/records and investigate actual mismatches.
+
+Check actual code and evidence rather than trusting claims of completion.
+Execute the smallest discriminating READ-ONLY check when it is possible without
+writing project files; use Python -B where needed. If reproducing requires a
+writable scratch directory unavailable in the read-only sandbox, provide the
+exact self-contained reproducer and mark the unexecuted result unverified.
+Do not weaken the sandbox to run checks. Do not invoke reviewer CLIs recursively.
+
+Return findings ordered by impact. Each needs severity (blocking/consider/nit),
+path:line, concrete trigger, consequence, supporting evidence, and the smallest
+verification or suggested correction. Keep speculative/unverified concerns
+separate. State explicitly if there are no actionable findings. Finish with
+material review limits; do not infer a publication approval from a review.
+
+Changed paths:
+M	.claude-plugin/plugin.json
+A	.github/workflows/bundle.yml
+M	.gitignore
+M	README.md
+M	README.th.md
+A	docs/qualification.md
+A	evaluation/README.md
+A	evaluation/fixtures/api/README.md
+A	evaluation/fixtures/api/api.py
+A	evaluation/fixtures/api/reporting/month_end.py
+A	evaluation/fixtures/api/verification/SKILL.md
+A	evaluation/fixtures/api/verification/references/invoice.md
+A	evaluation/fixtures/api/verify_api.py
+A	evaluation/fixtures/bug/README.md
+A	evaluation/fixtures/bug/quote.py
+A	evaluation/fixtures/council/README.md
+A	evaluation/fixtures/council/billing.py
+A	evaluation/fixtures/council/review-evidence/claude.txt
+A	evaluation/fixtures/council/review-evidence/codex.txt
+A	evaluation/fixtures/small/README.md
+A	evaluation/fixtures/small/evidence/earlier-check.json
+A	evaluation/fixtures/small/greeting.py
+A	evaluation/fixtures/small/test_math.py
+A	evaluation/fixtures/verifier/README.md
+A	evaluation/fixtures/verifier/taskapp.py
+A	evaluation/fixtures/verifier/verify.py
+A	evaluation/results/artifacts.json
+A	evaluation/results/codex-full-access/artifacts.json
+A	evaluation/results/codex-full-access/deterministic.txt
+A	evaluation/results/codex-full-access/evidence.md
+A	evaluation/results/codex-full-access/runs.json
+A	evaluation/results/codex-full-access/verifier-receipts.json
+A	evaluation/results/codex-full-access/verifier/SKILL.md
+A	evaluation/results/codex-full-access/verifier/references/create-and-list.md
+A	evaluation/results/codex-full-access/verifier/references/run.ps1
+A	evaluation/results/deterministic.txt
+A	evaluation/results/evidence.md
+A	evaluation/results/runs.json
+A	evaluation/results/verifier-receipts.json
+A	evaluation/results/verifiers/claude/SKILL.md
+A	evaluation/results/verifiers/claude/references/create-and-list-task.md
+A	evaluation/results/verifiers/opencode/SKILL.md
+A	evaluation/results/verifiers/opencode/references/create-and-list.md
+A	evaluation/results/verifiers/pi/SKILL.md
+A	evaluation/results/verifiers/pi/references/create-and-list-task.md
+A	evaluation/run.py
+A	evaluation/runtime.example.json
+A	scripts/install-skills.sh
+A	scripts/link-agent-skills.sh
+M	scripts/link-claude-skills.sh
+M	scripts/link-codex-skills.sh
+M	scripts/link-kiro-skills.sh
+M	scripts/list-skills.sh
+M	scripts/published-skill-dirs.sh
+A	scripts/python.sh
+A	scripts/skills.py
+M	skills/engineering/README.md
+M	skills/engineering/bug-hunter/SKILL.md
+M	skills/engineering/council/SKILL.md
+M	skills/engineering/council/agents/openai.yaml
+A	skills/engineering/council/references/finding-rubric.md
+A	skills/engineering/create-verifier/SKILL.md
+A	skills/engineering/create-verifier/agents/openai.yaml
+A	skills/engineering/create-verifier/references/api.md
+A	skills/engineering/create-verifier/references/cli.md
+A	skills/engineering/create-verifier/references/guide-template.md
+A	skills/engineering/create-verifier/references/web.md
+M	skills/engineering/hold-your-horses/SKILL.md
+M	skills/engineering/hold-your-horses/agents/openai.yaml
+M	skills/engineering/prove-it/SKILL.md
+M	skills/engineering/prove-it/agents/openai.yaml
+A	tests/test_bundle.py
+A	tests/test_evaluation.py
+A	tests/test_fixtures.py
