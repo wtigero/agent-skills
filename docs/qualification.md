@@ -16,8 +16,22 @@ All independent reviews are static packet audits; see the report for scope limit
 
 ## GitHub delivery checks
 
-The sections below retain the pre-delivery qualification evidence. Remote CI is
-now running in [PR #1](https://github.com/wtigero/agent-skills/pull/1). Its initial
+**Current delivery policy:** automatic CI was removed at the user's request.
+The Python suite remains available for manual runs. Earlier CI/review records
+below are historical evidence, not a continuing automatic merge requirement.
+
+The GitHub review of `f899f80` raised six findings. Corrections add retained-file
+literal credential redaction, clean candidate guards and committed source
+archives, commit-keyed baseline caches, indented YAML name recognition,
+transaction-wide installer rollback, and evaluator command resolution before
+reviewer PATH wrappers. Provider-free regressions fail against the earlier code
+and pass after correction. Rollback also preserves concurrent edits and reports
+retained backups if full restoration is impossible. The complete manual suite
+passed: Linux 38 passed/1 skipped (9.332 s), Windows/Git Bash 32 passed/7 skipped
+(53.345 s). Public skill bytes remain unchanged; model trials were not repeated.
+
+The sections below retain the pre-delivery qualification evidence. Remote CI ran
+in [PR #1](https://github.com/wtigero/agent-skills/pull/1). Its initial
 [push run](https://github.com/wtigero/agent-skills/actions/runs/37761373785) and
 [PR run](https://github.com/wtigero/agent-skills/actions/runs/37761379818) passed
 Ubuntu but failed one Windows assertion when native symlink privileges were

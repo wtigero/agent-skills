@@ -57,7 +57,23 @@ def skill_root(runtime):
     return ".claude/skills" if runtime == "claude" else ".agents/skills"
 
 
-def prepare(runtime, scenario, variant, root, baseline):
+def archived_source(root, runtime, revision):
+    revision = git("rev-parse", "--verify", revision + "^{commit}").decode().strip()
+    source = root / "sources" / runtime / revision
+    marker = source / ".agent-skills-revision"
+    if source.exists():
+        if not marker.is_file() or marker.read_text(encoding="utf-8") != revision:
+            raise RuntimeError("incomplete source cache; preserve it and use a new output root")
+    else:
+        archive = git("archive", "--format=zip", revision)
+        source.mkdir(parents=True)
+        with zipfile.ZipFile(io.BytesIO(archive)) as bundle:
+            bundle.extractall(source)
+        marker.write_text(revision, encoding="utf-8")
+    return source
+
+
+def prepare(runtime, scenario, variant, root, baseline, candidate=None):
     case = "verifier" if scenario == "handoff" else scenario
     workspace = root / "workspaces" / runtime / case / variant
     if scenario == "handoff":
@@ -66,15 +82,10 @@ def prepare(runtime, scenario, variant, root, baseline):
         return workspace
     if workspace.exists():
         raise RuntimeError(f"workspace already exists; use a new --output root to preserve earlier evidence: {workspace}")
-    shutil.copytree(REPO / "evaluation/fixtures" / case, workspace)
-    source = REPO
-    if variant == "baseline":
-        source = root / "sources" / runtime / baseline
-        if not source.exists():
-            archive = git("archive", "--format=zip", baseline)
-            source.mkdir(parents=True)
-            with zipfile.ZipFile(io.BytesIO(archive)) as bundle:
-                bundle.extractall(source)
+    candidate = candidate or git("rev-parse", "HEAD").decode().strip()
+    candidate_source = archived_source(root, runtime, candidate)
+    shutil.copytree(candidate_source / "evaluation/fixtures" / case, workspace)
+    source = archived_source(root, runtime, baseline) if variant == "baseline" else candidate_source
     manifest = json.loads((source / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
     for entry in manifest["skills"]:
         src = source / entry
@@ -86,6 +97,72 @@ def prepare(runtime, scenario, variant, root, baseline):
     git("-c", "user.name=Skill evaluation", "-c", "user.email=eval@localhost",
         "-c", "commit.gpgsign=false", "commit", "--quiet", "-m", "Isolated evaluation fixture", cwd=workspace)
     return workspace
+
+
+def resolve_evaluator(argv, env, workspace):
+    executable = argv[0]
+    if os.path.dirname(executable):
+        resolved = Path(executable)
+        if not resolved.is_absolute():
+            resolved = workspace / resolved
+        if not resolved.is_file():
+            raise RuntimeError("configured evaluator executable does not exist")
+    else:
+        found = shutil.which(executable, path=env.get("PATH"))
+        if not found:
+            raise RuntimeError("configured evaluator executable is not on PATH")
+        resolved = Path(found)
+    return [str(resolved.absolute()), *argv[1:]]
+
+
+def redact_text(value, secrets):
+    for secret in secrets:
+        value = value.replace(secret, "[REDACTED]")
+    return value
+
+
+def redact_artifacts(roots, secrets):
+    """Scrub literal access tokens from owned files, including binary evidence.
+
+    Never traverse links into user/global paths. Audit errors block acceptance;
+    continue scrubbing the other owned files before reporting any failure.
+    """
+    needles = [secret.encode("utf-8") for secret in secrets if secret]
+    if not needles:
+        return 0
+    errors, changed = [], 0
+    for root in roots:
+        if root is None or not root.exists():
+            continue
+        if root.is_symlink() or getattr(root, "is_junction", lambda: False)():
+            errors.append("linked artifact root")
+            continue
+        for directory, dirs, files in os.walk(root, followlinks=False, onerror=lambda exc: errors.append(str(exc))):
+            for name in list(dirs) + files:
+                path = Path(directory) / name
+                if path.is_symlink() or getattr(path, "is_junction", lambda: False)():
+                    errors.append("linked retained artifact")
+                    if name in dirs:
+                        dirs.remove(name)
+                    continue
+                if name in dirs:
+                    continue
+                if not path.is_file():
+                    errors.append("nonregular retained artifact")
+                    continue
+                try:
+                    original = path.read_bytes()
+                    scrubbed = original
+                    for needle in needles:
+                        scrubbed = scrubbed.replace(needle, b"[REDACTED]")
+                    if scrubbed != original:
+                        path.write_bytes(scrubbed)
+                        changed += 1
+                except OSError as exc:
+                    errors.append(str(exc))
+    if errors:
+        raise RuntimeError("retained artifact credential audit failed: " + redact_text("; ".join(errors), secrets))
+    return changed
 
 
 def environment(runtime, home, original_home, openai_subscription=False, timeout=360):
@@ -285,6 +362,7 @@ def run(args):
               "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               "started_at": datetime.now(timezone.utc).isoformat(), "status": "blocked"}
     start = time.monotonic()
+    secrets, workspace, home = [], None, None
     try:
         config = json.loads(Path(args.config).read_text(encoding="utf-8"))[args.runtime]
         if not isinstance(config, dict) or any(not isinstance(config.get(key), str) or not config[key]
@@ -296,6 +374,10 @@ def run(args):
         record.update({key: config[key] for key in ("provider", "model", "effort")})
         record["baseline_revision"] = git("rev-parse", "--verify", args.baseline + "^{commit}").decode().strip()
         record["candidate_revision"] = git("rev-parse", "HEAD").decode().strip()
+        if args.variant == "candidate" and git("status", "--porcelain=v1", "--untracked-files=normal").strip():
+            raise RuntimeError("candidate checkout must be clean; commit or preserve changes before evaluating")
+        record["source_policy"] = ("skills and fixtures from recorded commit archives; baseline cache keyed by resolved commit; "
+                                   "handoff reuses the retained generator workspace")
         if args.codex_sandbox != "workspace-write" and args.runtime != "codex":
             raise RuntimeError("--codex-sandbox applies only to Codex")
         if args.runtime == "codex":
@@ -305,10 +387,12 @@ def run(args):
             if not expected or not config["model"].startswith(expected):
                 raise RuntimeError("subscription reuse requires the native OpenAI provider model prefix")
             record["auth_method"] = "existing Codex ChatGPT access token; native provider; child environment only; no refresh"
-        workspace = prepare(args.runtime, args.scenario, args.variant, root, args.baseline)
+        workspace = prepare(args.runtime, args.scenario, args.variant, root,
+                            record["baseline_revision"], record["candidate_revision"])
         home = root / "homes" / args.runtime / args.scenario / args.variant
         home.mkdir(parents=True)
         env, secrets = environment(args.runtime, home, original_home, args.openai_subscription_auth, args.timeout)
+        config["command"] = resolve_evaluator(config["command"], env, workspace)
         version = subprocess.run(config["command"] + ["--version"], env=env, capture_output=True, text=True, timeout=30)
         record["version"] = version.stdout.strip()
         target = skill_root(args.runtime)
@@ -356,10 +440,15 @@ def run(args):
         record["oracle"] = oracle(args.scenario, workspace, result_dir) if record["status"] != "blocked" else {"status": "not_run"}
         record["working_tree_diff"] = git("diff", "--stat", cwd=workspace).decode("utf-8", "replace")
     except (OSError, ValueError, KeyError, TypeError, RuntimeError, subprocess.SubprocessError) as exc:
-        record["blocker"] = str(exc)
+        record["blocker"] = redact_text(str(exc), secrets)
+    try:
+        record["redacted_artifact_files"] = redact_artifacts((workspace, home, result_dir), secrets)
+    except (OSError, RuntimeError) as exc:
+        record["status"] = "blocked"
+        record["blocker"] = redact_text(str(exc), secrets)
     record["elapsed_seconds"] = round(time.monotonic() - start, 3)
     record["finished_at"] = datetime.now(timezone.utc).isoformat()
-    (result_dir / "run.json").write_text(json.dumps(record, indent=2), encoding="utf-8")
+    (result_dir / "run.json").write_text(redact_text(json.dumps(record, indent=2), secrets), encoding="utf-8")
     print(json.dumps({k: record.get(k) for k in ("runtime", "scenario", "variant", "status", "elapsed_seconds", "blocker")}))
     return 0 if record["status"] == "completed_needs_review" else 1
 

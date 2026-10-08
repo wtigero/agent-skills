@@ -251,8 +251,9 @@ effort and budget; these skills do not authorize paid model escalation.
 python -m unittest discover -s tests -v
 ```
 
-The deterministic suite uses temporary HOME directories and runs in CI on Linux
-and Windows/Git Bash. It covers bundle metadata/references, path safety,
+The deterministic suite is run manually on Linux and Windows/Git Bash with
+temporary HOME directories. This repository has no automatic CI workflow.
+It covers bundle metadata/references, path safety,
 fresh/repeated installs, copies, real links, conflicts, backups and preservation.
 It makes no provider calls.
 

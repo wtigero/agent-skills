@@ -11,6 +11,7 @@ import shutil
 import stat
 import sys
 import tempfile
+import textwrap
 from datetime import datetime, timezone
 from uuid import uuid4
 
@@ -159,6 +160,10 @@ def declared_name(skill_md):
     if not closing:
         raise SkillError(f"unclosed skill frontmatter: {skill_md}")
     header = content[4:4 + closing.start()]
+    # YAML permits a uniformly indented top-level mapping; comments need not
+    # share that indentation. Nested keys stay indented after this operation.
+    header = textwrap.dedent("\n".join("" if line.lstrip().startswith("#") else line
+                                     for line in header.splitlines()))
     matches = re.findall(r"^(?:name|\"name\"|'name')[ \t]*:[ \t]*(.*)$", header, re.MULTILINE)
     if not matches:
         return skill_md.parent.name
@@ -261,20 +266,40 @@ def install(args):
                 if not staged.is_symlink() or not matches(staged, source):
                     raise SkillError(f"link is not a real symlink: {name}; retry with --copy")
         dest.mkdir(parents=True, exist_ok=True)
-        for name, _, target, replacing in planned:
-            if exists(target) != replacing:
-                raise SkillError(f"destination changed during installation: {target}; retry after inspection")
-            backup = None
-            if replacing:
-                backup = backup_base / (datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid4().hex[:8]) / name
-                backup.parent.mkdir(parents=True, exist_ok=False)
-                target.rename(backup)  # Same volume; preserves directories and links.
-            try:
+        moved = []
+        try:
+            for name, source, target, replacing in planned:
+                if exists(target) != replacing:
+                    raise SkillError(f"destination changed during installation: {target}; retry after inspection")
+                step = {"name": name, "source": source, "target": target, "backup": None, "installed": False}
+                moved.append(step)
+                if replacing:
+                    backup = backup_base / (datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid4().hex[:8]) / name
+                    backup.parent.mkdir(parents=True, exist_ok=False)
+                    target.rename(backup)  # Same volume; preserves directories and links.
+                    step["backup"] = backup
                 (stage_root / name).rename(target)
-            except OSError:
-                if backup is not None:
-                    backup.rename(target)
-                raise
+                step["installed"] = True
+        except (OSError, SkillError) as exc:
+            failures = []
+            for step in reversed(moved):
+                try:
+                    target, backup = step["target"], step["backup"]
+                    if step["installed"]:
+                        if not matches(target, step["source"]):
+                            raise SkillError(f"rollback target changed; preserving target and backup: {target}")
+                        target.rename(stage_root / step["name"])
+                    if backup is not None:
+                        if exists(target):
+                            raise SkillError(f"rollback target occupied; backup retained: {backup}")
+                        backup.rename(target)
+                except (OSError, SkillError) as failure:
+                    failures.append(str(failure))
+            if failures:
+                raise SkillError(f"installation failed: {exc}; rollback incomplete; " + "; ".join(failures)) from exc
+            raise SkillError(f"installation failed; changes rolled back: {exc}") from exc
+        for step in moved:
+            name, target, backup = step["name"], step["target"], step["backup"]
             if backup is not None:
                 print(f"backup {name} -> {backup}")
             mode = "copied" if args.copy or args.runtime == "kiro" else "linked"

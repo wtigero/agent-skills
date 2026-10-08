@@ -1,10 +1,20 @@
 # Behavioral qualification
 
-This is an **opt-in live evaluation**, separate from deterministic CI. It uses
+This is an **opt-in live evaluation**, separate from the manual offline tests. It uses
 configured provider accounts and consumes their normal quota. Do not add it to
 CI, supply credentials in the config, or introduce a new paid provider. Use the
 user's model/effort choices; default to available Luna/Sol models where supported.
 An Astra escalation needs the existing necessity gate, not just a difficult task.
+
+Candidate runs require a clean checkout. Skills and fixtures are read from the
+recorded commit archives, and baseline caches use resolved commit IDs even when
+the requested ref moves. Handoff reuses the retained generator workspace.
+The primary evaluator executable is resolved before reviewer-unavailability
+wrappers modify PATH. Literal subscription access tokens are redacted from owned
+workspace, home and result files on both session success and failure; links to
+other locations block the artifact audit and are never followed. This literal
+redaction is not a guarantee against arbitrary encoded or deliberately concealed
+credentials. Use fixture-only data and inspect evidence before exporting it.
 
 ## Cases and acceptance
 

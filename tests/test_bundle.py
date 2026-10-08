@@ -181,6 +181,75 @@ class InstallerTests(unittest.TestCase):
         self.assertFalse(self.destination().exists())
         self.assertEqual((old / "keep.txt").read_bytes(), b"do not lose this\x00\xff")
 
+    def test_indented_yaml_name_collides_without_confusing_nested_names(self):
+        old = self.home / ".pi/agent/skills/alias"
+        self.old_skill(old)
+        content = "---\n# comment at column zero\n  name: prove-it\n  description: Existing skill\n---\nKeep original.\n"
+        (old / "SKILL.md").write_text(content, encoding="utf-8")
+        result = self.run_install("agent", "--copy")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("duplicate prove-it", result.stderr)
+        self.assertFalse(self.destination().exists())
+        self.assertEqual((old / "SKILL.md").read_text(encoding="utf-8"), content)
+        (old / "SKILL.md").write_text("---\nname: unrelated\nmetadata:\n  name: prove-it\n---\n", encoding="utf-8")
+        self.assertEqual(SKILLS.declared_name(old / "SKILL.md"), "unrelated")
+
+    def test_late_install_failure_rolls_back_new_and_replaced_skills(self):
+        ordered = SKILLS.manifest_skills(self.repo)
+        original_rename = Path.rename
+        for replacing in (False, True):
+            with self.subTest(replacing=replacing):
+                self.home = self.base / ("replace rollback" if replacing else "new rollback")
+                self.home.mkdir()
+                args = type("Args", (), dict(repo=str(self.repo), home=str(self.home), runtime="shared",
+                            project=str(self.repo), codex_home=None, config_home=None, pi_home=None,
+                            replace=[item[0] for item in ordered] if replacing else [], copy=True))()
+                if replacing:
+                    for name, _, _ in ordered:
+                        self.old_skill(self.destination() / name, name)
+                before = {p.relative_to(self.destination()): p.read_bytes()
+                          for p in self.destination().rglob("*") if p.is_file()}
+                calls = []
+                def fail_later(path, target):
+                    if path.parent.name.startswith(".agent-skills-stage-"):
+                        calls.append(path.name)
+                        if len(calls) == 3:
+                            raise OSError("fixture late target locked")
+                    return original_rename(path, target)
+                with patch.object(Path, "rename", fail_later):
+                    with self.assertRaisesRegex(SKILLS.SkillError, "changes rolled back"):
+                        SKILLS.install(args)
+                self.assertEqual(len(calls), 3)
+                after = {p.relative_to(self.destination()): p.read_bytes()
+                         for p in self.destination().rglob("*") if p.is_file()}
+                self.assertEqual(before, after)
+                self.assertEqual(list(self.home.rglob(".agent-skills-stage-*")), [])
+
+    def test_rollback_preserves_concurrent_edit_and_reports_retained_backup(self):
+        ordered = SKILLS.manifest_skills(self.repo)
+        first = ordered[0][0]
+        for name, _, _ in ordered:
+            self.old_skill(self.destination() / name, name)
+        args = type("Args", (), dict(repo=str(self.repo), home=str(self.home), runtime="shared",
+                    project=str(self.repo), codex_home=None, config_home=None, pi_home=None,
+                    replace=[item[0] for item in ordered], copy=True))()
+        original_rename, calls = Path.rename, []
+        def concurrent_failure(path, target):
+            if path.parent.name.startswith(".agent-skills-stage-"):
+                calls.append(path.name)
+                if len(calls) == 3:
+                    (self.destination() / first / "concurrent-edit.txt").write_text("preserve this edit")
+                    raise OSError("fixture late lock")
+            return original_rename(path, target)
+        with patch.object(Path, "rename", concurrent_failure):
+            with self.assertRaisesRegex(SKILLS.SkillError, "rollback incomplete"):
+                SKILLS.install(args)
+        self.assertEqual((self.destination() / first / "concurrent-edit.txt").read_text(), "preserve this edit")
+        backups = list((self.home / ".agents/agent-skills-backups").rglob("keep.txt"))
+        self.assertEqual(len(backups), 1)
+        self.assertEqual(backups[0].parent.name, first)
+        self.assertEqual(backups[0].read_bytes(), b"do not lose this\x00\xff")
+
     def test_conflict_preserves_directory_and_installs_nothing(self):
         old = self.destination() / "hold-your-horses"
         self.old_skill(old)

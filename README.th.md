@@ -239,7 +239,8 @@ skills ไม่ใช่การอนุญาตให้ขยับไป�
 python -m unittest discover -s tests -v
 ```
 
-ชุด deterministic ใช้ HOME ชั่วคราว และเข้า CI บน Linux กับ Windows/Git Bash
+ชุด deterministic รันเองบน Linux หรือ Windows/Git Bash โดยใช้ HOME ชั่วคราว.
+repo นี้ไม่มี CI อัตโนมัติ.
 ตรวจ manifest, metadata, references, paths, ติดตั้งใหม่/ซ้ำ, copy/link จริง,
 conflict, backup และการรักษาของเดิม โดยไม่เรียก provider.
 

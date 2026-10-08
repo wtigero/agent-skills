@@ -1,6 +1,7 @@
 """Safety checks for opt-in evaluation setup; no provider or network calls."""
 
 import base64
+import io
 import importlib.util
 import json
 import os
@@ -11,6 +12,7 @@ from pathlib import Path
 import tempfile
 import time
 import unittest
+import zipfile
 from unittest.mock import patch
 from types import SimpleNamespace
 
@@ -124,6 +126,131 @@ class EvaluationSetupTests(unittest.TestCase):
         record = json.loads((Path(args.output) / "results/codex/small/candidate/run.json").read_text())
         self.assertEqual(record["status"], "blocked")
         self.assertIn("codex", record["blocker"])
+
+    def run_args(self, runtime="pi"):
+        config = self.root / "runtime.json"
+        config.write_text(json.dumps({runtime: {"command": [sys.executable], "provider": "fixture",
+                          "model": "openai-codex/fixture", "effort": "medium"}}))
+        return SimpleNamespace(output=str(self.root / "trials"), config=str(config), runtime=runtime,
+                               scenario="small", variant="candidate", baseline="HEAD",
+                               codex_sandbox="workspace-write", openai_subscription_auth=False, timeout=1)
+
+    def test_dirty_candidate_blocks_before_workspace_or_provider(self):
+        args = self.run_args()
+        def git(*argv, **kwargs):
+            return b" M skills/engineering/prove-it/SKILL.md\n" if argv[0] == "status" else b"a" * 40
+        with patch.object(RUNNER, "git", side_effect=git), patch.object(RUNNER, "prepare") as prepare, \
+                patch.object(RUNNER, "call_session") as session:
+            self.assertEqual(RUNNER.run(args), 1)
+            prepare.assert_not_called()
+            session.assert_not_called()
+        record = json.loads((Path(args.output) / "results/pi/small/candidate/run.json").read_text())
+        self.assertIn("must be clean", record["blocker"])
+
+    def test_source_cache_follows_resolved_revision_not_moving_ref(self):
+        revisions = ["a" * 40, "b" * 40]
+        current = [0]
+        archives = []
+        def git(*argv, **kwargs):
+            if argv[0] == "rev-parse":
+                return revisions[current[0]].encode()
+            self.assertEqual(argv[0], "archive")
+            archives.append(argv[-1])
+            stream = io.BytesIO()
+            with zipfile.ZipFile(stream, "w") as bundle:
+                bundle.writestr("marker.txt", argv[-1])
+            return stream.getvalue()
+        with patch.object(RUNNER, "git", side_effect=git):
+            first = RUNNER.archived_source(self.root, "pi", "moving-ref")
+            current[0] = 1
+            second = RUNNER.archived_source(self.root, "pi", "moving-ref")
+            again = RUNNER.archived_source(self.root, "pi", "moving-ref")
+        self.assertNotEqual(first, second)
+        self.assertEqual(second, again)
+        self.assertEqual(archives, revisions)
+        self.assertEqual((first / "marker.txt").read_text(), revisions[0])
+        self.assertEqual((second / "marker.txt").read_text(), revisions[1])
+
+    def test_retained_artifacts_scrub_literals_on_success_and_session_failure(self):
+        token = "fixture-private-access-do-not-retain"
+        for failure in (False, True):
+            with self.subTest(failure=failure):
+                args = self.run_args()
+                args.output = str(self.root / ("failure" if failure else "success"))
+                workspace = self.root / ("failure workspace" if failure else "success workspace")
+                workspace.mkdir()
+                def git(*argv, **kwargs):
+                    return b"" if argv[0] in ("status", "diff") else b"a" * 40
+                def session(cmd, cwd, env, prompt, timeout):
+                    (cwd / "environment.txt").write_text(token)
+                    (cwd / "receipt.bin").write_bytes(b"\x00" + token.encode() + b"\xff")
+                    (Path(env["HOME"]) / "provider-receipt.txt").write_text(token)
+                    if failure:
+                        raise RuntimeError("fixture failure: " + token)
+                    return token, token, 0
+                def environment(runtime, home, original, *unused):
+                    return {**os.environ, "HOME": str(home)}, [token]
+                with patch.object(RUNNER, "git", side_effect=git), \
+                        patch.object(RUNNER, "prepare", return_value=workspace), \
+                        patch.object(RUNNER, "environment", side_effect=environment), \
+                        patch.object(RUNNER, "call_session", side_effect=session), \
+                        patch.object(RUNNER, "parse_metrics", return_value={"final_text": "fixture complete"}), \
+                        patch.object(RUNNER, "oracle", return_value={"status": "fixture"}):
+                    self.assertEqual(RUNNER.run(args), 1 if failure else 0)
+                for root in (workspace, Path(args.output)):
+                    for path in root.rglob("*"):
+                        if path.is_file():
+                            self.assertNotIn(token.encode(), path.read_bytes(), path.name)
+                self.assertIn(b"[REDACTED]", (workspace / "receipt.bin").read_bytes())
+
+    def test_evaluator_resolution_precedes_reviewer_path_shadowing(self):
+        binary = self.root / "bin"
+        binary.mkdir()
+        executable = binary / ("codex.cmd" if os.name == "nt" else "codex")
+        executable.write_text("@exit /b 0\n" if os.name == "nt" else "#!/bin/sh\nexit 0\n")
+        executable.chmod(0o755)
+        env = {**os.environ, "PATH": str(binary)}
+        resolved = RUNNER.resolve_evaluator(["codex"], env, self.root)
+        RUNNER.review_unavailable_path(self.root / "home", env)
+        self.assertEqual(Path(resolved[0]), executable)
+        self.assertNotEqual(Path(RUNNER.shutil.which("codex", path=env["PATH"])), executable)
+        args = self.run_args("codex")
+        args.scenario = "council"
+        config = json.loads(Path(args.config).read_text())
+        config["codex"]["command"] = ["codex"]
+        Path(args.config).write_text(json.dumps(config))
+        workspace = self.root / "workspace"
+        workspace.mkdir()
+        env["PATH"] = str(binary)
+        def git(*argv, **kwargs):
+            return b"" if argv[0] in ("status", "diff") else b"a" * 40
+        def session(cmd, cwd, child_env, prompt, timeout):
+            self.assertEqual(Path(cmd[0]), executable)
+            self.assertNotEqual(Path(RUNNER.shutil.which("codex", path=child_env["PATH"])), executable)
+            return "fixture", "", 0
+        with patch.object(RUNNER, "git", side_effect=git), \
+                patch.object(RUNNER, "prepare", return_value=workspace), \
+                patch.object(RUNNER, "environment", return_value=(env, [])), \
+                patch.object(RUNNER.subprocess, "run", return_value=SimpleNamespace(stdout="fixture version")), \
+                patch.object(RUNNER, "call_session", side_effect=session), \
+                patch.object(RUNNER, "parse_metrics", return_value={"final_text": "fixture complete"}), \
+                patch.object(RUNNER, "oracle", return_value={"status": "fixture"}):
+            self.assertEqual(RUNNER.run(args), 0)
+
+    def test_credential_audit_blocks_links_and_still_scrubs_owned_files(self):
+        owned = self.root / "owned"
+        owned.mkdir()
+        outside = self.root / "outside.txt"
+        outside.write_text("fixture-private-access")
+        try:
+            (owned / "external-link").symlink_to(outside)
+        except OSError as exc:
+            self.skipTest(f"native symlink privilege unavailable: {exc}")
+        (owned / "own-evidence.txt").write_text("fixture-private-access")
+        with self.assertRaisesRegex(RuntimeError, "linked retained artifact"):
+            RUNNER.redact_artifacts([owned], ["fixture-private-access"])
+        self.assertEqual(outside.read_text(), "fixture-private-access")
+        self.assertEqual((owned / "own-evidence.txt").read_text(), "[REDACTED]")
 
     @unittest.skipIf(os.name == "nt", "POSIX process-group termination")
     def test_timeout_forces_owned_group_and_retains_partial_output(self):
