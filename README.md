@@ -112,6 +112,12 @@ The point is simple: follow the failure and bring evidence for the cause.
 
 ## Create Verifier
 
+This is optional setup for projects that need a reusable verification recipe
+across sessions. `bug-hunter` investigates causes; `prove-it` judges whether
+evidence supports a claim. They can reuse `verify-project` or the existing harness
+without first creating a guide. The creator's trial checks that its recipe runs;
+later changes still need evidence matching their own claims.
+
 Use this to create a `verify-project` skill from a repository's existing harness.
 It covers Launch, Doctor, Drive, Evidence and Cleanup, maps up to three main
 feature paths, and exercises one through the real app/API/CLI. Evidence must

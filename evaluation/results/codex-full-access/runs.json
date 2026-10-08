@@ -1,0 +1,174 @@
+{
+  "scope": "Separate Codex 0.161.0 full-access follow-up; no default-sandbox write qualification; agent transcript review",
+  "runs": [
+    {
+      "runtime": "codex",
+      "scenario": "verifier",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "55be804df04f64d6f8a3e335af5f78479cfff0f8",
+      "runner_sha256": "d217175f4a12fc1e6fb9eaf5193b295f9e0f7f6309d4e277434eeeb1f2415f89",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "started_at": "2026-10-08T04:55:51.709076+00:00",
+      "status": "completed_needs_review",
+      "sandbox": "danger-full-access",
+      "version": "codex-cli 0.161.0",
+      "skill_fingerprints": {
+        "create-verifier": "19e7a3038944feb2e1968400ea3513d798085fc92bf2c2a3987751d840a8811f"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "C:/Program Files/nodejs/node_modules/@openai/codex/bin/codex.js",
+        "exec",
+        "--ignore-user-config",
+        "--ignore-rules",
+        "--ephemeral",
+        "--json",
+        "--disable",
+        "plugins",
+        "--disable",
+        "apps",
+        "--disable",
+        "memories",
+        "--disable",
+        "hooks",
+        "--disable",
+        "multi_agent",
+        "--enable",
+        "skip_host_skill_discovery",
+        "--sandbox",
+        "danger-full-access",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--model",
+        "gpt-6-sol",
+        "--cd",
+        "<EVALUATION>\\codex-full-access\\workspaces\\codex\\verifier\\candidate",
+        "-"
+      ],
+      "usage": {
+        "input_tokens": 948926,
+        "cached_input_tokens": 903424,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 11480,
+        "reasoning_output_tokens": 3154
+      },
+      "actual_model": null,
+      "event_count": 73,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 218.208,
+      "finished_at": "2026-10-08T04:59:29.917058+00:00",
+      "native_session_ids": [
+        "01a119de-2c3a-7033-96d0-40aba7b3d381"
+      ],
+      "review": {
+        "verdict": "pass",
+        "reviewer": "implementing agent",
+        "observations": "Implementing-agent transcript review: the designated creator and needed references were read. Only the shared project guide was created. The final PowerShell recipe ran the existing unchanged harness, recorded HTTP 201/create/list/persistence, exit 0, owned process/data cleanup and durable evidence. Earlier quoting/exit-code wrapper failures remain recorded. Fresh-session use is assessed separately."
+      },
+      "raw_location": ".evaluation/codex-full-access/results/codex/verifier/candidate",
+      "raw_sha256": {
+        "final.md": "27ce3ad7fde3a6547c006ad45cc39e46e7be34e652303e2394cc2e14ecd2d01e",
+        "prompt.txt": "fae719725cf6741c20bd6cfee70875bebf0751c64bfc146911009742917ad62c",
+        "run.json": "2230a80694b24e3f91452ab212ae2865ca8029f88dcf2b3cc79a031a27ae41c3",
+        "stderr.txt": "3be49518231ba0be94c9f0822b68509cd2349cdb9214c1b589d51e63d6e03dd0",
+        "stdout.jsonl": "b81015c53d47479c7b9be3eb3ddd4f7ab1ff01340654fab6ace25ad9cf9750f7"
+      }
+    },
+    {
+      "runtime": "codex",
+      "scenario": "handoff",
+      "variant": "candidate",
+      "baseline_revision": "e003656917fbe06d00e23c82a2de3955f7aa66b6",
+      "candidate_revision": "55be804df04f64d6f8a3e335af5f78479cfff0f8",
+      "runner_sha256": "d217175f4a12fc1e6fb9eaf5193b295f9e0f7f6309d4e277434eeeb1f2415f89",
+      "provider": "ChatGPT account",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "started_at": "2026-10-08T05:00:25.006637+00:00",
+      "status": "completed_needs_review",
+      "sandbox": "danger-full-access",
+      "version": "codex-cli 0.161.0",
+      "skill_fingerprints": {
+        "verify-project": "6c8a45fd339414edb5965c48f49e622fdffaa776c8c6fe1fd4ba76ca4bd06c89"
+      },
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "C:/Program Files/nodejs/node_modules/@openai/codex/bin/codex.js",
+        "exec",
+        "--ignore-user-config",
+        "--ignore-rules",
+        "--ephemeral",
+        "--json",
+        "--disable",
+        "plugins",
+        "--disable",
+        "apps",
+        "--disable",
+        "memories",
+        "--disable",
+        "hooks",
+        "--disable",
+        "multi_agent",
+        "--enable",
+        "skip_host_skill_discovery",
+        "--sandbox",
+        "danger-full-access",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--model",
+        "gpt-6-sol",
+        "--cd",
+        "<EVALUATION>\\codex-full-access\\workspaces\\codex\\verifier\\candidate",
+        "-"
+      ],
+      "usage": {
+        "input_tokens": 211097,
+        "cached_input_tokens": 183424,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2663,
+        "reasoning_output_tokens": 705
+      },
+      "actual_model": null,
+      "event_count": 36,
+      "exit_code": 0,
+      "oracle": {
+        "status": "manual_required",
+        "note": "Check transcript, raw reviews or generated references, real feature receipts, and cleanup."
+      },
+      "working_tree_diff": "",
+      "elapsed_seconds": 61.019,
+      "finished_at": "2026-10-08T05:01:26.025995+00:00",
+      "native_session_ids": [
+        "01a119e2-555b-7b12-9fcc-8311bd9e4096"
+      ],
+      "review": {
+        "verdict": "pass",
+        "reviewer": "implementing agent",
+        "observations": "Implementing-agent transcript review: a distinct native session loaded the generated guide and references, ran a new real create/list feature, saved a new receipt under the requested cold-session evidence location and checked cleanup/evidence survival. It did not edit the generated guide or fixture application/harness."
+      },
+      "raw_location": ".evaluation/codex-full-access/results/codex/handoff/candidate",
+      "raw_sha256": {
+        "final.md": "a73ee342ffd198342f4447a2fc8bc3300827e3c01f559ab6b7adcef10bc772da",
+        "prompt.txt": "861e4bb6e5b7a64143956c809de7ce82cf3b4a4797debb7f638358a84396410b",
+        "run.json": "f0d7cfa8ad1894e7fc7843de93a03663b92352531bd9222b2b8179ffe05fe41b",
+        "stderr.txt": "da1854cd14ac3449db72539a2863b6c96c8ef96e9ae042cf1f986b49a9f4e108",
+        "stdout.jsonl": "f25859a760612d1e33bf1d3b1dd984cffef19c878f70ff54f4913ebd663d2464"
+      }
+    }
+  ],
+  "generated_guide_sha256": "6c8a45fd339414edb5965c48f49e622fdffaa776c8c6fe1fd4ba76ca4bd06c89",
+  "fixture_application_and_harness_unchanged": true,
+  "public_skill_bytes_unchanged": true
+}
