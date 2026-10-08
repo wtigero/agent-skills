@@ -1,15 +1,18 @@
 {
-  "after-probes.json": "21555033460474b9248825686adcbc5abdfe6f1c7d6428b5e39a91cb3b1d5bb0",
-  "attempts.json": "48151a9de8e514f13963f90a9bb766e09be5a828beb2d17b1c6931124cb0f4db",
-  "before-probes.json": "a54cfa7289fb936ca24df990129587964e834c8421c3dea783f705116f62a439",
-  "linux-tests.txt": "702cee52522690356303e26341ff7758f17e96f20586263f01ae460b3d12c4f2",
-  "packet-review.md": "9dfc7500ee185e3310354b4f8794d379ebbe326a312bcced1c46e396c23d9fa3",
-  "packet-stderr.txt": "1cdd4091ee708d0ef7bec26acc623c0fbd7302e2d002e066d68bc8d769f73de4",
-  "pi-commented-name-proof.json": "7e01d46bdc41eed462ff6b4d87846f22471ba0adf540df2845b3e9ecf64aaa37",
-  "posix-timeout-after.json": "7f83f6ec2d5314cb1e936045cbea18e6aa92231eda20534818ad4cda8e8bbd37",
-  "posix-timeout-before.json": "1202ccbf647a847ee8e4f4515220bef142fe03459d66308c01134a445887089d",
-  "review-brief.txt": "2b7428cd856cf4ec16be3dbd0224ffd368df3f5e97c5c860aad105495d3030dd",
-  "shell-review.md": "f5fbbd845760c4f0f0b98e21af0e8d35726f602c3a6788d9712d1203439de213",
-  "shell-stderr.txt": "ed558b0f648461eeeb891fadaf298e6158baceba6db9b03a1efaed3ad33fca9f",
-  "windows-tests.txt": "c0b760950c3c47f6b65cd761eebaec202910c9ece3d6d3288aadc2c605bc8447"
+  "normalization": "UTF-8 text with LF line endings",
+  "files": {
+    "after-probes.json": "ae95e4971987840bc74081597a02ddea995f4f36d3a75ba9ac4fe3c608dc61fc",
+    "attempts.json": "8556364412ab6207764824b995557d9f7fb1c5bd37174ca151d301d0b62c8ee0",
+    "before-probes.json": "e97adadd726a3aad06a1ad6a6ba90ab9abf4b5070474414795cb71f78d35d19a",
+    "linux-tests.txt": "5d6487c64d35a1434dcec7ad781264301da7966c1c021ff7a6636c1eec0afa0d",
+    "packet-review.md": "c29e1ec8625a7b34cc3aae235ed7a95ae054a48b70276a38b6e77f761b27ffb4",
+    "packet-stderr.txt": "bcb5d8346867c91b83323ed508974abf7815c7623137214963f4dcddb9c4288d",
+    "pi-commented-name-proof.json": "e4487c317319df153d69cb1ba0f67b24e6b138305ce0f5a2eb0ecb8d3ae10d69",
+    "posix-timeout-after.json": "30a4fdefa1e5834bd1ef7e49f8bff1c330be07687ecc5c4df6b50205ad82f20d",
+    "posix-timeout-before.json": "56f7b1e0fce68cf89370a15b35b7999f59585b7bf575bcfc1d255a6ac04b76d9",
+    "review-brief.txt": "4130fc9ed8328478cc45381cba63315018653d06072957ad687e7ec46f5dac1e",
+    "shell-review.md": "8d231dbe950e93c88bf6dfee584ebbaff8aae0c24f77c61cd073c3335611f2c3",
+    "shell-stderr.txt": "d0fb77ccd0395af750bf7fe0f9b0cc17bf76a8c1487710f4cac8ea0ec8e213ea",
+    "windows-tests.txt": "c8d8a284b9d5accf5aad8debddf0550eca29418c2ab053e749d8d6666c1d535e"
+  }
 }

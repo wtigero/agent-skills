@@ -38,7 +38,8 @@ limitations. The [failed first response](../evaluation/results/sol-review/shell-
 [first stderr](../evaluation/results/sol-review/shell-stderr.txt), and
 [packet stderr](../evaluation/results/sol-review/packet-stderr.txt) are retained.
 Full raw streams and the source packet remain under the recorded ignored
-`.evaluation/` directories. Exported text only replaces private path prefixes;
+`.evaluation/` directories. Exported text replaces private path prefixes and
+normalizes line endings to LF;
 reviewer assessments have not been rewritten to incorporate later fixes.
 
 ## Aggregator assessment
@@ -87,7 +88,8 @@ automatically; the configured remote matrix has not been run.
 Full logs: [Linux](../evaluation/results/sol-review/linux-tests.txt),
 [Windows](../evaluation/results/sol-review/windows-tests.txt).
 [Export hashes](../evaluation/results/sol-review/export-sha256.json) identify
-the sanitized evidence files; the attempt metadata separately identifies raw
+the sanitized evidence files using canonical LF line endings, including on
+Windows checkouts; the attempt metadata separately identifies raw
 review streams and prompts.
 
 Public skill instructions, references, metadata and the manifest are byte-for-byte
