@@ -98,7 +98,9 @@ revision, skill fingerprints, CLI version, provider, requested/observed model,
 effort, timestamps, elapsed time and available token usage. Null metrics mean
 unavailable. A timeout stops only the owned CLI process tree and keeps partial
 output. Windows uses PID-scoped tree termination; POSIX gives the owned process
-group five seconds after SIGTERM, then forces SIGKILL if needed. Invalid config
+group five seconds after SIGTERM, then forces SIGKILL if needed. Leader exit or
+pipe EOF does not shorten the group's grace period; descendants with redirected
+pipes are also stopped. Invalid config
 or revision setup leaves a blocked `run.json` with the requested baseline ref.
 Existing result/workspace paths cannot be overwritten; use a fresh
 `--output .evaluation/rerun-<reason>` only after a fix or an ambiguous result.

@@ -159,7 +159,7 @@ def declared_name(skill_md):
     if not closing:
         raise SkillError(f"unclosed skill frontmatter: {skill_md}")
     header = content[4:4 + closing.start()]
-    matches = re.findall(r"^(?:name|\"name\"|'name'):[ \t]*(.*)$", header, re.MULTILINE)
+    matches = re.findall(r"^(?:name|\"name\"|'name')[ \t]*:[ \t]*(.*)$", header, re.MULTILINE)
     if not matches:
         return skill_md.parent.name
     if len(matches) != 1:

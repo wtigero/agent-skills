@@ -245,15 +245,14 @@ def call_session(cmd, workspace, env, prompt, timeout, terminate_grace=5):
                 os.killpg(process.pid, signal.SIGTERM)
             except ProcessLookupError:
                 pass  # The owned group may have exited at the timeout boundary.
+            # Keep the leader unreaped through the grace period: its PID anchors
+            # ownership even if it exits before descendants with redirected pipes.
+            # Pipe EOF cannot establish that every member of the group stopped.
+            time.sleep(terminate_grace)
             try:
-                stdout, stderr = process.communicate(timeout=terminate_grace)
-            except subprocess.TimeoutExpired:
-                try:
-                    os.killpg(process.pid, signal.SIGKILL)
-                except ProcessLookupError:
-                    pass
-            else:
-                return stdout, stderr + f"\nEvaluation timeout after {timeout}s; owned process tree stopped; partial output retained.", None
+                os.killpg(process.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
         stdout, stderr = process.communicate(timeout=15)
         return stdout, stderr + f"\nEvaluation timeout after {timeout}s; owned process tree stopped; partial output retained.", None
 

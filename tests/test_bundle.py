@@ -158,9 +158,12 @@ class InstallerTests(unittest.TestCase):
     def test_commented_yaml_names_cannot_hide_alias_conflicts(self):
         old = self.home / ".pi/agent/skills/alias"
         self.old_skill(old, "prove-it")
-        for scalar in ("prove-it # local copy", "'prove-it' # local copy", '"prove-it" # local copy'):
-            with self.subTest(scalar=scalar):
-                content = f'---\ndescription: "uses --- in prose"\nname: {scalar}\n---\nKeep original.\n'
+        declarations = ("name: prove-it # local copy", "name: 'prove-it' # local copy",
+                        'name: "prove-it" # local copy', "name : prove-it # local copy",
+                        "'name' \t: 'prove-it' # local copy", '"name" : "prove-it" # local copy')
+        for declaration in declarations:
+            with self.subTest(declaration=declaration):
+                content = f'---\ndescription: "uses --- in prose"\n{declaration}\n---\nKeep original.\n'
                 (old / "SKILL.md").write_text(content, encoding="utf-8")
                 result = self.run_install("agent", "--copy")
                 self.assertNotEqual(result.returncode, 0)

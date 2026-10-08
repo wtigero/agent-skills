@@ -159,6 +159,58 @@ class EvaluationSetupTests(unittest.TestCase):
                         process.kill()
                 process.communicate(timeout=5)
 
+    @unittest.skipUnless(sys.platform == "linux", "Linux descendant liveness via /proc")
+    def test_timeout_stops_descendant_after_parent_closes_pipes(self):
+        real_popen = subprocess.Popen
+        owned = []
+        ready = self.root / "descendant-ready"
+        child_code = ('import os,signal,time; from pathlib import Path; '
+                      'signal.signal(signal.SIGTERM,signal.SIG_IGN); '
+                      f'Path({str(ready)!r}).write_text(str(os.getpid())); time.sleep(60)')
+        parent_code = ('import subprocess,sys,time; from pathlib import Path; '
+                       f'subprocess.Popen([sys.executable,"-c",{child_code!r}], '
+                       'stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL); '
+                       f'ready=Path({str(ready)!r});\n'
+                       'while not ready.exists(): time.sleep(.01)\n'
+                       'print("parent-ready",flush=True); time.sleep(60)')
+        def start(*args, **kwargs):
+            process = real_popen(*args, **kwargs)
+            owned.append(process)
+            deadline = time.monotonic() + 5
+            while not ready.exists() and process.poll() is None and time.monotonic() < deadline:
+                time.sleep(.01)
+            return process
+        def active(pid):
+            try:
+                state = Path(f"/proc/{pid}/stat").read_text().split(") ", 1)[1].split()[0]
+                return state != "Z"  # A stopped orphan may await its system reaper.
+            except FileNotFoundError:
+                return False
+        try:
+            with patch.object(RUNNER.subprocess, "Popen", side_effect=start):
+                stdout, stderr, exit_code = RUNNER.call_session(
+                    [sys.executable, "-c", parent_code], self.root, os.environ.copy(), None, .1, terminate_grace=.1)
+            self.assertTrue(ready.exists())
+            pid = int(ready.read_text())
+            deadline = time.monotonic() + 2
+            while active(pid) and time.monotonic() < deadline:
+                time.sleep(.01)
+            self.assertFalse(active(pid), "TERM-ignoring descendant survived after pipe EOF")
+            self.assertIsNone(exit_code)
+            self.assertIn("parent-ready", stdout)
+            self.assertIn("partial output retained", stderr)
+        finally:
+            # Only groups created with start_new_session by this fixture.
+            for process in owned:
+                descendant_owned = (ready.exists() and active(int(ready.read_text()))
+                                    and os.getpgid(int(ready.read_text())) == process.pid)
+                if process.poll() is None or descendant_owned:
+                    try:
+                        os.killpg(process.pid, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+                process.communicate(timeout=5)
+
 
 if __name__ == "__main__":
     unittest.main()
